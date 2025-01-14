@@ -1,7 +1,0 @@
-User-agent: Googlebot-Image
-Disallow: /img/*.png
-Disallow: /img/*.jpg
-Disallow: /img/*.jpeg
-Disallow: /img/*.gif
-Disallow: /img/*.aseprite
-Disallow: /img/*.cur
