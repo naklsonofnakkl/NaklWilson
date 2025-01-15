@@ -4,7 +4,7 @@ document.querySelector(".writeHeader").innerHTML = `
     <header align="center">
         <a href="https://www.naklwilson.net"><img src="./img/logo.png" alt="NaklWilson Comics Banner" /></a> 
 
-        <div id="nav" style="width: 958px">
+        <div id="nav" style="width: 100%">
             <a href="index.html">HOME</a> |
             <a href="archive.html">ARCHIVE</a> |
             <a href="about.html">ABOUT</a> |

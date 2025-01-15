@@ -39,7 +39,7 @@
         body {
             background-color: #a69cce;
             font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-            color: #FFFFFF;
+            color: #000000;
 
         }
 
@@ -92,7 +92,7 @@
         }
 
         #twitch {
-            background: url(./images/layout/twitch_icon.webp) no-repeat;
+            background: url(./images/layout/mobile_twitch_icon.webp) no-repeat;
             margin: 15px auto 5px auto;
             display: block;
             height: 72px;
@@ -100,7 +100,7 @@
         }
 
         #youtube {
-            background: url(./images/layout/youtube_icon.webp) no-repeat;
+            background: url(./images/layout/mobile_youtube_icon.webp) no-repeat;
             margin: 15px auto 5px auto;
             display: block;
             height: 72px;
@@ -148,7 +148,7 @@
         }
 
         #nav-bg {
-            background-image: url(./images/layout/mobile_border.webp);
+            background-image: url(./images/layout/mobile_border_webring.webp);
             background-repeat: no-repeat;
             background-size: cover;
             height: 88px;
@@ -182,25 +182,39 @@
             align-items: center;
         }
 
+        #webring_nest {
+            color: #000000;
+            background-color: #036b77;
+            align-items: center;
+            border-radius: 15px;
+        }
+
+        #webring_nest_alt {
+            color: #000000;
+            background-color: #756e92;
+            align-items: center;
+            border-radius: 15px;
+        }
+
         .accordion-body {
             background-color: #0496a5;
-            color: #FFFFFF;
+            color: #000000;
         }
 
         .accordion-button {
-            color: #FFFFFF;
-            background-image: url(./images/layout/accordian-background.webp);
+            color: #000000;
+            background-image: url(./images/layout/accordian-background_webring.webp);
             background-repeat: no-repeat;
             background-size: cover;
             height: 8px;
         }
 
         .accordion-item {
-            color: #FFFFFF;
+            color: #000000;
         }
 
         .accordion-button:not(.collapsed) {
-            color: #FFFFFF;
+            color: #000000;
         }
 
         .accordion-button:not(.collapsed)::after {
@@ -232,7 +246,7 @@
             <nav class="navbar bg-transparent sticky-top" style="width: 25rem;">
                 <div class="container" id="nav-bg">
                     <a class="navbar-brand" href="https://naklwilson.net">
-                        <img src="./images/layout/mobile_webring_header_logo.webp" alt="Bootstrap" width="100%"
+                        <img src="./images/layout/mobile_header_webring_logo.webp" alt="Bootstrap" width="100%"
                             height="100%">
                     </a>
                 </div>
@@ -308,7 +322,7 @@
                     <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show">
                         <div class="accordion-body">
                             <div class="container" id="sm_badges">
-                                <div class="row row-cols-3">
+                                <div class="row row-cols-3" id="webring_nest">
                                     <div class="col">
                                         <div><a class="outra-link" aria-label="Toaster Icon" id="toaster" 
                                                 href="#"></a><img
@@ -326,7 +340,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row row-cols-3">
+                                <div class="row row-cols-3" id="webring_nest_alt">
                                     <div class="col">
                                         <div> <a class="outra-link" aria-label="Marrow Icon" id="marrow" 
                                                 href="#"></a><img
@@ -343,7 +357,7 @@
                                                 alt="Youtube Text" src="./images/layout/YOUTUBE_TEXT.webp"></div>
                                     </div>
                                 </div>
-                                <div class="row row-cols-3">
+                                <div class="row row-cols-3" id="webring_nest">
                                     <div class="col">
                                         <div><a class="outra-link" aria-label="Bird Icon" id="bird" 
                                                 href="#"></a><img
@@ -362,7 +376,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row row-cols-3">
+                                <div class="row row-cols-3" id="webring_nest_alt">
                                     <div class="col">
                                         <div> <a class="outra-link" aria-label="Colonel Icon" id="colonel"
                                                 href="#"></a><img alt="Colonel Text"
@@ -380,7 +394,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row row-cols-3">
+                                <div class="row row-cols-3" id="webring_nest">
                                     <div class="col">
                                         <div> <a class="outra-link" aria-label="thebrianj Icon" id="brianj"
                                                 href="#"></a><img alt="brianj Text"
