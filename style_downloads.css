@@ -7,7 +7,7 @@ a:visited {
 
 html {
 	 overflow-y: scroll;
-     cursor: url('./images/mouse_cursor/Mouse_Cursor.cur'), auto;
+     cursor: url('./images/mouse_cursor/Mouse_Cursor_downloads_hover.cur'), auto;
 }
 
 body {
@@ -277,9 +277,9 @@ audio::-webkit-media-controls-panel {
     color: #ffffff;
   }
 
-  .intra-link {cursor: url('./images/mouse_cursor/blue-dinosaur.cur'),auto;}
-  .outra-link {cursor: url('./images/mouse_cursor/mouse_cursor_outra.cur'),auto;}
-  .home-cursor {cursor: url('./images/mouse_cursor/blue-dinosaur.cur'),auto;}
+  .intra-link {cursor: url('./images/mouse_cursor/Mouse_Cursor_downloads_hover.cur'),auto;}
+  .outra-link {cursor: url('./images/mouse_cursor/Mouse_Cursor_downloads.cur'),auto;}
+  .home-cursor {cursor: url('./images/mouse_cursor/Mouse_Cursor_downloads_hover.cur'),auto;}
 
   .sm_badges {
     align-items: center;
