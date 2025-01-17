@@ -215,6 +215,13 @@ iframe {
     height: 72px;
     width: 72px;
 }
+#thebrianj {
+    background: url(./images/layout/brianj_icon.webp) no-repeat;
+	margin:15px auto 5px auto;
+    display: block;
+    height: 72px;
+    width: 72px;
+}
 
 #downloads:hover {
     background-position: -72px 0;
