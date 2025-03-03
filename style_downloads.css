@@ -280,6 +280,8 @@ audio::-webkit-media-controls-panel {
   .intra-link {cursor: url('./images/mouse_cursor/Mouse_Cursor_downloads_hover.cur'),auto;}
   .outra-link {cursor: url('./images/mouse_cursor/Mouse_Cursor_downloads.cur'),auto;}
   .home-cursor {cursor: url('./images/mouse_cursor/Mouse_Cursor_downloads_hover.cur'),auto;}
+  .down-link {cursor: url('./images/mouse_cursor/Mouse_Cursor_downloads_bonus.cur'),auto;}
+
 
   .sm_badges {
     align-items: center;
