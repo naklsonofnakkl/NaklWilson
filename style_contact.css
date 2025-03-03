@@ -100,10 +100,23 @@ p {
 	text-indent: 40px;
 }
 
+P.commissionText {
+    width: 500px; 
+    font-weight: bold; 
+    height: 49px;
+}
+
 button#work:hover {
 background-color: #a869c0;
 color:#ffffe1;
 }
+
+.flex-parent {
+    display: flex;
+  }
+  .flex-child {
+    flex: 1;
+  }
 
 /**************** Styles for <nav> icons and hover. ******************/
 
@@ -165,6 +178,38 @@ color:#ffffe1;
     width: 72px;
 }
 
+#twitchlayout {
+    background: url(./images/layout/contact_collapse_twitchlayout_inactive.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+
+#leveldesign {
+    background: url(./images/layout/contact_collapse_leveldesign_inactive.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+
+#profileicon {
+    background: url(./images/layout/contact_collapse_profileicon_inactive.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+
+#halfbody {
+    background: url(./images/layout/contact_collapse_halfbody_inactive.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+
 #downloads:hover {
     background-position: -72px 0;
 }
@@ -189,7 +234,60 @@ color:#ffffe1;
 #webring:hover {
     background-position: -72px 0;
 }
+#twitchlayout:hover {
+    background: url(./images/layout/contact_collapse_twitchlayout_active.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+#leveldesign:hover {
+    background: url(./images/layout/contact_collapse_leveldesign_active.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
 
+#profileicon:hover {
+    background: url(./images/layout/contact_collapse_profileicon_active.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+#halfbody:hover {
+    background: url(./images/layout/contact_collapse_halfbody_active.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+
+#commissioninfo {
+    background: url(./images/layout/contact_div_background.webp) no-repeat;
+}
+
+  #screw {
+    margin:12px auto 5px auto;
+    display: block;
+  }
+
+  #contactBannerEnd {
+    background: url(./images/layout/contact_button_background_end.webp) no-repeat;
+    width: 45px;
+    height: 49px;
+    display: block;
+  }
+  #contactBannerStart {
+    background: url(./images/layout/contact_button_background_start.webp) no-repeat;
+    height: 49px;
+  }
+  #contactBannerContent {
+    background: url(./images/layout/contact_button_background_content.webp) repeat-x;
+    height: 49px;
+    width: auto;
+}
 
 audio::-webkit-media-controls-panel {
     background-color: #99237f;
