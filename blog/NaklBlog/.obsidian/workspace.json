@@ -1,0 +1,240 @@
+{
+  "main": {
+    "id": "5e11b0eb7aaf581f",
+    "type": "split",
+    "children": [
+      {
+        "id": "6b2d4037cc6a9b8c",
+        "type": "tabs",
+        "dimension": 55.5956678700361,
+        "children": [
+          {
+            "id": "f134f3e89d076af3",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2025/September/2025-09-14.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-09-14"
+            }
+          },
+          {
+            "id": "084fe8fec1e1f2ae",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2025/October/2025-10-07.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "2025-10-07"
+            }
+          }
+        ],
+        "currentTab": 1
+      },
+      {
+        "id": "1b4b9921e598edef",
+        "type": "split",
+        "dimension": 44.4043321299639,
+        "children": [
+          {
+            "id": "f564efa0baea7958",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "a304536f2f6382ea",
+                "type": "leaf",
+                "state": {
+                  "type": "graph",
+                  "state": {},
+                  "icon": "lucide-git-fork",
+                  "title": "Graph view"
+                }
+              }
+            ]
+          },
+          {
+            "id": "d07b1be00444fce1",
+            "type": "tabs",
+            "children": [
+              {
+                "id": "11f42db1fc0a4590",
+                "type": "leaf",
+                "state": {
+                  "type": "graph",
+                  "state": {},
+                  "icon": "lucide-git-fork",
+                  "title": "Graph view"
+                }
+              }
+            ]
+          }
+        ],
+        "direction": "horizontal"
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "3ff0c29260d9f239",
+    "type": "split",
+    "children": [
+      {
+        "id": "addc76ebe5f34f98",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d916e07059864c33",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "ef6a8dbde99a6c54",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "61a96a16c8a7dee2",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8f786b0febebb188",
+    "type": "split",
+    "children": [
+      {
+        "id": "e3ead74a23bbe790",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "58583300402b23c1",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "Welcome.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Welcome"
+            }
+          },
+          {
+            "id": "69ad78ae7b572c31",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "Welcome.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Welcome"
+            }
+          },
+          {
+            "id": "cec662559dcde6e5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "215f33975bba4d0c",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "Welcome.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Welcome"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "bases:Create new base": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "11f42db1fc0a4590",
+  "lastOpenFiles": [
+    "2025/September/2025-09-12.md",
+    "2025/September/2025-09-05.md",
+    "2025/September/2025-09-14.md",
+    "2025/September/2025-09-13.md",
+    "2025/October/2025-10-07.md",
+    "Introduction.md",
+    "2025/October",
+    "2025",
+    "2025/September"
+  ]
+}
