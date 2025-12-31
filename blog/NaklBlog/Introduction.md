@@ -1,3 +1,0 @@
-Hi, my name is Andrew and I am a typical internet nobody. I like technology, video games and anime. My current hobby/fixation is the One Piece TCG and I have two pets; Shadow, a terrier, poodle mix and Fry, a Domestic Shorthair orphan I took off the streets as the last dying wish of his father when he tragically passed away last year.
-
-I am 36 years old and work in IT. I have been doing some variation of my job for nearly a decade now and I both hate it and enjoy how easy it is for me. I have a formal education, but my college lost its accreditation mid-degree and left me with a worthless piece of paper and a loan to repay for nearly seven years without fail.
