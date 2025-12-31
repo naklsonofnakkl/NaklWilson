@@ -210,6 +210,14 @@ color:#ffffe1;
     width: 226px;
 }
 
+#siteinquiry {
+    background: url(./images/layout/contact_collapse_inquiry_inactive.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+
 #downloads:hover {
     background-position: -72px 0;
 }
@@ -258,6 +266,14 @@ color:#ffffe1;
 }
 #halfbody:hover {
     background: url(./images/layout/contact_collapse_halfbody_active.webp) no-repeat;
+	margin:5px auto 5px auto;
+    display: block;
+    height: 36px;
+    width: 226px;
+}
+
+#siteinquiry:hover {
+    background: url(./images/layout/contact_collapse_inquiry_active.webp) no-repeat;
 	margin:5px auto 5px auto;
     display: block;
     height: 36px;
