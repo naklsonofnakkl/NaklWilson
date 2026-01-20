@@ -3,7 +3,7 @@
 
 <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-65170222-1"></script>
+    <script async src="./json/gtag_js.js"></script>
     <script http-equiv="Content-Type" content="text/javascript; charset=utf-8">
         window.dataLayer = window.dataLayer || [];
         function gtag() { dataLayer.push(arguments); }
@@ -50,10 +50,15 @@
     <meta name="theme-color" content="#6a1480">
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_border.webp" type="image/webp">
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_sub.webp" type="image/webp">
-    <meta http-equiv="Cache-control" content="no-store">
+    <meta http-equiv="Cache-control" content="max-age=604800, must-revalidate">
     <link type="application/json+oembed" href="https://naklwilson.net/json/embed_info.json" />
-    <link http-equiv="Content-Type" content="text/css; charset=utf-8" rel="stylesheet" type="text/css"
-        href=".\style-min.css">
+    <link rel="preload" href="style-min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="style-min.css">
+    </noscript>
+    <style>
+ a:link{ color: #FFFFFF;} a:visited{ color: #ffa047;} html{ overflow-y: scroll; cursor: url('./images/mouse_cursor/Mouse_Cursor.cur'), auto;} body{ background-color: #561350; width: 960px; margin: 8px auto; line-height: 1.6; font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif; color: #FFFFFF;} header{ width: 960px; height: 150px; background-image: url('./images/layout/homepage_banner.webp'); background-color: #6a1480;} footer{ clear: both; padding-top: 10px; background-repeat: no-repeat; background-image: url('./images/layout/homepage_bottomborder.webp'); text-align: center;} section{ padding: 10px 8px 10px 8px; background-color: #6a1480; background-image: url('./images/layout/homepage_sub.webp'), url('./images/layout/homepage_border.webp'); background-repeat: no-repeat, repeat-y; height: 100%; width: 944px; float: left;} #left-col{ float: left; width: 152px;} main{ float: left; width: 640px; height: auto;} #right-col{ float: right; width: 152px;} article{ width: 598px; padding: 10px 20px; border-width: 1px; background-color: #99237f; margin: 10px auto; -moz-border-radius: 10px; -webkit-border-radius: 10px; border-style: solid; border-radius: 10px 10px;} h1{ font-variant: small-caps; font-size: 28px; font-weight: bold; margin-top: 0px; margin-bottom: 3px; text-shadow: #561350 2px 2px;} h2{ font-size: 14pt; font-weight: bold; margin: 0px; text-shadow: #561350 2px 2px;} nav>img{ margin-left: auto; margin-right: auto; display: block;} p{ text-indent: 40px;} #social{ background: url(./images/layout/social_icon.webp) no-repeat; margin: 15px auto 5px auto; display: block; height: 72px; width: 72px;} #art{ background: url(./images/layout/art_icon.webp) no-repeat; margin: 15px auto 5px auto; display: block; height: 72px; width: 72px;} #twitch{ background: url(./images/layout/twitch_icon.webp) no-repeat; margin: 15px auto 5px auto; display: block; height: 72px; width: 72px;} #youtube{ background: url(./images/layout/youtube_icon.webp) no-repeat; margin: 15px auto 5px auto; display: block; height: 72px; width: 72px;} #store{ background: url(./images/layout/store_icon.webp) no-repeat; margin: 15px auto 5px auto; display: block; height: 72px; width: 72px;} #contact{ background: url(./images/layout/contact_icon.webp) no-repeat; margin: 15px auto 5px auto; display: block; height: 72px; width: 72px;} #webring{ background: url(./images/layout/WEB_RING_ICON.webp) no-repeat; margin: 15px auto 5px auto; display: block; height: 72px; width: 72px;} #downloads{ background: url(./images/layout/downloads_icon.webp) no-repeat; margin: 15px auto 5px auto; display: block; height: 72px; width: 72px;} .intra-link{ cursor: url('./images/mouse_cursor/Mouse_Cursor_intra.cur'), auto} .outra-link{ cursor: url('./images/mouse_cursor/mouse_cursor_outra.cur'), auto} #octoberDiv, #decemberDiv{ display: none;}
+    </style>
 </head>
 
 <body>
@@ -180,14 +185,33 @@
                 <h1>
                     <center>Latest Updates</center>
                 </h1>
-                <h3>
-                    <img src="./images/badges/Blog Dates/2025/2025-12-31.webp"> The Dawn of a New Year
-                </h3>
+                <center>
+                    <table style="margin: -15px;">
+                        <tr>
+                            <td><img src="./images/badges/Blog Dates/2026/2026-01-20.webp" alt="Badge with the date January 20th 2026" style="width: 80px; height: 15px; padding-right: 5px;"></td>
+                            <td>
+                                <h3>
+                                    Thematic Efficency
+                                </h3>
+                            </td>
+                        </tr>
+                    </table>
+
+                </center>
                 <p>
-                    Seasons Greetings! Once again the year is coming to a close and it has been one of the most
-                    turbulent years for me to date. I'm excited to see it finally go, but I am anxious as to what is soon to come.</p>
+                    As none of you may notice, the website has been given a signifigant performance improvement and a
+                    handful of various SEO and Accesibility updates. My hope is to maintain both the visual and the
+                    logistical vibe that reminisces early internet era websites. In order to achieve this I focused my
+                    efforts on speeding up the loading times of pages, particularly ones like <a href="./downloads.html"
+                        alt="Downloads Page Link">Downloads</a> or <a href="./webring.html"
+                        alt="Webring Page Link">Webring</a> which tend to be
+                    more dense with images. </p>
                 <p>
-                    I managed to optimize a handful of aspects about the desktop version of the site with a few visual changes planned for the mobile version at a later date. I also added a new addition to the <a class="intra-link" aria-label="Downloads page" href="https://naklwilson.net/downloads">Downloads</a> page for the current Factorio playthrough! Enjoy taking a look around to see some of the subtle updates and look forward to many more changes to come as I try to  make 2026 the <strong>year of creative projects!</strong>
+                    I have also worked to do a visual overhaul of the <a href="./webring.html"
+                        alt="Webring Page Link">Webring</a> page in order to give it a naudical theme to harken back to
+                    the Windows 95 'Underwater' screensaver with a touch of a modern flare! My goal this year is to
+                    further refine and enhance the theming of each page while also making sure load times are fast
+                    on even the slowest internet speeds available!
                 </p>
 
             </article>
@@ -224,7 +248,7 @@
                 src="./images/badges/github-export.webp" width="80px" height="15px"></a>
         <a class="outra-link" aria-label="Ko-Fi Donation Page" target="_blank" href="https://ko-fi.com/naklwilson"><img
                 alt="Ko-Fi Donation Badge" src="./images/badges/kofi.webp" width="80px" height="15px"></a>
-        <img alt="No AI Button" src="./images/badges/NO-AI.png" width="80px" height="15px">
+        <img alt="No AI Button" src="./images/badges/NO-AI-HUMAN.webp" width="80px" height="15px">
 
         <!--- <div id="audio-player-container">
   <audio autoplay loop preload id="playaudio" src="./music/Normal/homepage_theme.mp3" type="audio/mpeg"></audio>
