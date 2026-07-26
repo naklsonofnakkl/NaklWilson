@@ -4623,6 +4623,7 @@ textarea.form-control-lg {
 
 .accordion-header {
   margin-bottom: 0;
+  color: var(--bs-black);
 }
 
 .accordion-item {

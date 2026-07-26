@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Display View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        #game-title {
+            font-size: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #aaa;
+            margin-bottom: 10px;
+        }
+
+        /* Set up base structure rules here once */
+        #timer {
+            font-size: 15rem;
+            font-weight: bold;
+            font-variant-numeric: tabular-nums;
+            padding: 20px 60px;
+            border-radius: 20px;
+            border: 10px solid #FFFFFF; 
+            transition: border-color 0.3s ease, color 0.3s ease;
+            color: #FFFFFF;
+        }
+
+        /* Modifier classes only adjust colors */
+        #timer.is-running {
+            border-color: #43b72f !important;
+            color: #43b72f !important;
+        }
+
+        #timer.is-stopped {
+            border-color: #b72f2f !important;
+            color: #b72f2f !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="game-title">Loading Game...</div>
+    <div id="timer">--:--</div>
+
+    <script>
+        const gameNames = {
+            "YO": "Yu-Gi-Oh!",
+            "OP": "One Piece",
+            "RB": "RiftBound",
+            "UA": "Union Arena",
+            "GA": "Grand Archive",
+            "DM": "Digimon"
+        };
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const activeGame = urlParams.get('game');
+
+        const titleDisplay = document.getElementById('game-title');
+        const clockDisplay = document.getElementById('timer');
+
+        if (activeGame && gameNames[activeGame]) {
+            titleDisplay.textContent = gameNames[activeGame];
+            document.title = gameNames[activeGame];
+        } else {
+            titleDisplay.textContent = "Unknown Event";
+        }
+
+        const bc = new BroadcastChannel('tcg_timer_channel');
+
+        bc.onmessage = (event) => {
+            const { type, game, time, status } = event.data;
+
+            if (type === 'UPDATE' && game === activeGame) {
+                clockDisplay.textContent = time;
+
+                if (status === "running") {
+                    clockDisplay.classList.add("is-running");
+                    clockDisplay.classList.remove("is-stopped");
+                } else if (status === "stopped") {
+                    clockDisplay.classList.remove("is-running");
+                    clockDisplay.classList.add("is-stopped");
+                } else if (status === "reset") {
+                    clockDisplay.classList.remove("is-running", "is-stopped");
+                }
+            }
+        };
+    </script>
+</body>
+
+</html>

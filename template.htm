@@ -52,10 +52,198 @@
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_sub.webp" type="image/webp">
     <meta http-equiv="Cache-control" content="max-age=604800, must-revalidate">
     <link type="application/json+oembed" href="https://naklwilson.net/json/embed_info.json" />
-    <link http-equiv="Content-Type" content="text/css; charset=utf-8" rel="stylesheet" type="text/css"
-        href=".\style_currentpage-min.css">
-</head>
+    <link rel="preload" href="style-min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="style-min.css">
+    </noscript>
+    <style>
+        a:link {
+            color: #FFFFFF;
+        }
 
+        a:visited {
+            color: #ffa047;
+        }
+
+        html {
+            overflow-y: scroll;
+            cursor: url('./images/mouse_cursor/Mouse_Cursor.cur'), auto;
+        }
+
+        body {
+            background-color: #561350;
+            width: 960px;
+            margin: 8px auto;
+            line-height: 1.6;
+            font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+            color: #FFFFFF;
+        }
+
+        header {
+            width: 960px;
+            height: 150px;
+            background-image: url('./images/layout/homepage_banner.webp');
+            background-color: #6a1480;
+        }
+
+        footer {
+            clear: both;
+            padding-top: 10px;
+            background-repeat: no-repeat;
+            background-image: url('./images/layout/homepage_bottomborder.webp');
+            text-align: center;
+        }
+
+        section {
+            padding: 10px 8px 10px 8px;
+            background-color: #6a1480;
+            background-image: url('./images/layout/homepage_sub.webp'), url('./images/layout/homepage_border.webp');
+            background-repeat: no-repeat, repeat-y;
+            height: 100%;
+            width: 944px;
+            float: left;
+        }
+
+        #left-col {
+            float: left;
+            width: 152px;
+        }
+
+        main {
+            float: left;
+            width: 640px;
+            height: auto;
+        }
+
+        #right-col {
+            float: right;
+            width: 152px;
+        }
+
+        article {
+            width: 598px;
+            padding: 10px 20px;
+            border-width: 1px;
+            background-color: #99237f;
+            margin: 10px auto;
+            -moz-border-radius: 10px;
+            -webkit-border-radius: 10px;
+            border-style: solid;
+            border-radius: 10px 10px;
+        }
+
+        h1 {
+            font-variant: small-caps;
+            font-size: 28px;
+            font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 3px;
+            text-shadow: #561350 2px 2px;
+        }
+
+        .welcome {
+            font-variant: small-caps;
+            font-weight: bold;
+            margin-top: 0px;
+            margin-bottom: 3px;
+            text-shadow: #561350 2px 2px;
+        }
+
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin: 0px;
+            text-shadow: #561350 2px 2px;
+        }
+
+        nav>img {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+
+        p {
+            text-indent: 40px;
+        }
+
+        #social {
+            background: url(./images/layout/social_icon.webp) no-repeat;
+            margin: 15px auto 5px auto;
+            display: block;
+            height: 72px;
+            width: 72px;
+        }
+
+        #art {
+            background: url(./images/layout/art_icon.webp) no-repeat;
+            margin: 15px auto 5px auto;
+            display: block;
+            height: 72px;
+            width: 72px;
+        }
+
+        #twitch {
+            background: url(./images/layout/twitch_icon.webp) no-repeat;
+            margin: 15px auto 5px auto;
+            display: block;
+            height: 72px;
+            width: 72px;
+        }
+
+        #youtube {
+            background: url(./images/layout/youtube_icon.webp) no-repeat;
+            margin: 15px auto 5px auto;
+            display: block;
+            height: 72px;
+            width: 72px;
+        }
+
+        #store {
+            background: url(./images/layout/store_icon.webp) no-repeat;
+            margin: 15px auto 5px auto;
+            display: block;
+            height: 72px;
+            width: 72px;
+        }
+
+        #contact {
+            background: url(./images/layout/contact_icon.webp) no-repeat;
+            margin: 15px auto 5px auto;
+            display: block;
+            height: 72px;
+            width: 72px;
+        }
+
+        #webring {
+            background: url(./images/layout/WEB_RING_ICON.webp) no-repeat;
+            margin: 15px auto 5px auto;
+            display: block;
+            height: 72px;
+            width: 72px;
+        }
+
+        #downloads {
+            background: url(./images/layout/downloads_icon.webp) no-repeat;
+            margin: 15px auto 5px auto;
+            display: block;
+            height: 72px;
+            width: 72px;
+        }
+
+        .intra-link {
+            cursor: url('./images/mouse_cursor/Mouse_Cursor_intra.cur'), auto
+        }
+
+        .outra-link {
+            cursor: url('./images/mouse_cursor/mouse_cursor_outra.cur'), auto
+        }
+
+        #octoberDiv,
+        #decemberDiv {
+            display: none;
+        }
+    </style>
+</head>
 <body>
     <header>
         <a class="intra-link" href="https://www.naklwilson.net/"><img src="./images/layout/homepage_banner.webp"
@@ -64,7 +252,7 @@
 
     <section>
         <nav id="left-col">
-                <center>Navigation</center>
+            <center>Navigation</center>
             </h2>
             <a class="intra-link" aria-label="social page" id="social"
                 href="https://www.naklwilson.net/social.html"></a><img alt="Social Navigation Button"
@@ -96,8 +284,8 @@
                 href="https://twitch.thesadgames.com"></a><img alt="Twitch Navigation Button" src="./images/twitch.webp"
                 width="32px" height="8px">
             <a class="outra-link" aria-label="Youtube page" id="youtube" target="_blank"
-                href="https://yt.thesadgames.com"></a><img alt="Youtube Navigation Button"
-                src="./images/youtube.webp" width="41px" height="8px">
+                href="https://yt.thesadgames.com"></a><img alt="Youtube Navigation Button" src="./images/youtube.webp"
+                width="41px" height="8px">
             <a class="outra-link" aria-label="Store" id="store" href="https://naklprints.etsy.com"></a><img
                 alt="Store Navigation Button" src="./images/store.webp" width="28px" height="8px">
         </nav>
