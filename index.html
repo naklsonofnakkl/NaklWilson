@@ -425,7 +425,7 @@
     </section>
 
     <footer>
-        NaklWilson ©️ 2026 - Theme inspired by: <a class="outra-link" aria-label="Binarynova's homepage" target="_blank"
+        NaklWilson ©️ <span id="current-year"></span> - Theme inspired by: <a class="outra-link" aria-label="Binarynova's homepage" target="_blank"
             id="credit" href="https://www.binarynova.com/">Binarynova</a>
         <br>
         <a class="outra-link" aria-label="creative commons license details" target="_blank"
@@ -474,6 +474,8 @@
 
         // Call the function on page load
         window.onload = checkMonth;
+
+        document.getElementById("year").textContent = new Date().getFullYear();
     </script>
 
 </body>

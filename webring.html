@@ -234,7 +234,7 @@ border-radius: 0px 10px 10px 0px;
     </section>
 
     <footer class="sm-home-cursor">
-        NaklWilson ©️ 2026 - Theme inspired by: <a class="sm-outra-link" aria-label="Binarynova's homepage"
+        NaklWilson ©️ <span id="current-year"></span> - Theme inspired by: <a class="sm-outra-link" aria-label="Binarynova's homepage"
             target="_blank" id="credit" href="https://www.binarynova.com/">Binarynova</a>
         <br>
         <a class="sm-outra-link" aria-label="creative commons license details" target="_blank"
@@ -257,6 +257,9 @@ border-radius: 0px 10px 10px 0px;
   <button class="home-cursor" onclick="document.getElementById('playaudio').pause()">⏸️</button>
  --->
     </footer>
+        <script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
 </body>
 
 </html>

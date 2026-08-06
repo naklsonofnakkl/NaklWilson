@@ -12,3 +12,5 @@ OLD/*
 blog/*
 CERTS/*
 fonts/*
+TEST_TIMER.HTML
+json/test_timer.js

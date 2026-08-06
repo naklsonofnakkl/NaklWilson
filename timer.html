@@ -41,1055 +41,320 @@
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_sub.webp" type="image/webp">
     <meta http-equiv="Cache-control" content="max-age=604800, must-revalidate">
     <link type="application/json+oembed" href="https://naklwilson.net/json/embed_info.json" />
-    <style>
-        /* ELEMENTS */
-        :root {
-            color-scheme: light dark;
-            --bg-color: light-dark(#6abaf0, #111213);
-            --text-color: light-dark(#ffffff, #c7c7c7);
-            --card-color: light-dark(#2f6fb7, #1c1e20);
-            --navbtn-color: light-dark(#1753b6, #50596c);
-            --navbtnhover-color: light-dark(#1753b6, #3b82f6);
-            --navbtnactive-color: light-dark(#3b82f6, #979ca7);
-            --navbtnactiveborder-color: light-dark(#6abaf0, #50596c);
-            --navbar-color: light-dark(#2f6fb7, #1c1e20);
-            --navborder-color: light-dark(#e5e5e5, #979ca7);
-            --btnspace-color: light-dark(#43b72f, #5ec44d);
-            --btnborder-color: light-dark(#e5e5e5, #979ca7);
-            --btnactive-color: light-dark(#3b82f6, #1753b6);
-            --btn-color: light-dark(#919bb1, #50596c);
-            --btnhover-color: light-dark(#4a4f5a, #979ca7);
-            --timerstop-color: light-dark(#b72f2f, #c44d4d);
-            --timergo-color: light-dark(#43b72f, #5ec44d);
-            --border-color: light-dark(#e5e5e5, #979ca7);
-            --timerborder-color: light-dark(#e5e5e5, #979ca7);
-            --timerbg-color: light-dark (#1753b6, #50596c);
-        }
-
-        html {
-    font-size: 16px;
-}
-
-        h2 {
-            color: var(--text-color);
-        }
-
-        [hidden] {
-            display: none !important;
-        }
-
-        @font-face {
-            font-family: 'ChocolateMono';
-            src: url('./fonts/ChevyRay-Chocolate-Mono.ttf') format('truetype');
-            /* Fallback */
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        /* CLASS */
-        .timers-container {
-            display: flex;
-            flex-flow: row wrap;
-            justify-content: center;
-            align-items: flex-start;
-            gap: 0.5rem;
-            width: 100%;
-            max-width: 1800px;
-            margin: 0 auto;
-            padding: auto;
-        }
-
-        .timerScreen-card {
-            flex: 1 1 0px;
-            min-width: 350px;
-            max-width: 360px;
-            height: 90%;
-            min-height: auto;
-            padding: 1rem;
-            display: flex;
-            flex-flow: column nowrap;
-            gap: 0.5rem;
-            align-content: center;
-            align-items: center;
-            justify-content: space-between;
-            container-type: inline-size;
-            container-name: card;
-        }
-
-        .timerDisplay {
-            container-type: inline-size;
-            width: clamp(130px, 20vw, 240px);
-            height: auto;
-            aspect-ratio: 1 / 1;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12%;
-            box-sizing: border-box;
-            box-shadow: 0px 0px 25px 8px rgba(211, 211, 211, 0.5);
-            background-color: var(--card-color);
-        }
-
-        .timerDisplay h1 {
-            font-size: clamp(1.5rem, 28cqw, 2.8125rem);
-            font-family: 'ChocolateMono', monospace;
-            font-variant-numeric: tabular-nums;
-            margin: 0;
-            line-height: 1;
-            text-align: center;
-            white-space: nowrap;
-        }
-
-        .timer-input-container,
-        .sound-select-container {
-            background-color: var(--navbtn-color);
-            width: 90cqw;
-            border: 5px solid var(--border-color);
-            color: var(--text-color);
-            padding: 1rem;
-            width: 100%;
-            min-width: 150px;
-            max-width: 250px;
-            border-radius: 30px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .input-group {
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .input-group label {
-            font-size: 0.85rem;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-
-        .input-group input {
-            padding: 8px;
-            border: 1px solid var(--border-color);
-            border-radius: 2px;
-            text-align: center;
-        }
-
-        .button-space,
-        .button-alarm {
-            width: 100%;
-            margin-top: 5px;
-        }
-
-        .button-space button {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--btnspace-color);
-            color: #FFFFFF;
-            border: 2px solid var(--timergo-color);
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .button-alarm button {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--btn-color);
-            color: #FFFFFF;
-            border: 2px solid var(--btnborder-color);
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .timerDisplay.is-running {
-            box-shadow: 0px 0px 25px 8px rgba(67, 183, 47, 0.5) !important;
-            background-color: rgba(24, 66, 17, 0.5);
-        }
-
-        .timerDisplay.is-stopped {
-            box-shadow: 0px 0px 25px 8px rgba(183, 47, 47, 0.5) !important;
-            background-color: rgba(73, 18, 18, 0.5);
-        }
-
-        .button {
-            border: 2px solid var(--border-color);
-            background-color: var(--btn-color);
-            font-family: 'Courier New', Courier, monospace;
-            color: var(--text-color);
-            font-size: 18px;
-            padding: 10px;
-            margin: 5px;
-            cursor: pointer;
-            align-content: center;
-            align-items: center;
-            justify-content: space-evenly;
-        }
-
-        .logo {
-            display: block;
-            width: 60cqw;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            object-fit: contain;
-        }
-
-        .logo-button {
-            width: auto;
-            height: clamp(100px, 10vh, 330px);
-            aspect-ratio: auto;
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .logo-button img {
-            max-height: 100%;
-            max-width: 100%;
-            object-fit: contain;
-        }
-
-        .logo-picture {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .button:hover {
-            color: var(--bg-color);
-            background-color: var(--btnhover-color);
-            border: 2px solid var(--navbtn-color);
-        }
-
-        .time {
-            color: var(--text-color);
-        }
-
-        .time.is-running {
-            color: var(--timergo-color);
-        }
-
-        .time.is-stopped {
-            color: var(--timerstop-color);
-        }
-
-
-        .navbar-container {
-            display: flex;
-            flex-direction: row wrap;
-            justify-content: center;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 4px;
-            padding: 10px;
-            background-color: var(--navbar-color);
-            border: 5px solid var(--border-color);
-            border-radius: 30px;
-        }
-
-        .nav-btn {
-            padding: 2px 16px;
-            font-weight: bold;
-            text-transform: uppercase;
-            cursor: pointer;
-            border: 2px solid #e5e5e5;
-            background-color: var(--navbtn-color);
-            color: var(--text-color);
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            flex: 1 1 calc(33.333% - 12px);
-            min-width: 70px;
-            text-align: center;
-            min-height: 44px;
-            max-width: 100%;
-            max-height: 300px;
-        }
-
-        .nav-btn:hover {
-            background-color: var(--navbtnhover-color);
-            border: 2px solid var(--navbtnhover-color);
-        }
-
-        .nav-btn.active,
-        .button.active {
-            border-color: var(--navbtnactiveborder-color);
-            background-color: var(--navbtnactive-color);
-        }
-
-        .hidden-on-desktop {
-            display: none !important;
-        }
-
-        .ui-picture {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-        }
-
-        .ui-button {
-            display: flex;
-            flex-direction: row wrap;
-            width: auto;
-            height: 32px;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        /* ID */
-        #timerScreen-yo {
-            border: 5px solid var(--border-color);
-            border-radius: 30px;
-            background-color: var(--card-color);
-            box-shadow: 10px 10px 50px rgba(128, 128, 128, 0.3);
-        }
-
-        #timerScreen-op {
-            border: 5px solid var(--border-color);
-            border-radius: 30px;
-            background-color: var(--card-color);
-            box-shadow: 10px 10px 50px rgba(128, 128, 128, 0.3);
-        }
-
-        #timerScreen-rb {
-            border: 5px solid var(--border-color);
-            border-radius: 30px;
-            background-color: var(--card-color);
-            box-shadow: 10px 10px 50px rgba(128, 128, 128, 0.3);
-        }
-
-        #timerScreen-ua {
-            border: 5px solid var(--border-color);
-            border-radius: 30px;
-            background-color: var(--card-color);
-            box-shadow: 10px 10px 50px rgba(128, 128, 128, 0.3);
-        }
-
-        #timerScreen-ga {
-            border: 5px solid var(--border-color);
-            border-radius: 30px;
-            background-color: var(--card-color);
-            box-shadow: 10px 10px 50px rgba(128, 128, 128, 0.3);
-        }
-
-        #timerScreen-dm {
-            border: 5px solid var(--border-color);
-            border-radius: 30px;
-            background-color: var(--card-color);
-            box-shadow: 10px 10px 50px rgba(128, 128, 128, 0.3);
-        }
-
-        #timerDisplay-yo {
-            border: 5px solid var(--border-color);
-            border-radius: 50%;
-            font-weight: bold;
-        }
-
-        #timerDisplay-op {
-            border: 5px solid var(--border-color);
-            border-radius: 50%;
-            font-weight: bold;
-        }
-
-        #timerDisplay-rb {
-            border: 5px solid var(--border-color);
-            border-radius: 50%;
-            font-weight: bold;
-        }
-
-        #timerDisplay-ua {
-            border: 5px solid var(--border-color);
-            border-radius: 50%;
-            font-weight: bold;
-        }
-
-        #timerDisplay-ga {
-            border: 5px solid var(--border-color);
-            border-radius: 50%;
-            font-weight: bold;
-        }
-
-        #timerDisplay-dm {
-            border: 5px solid var(--border-color);
-            border-radius: 50%;
-            font-weight: bold;
-        }
-
-        /* Keep button layout perfectly aligned */
-        #startBtn-yo,
-        .button {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            padding: 8px;
-            /* Clean uniform padding over text padding dimensions */
-        }
-
-        #button-container {
-            margin-top: 5px;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 1285px) {
-
-            .nav-btn {
-                flex: 0 0 auto;
-                min-height: auto;
-                border: 1px solid var(--border-color);
-            }
-
-            .nav-btn:hover {
-                flex: 0 0 auto;
-                min-height: auto;
-                border: 1px solid var(--navborder-color);
-            }
-
-            .navbar-container {
-                border: 0px solid var(--border-color);
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-                justify-content: center;
-                align-items: center;
-                gap: 12px;
-                padding: 5px;
-                background-color: var(--navbar-color);
-                overflow-x: auto;
-                overflow-y: hidden;
-                -webkit-overflow-scrolling: touch;
-                scroll-behavior: smooth;
-                scrollbar-width: thin;
-                border: 4px solid var(--border-color);
-
-            }
-
-            .navbar-container::-webkit-scrollbar {
-                height: 6px;
-            }
-
-            .navbar-container::-webkit-scrollbar-thumb {
-                background: var(--navbar-color);
-                border-radius: 10px;
-            }
-
-            .logo-button {
-                width: auto;
-                height: clamp(80px, 6vh, 100px);
-                aspect-ratio: auto;
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-            }
-
-            .timerScreen-card {
-                flex: 1;
-                min-width: 280px;
-                max-width: 280px;
-                min-height: 400px;
-                padding: 1rem;
-                display: flex;
-                flex-flow: row wrap;
-                gap: 1rem;
-                align-content: center;
-                align-items: center;
-                justify-content: space-evenly;
-                container-type: inline-size;
-                container-name: card;
-            }
-
-        }
-
-        @media (max-width: 780px) {
-
-            .timerScreen-card {
-                flex: 1;
-                min-width: 150px;
-                max-width: 280px;
-                min-height: 400px;
-                padding: 1rem;
-                display: flex;
-                flex-flow: row wrap;
-                gap: 1rem;
-                align-content: center;
-                align-items: center;
-                justify-content: space-evenly;
-                container-type: inline-size;
-                container-name: card;
-            }
-
-            .navbar-container {
-                border: 0px solid var(--border-color);
-                display: flex;
-                flex-direction: row;
-                flex-wrap: nowrap;
-                justify-content: flex-start;
-                align-items: center;
-                gap: 12px;
-                padding: 10px;
-                background-color: var(--navbar-color);
-                overflow-x: auto;
-                overflow-y: hidden;
-                -webkit-overflow-scrolling: touch;
-                scroll-behavior: smooth;
-                scrollbar-width: thin;
-                border: 4px solid var(--border-color);
-
-            }
-        }
-</style>
+    <link rel="preload" href="style_timer-min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="style_timer-min.css">
+    </noscript>
 </head>
 
 <body>
     <div id="page-wrapper">
-        <nav class="navbar-container">
-            <button class="nav-btn" onclick="toggleMultiSection('yo', this)">
-                <picture class="logo-picture">
-                    <source srcset=".\images\tcg_timer\yugioh.webp" media="(min-width: 720px)">
-                    <img class="logo-button" src=".\images\tcg_timer\yugioh_icon.webp" alt="YGO">
-                </picture>
-            </button>
+        <!-- NAVIGATION BAR -->
+        <div class="navbar-wrapper">
+            <nav class="navbar-sm-container" id="normal-navbar" hidden>
+                <button class="nav-sm-btn" id="nt" data-action="toggle" data-target="nt">
+                    <picture class="logo-picture-sm">
+                        <source srcset=".\images\tcg_timer\ui\add.webp" media="(min-width: 780px)">
+                        <img class="logo-button-new" src=".\images\tcg_timer\ui\add.webp" alt="New Timer" width="32px"
+                            height="32px">
+                    </picture>
+                </button>
+                <button class="nav-sm-btn" id="set" data-action="toggle" data-target="set">
+                    <picture class="logo-picture-sm">
+                        <source srcset=".\images\tcg_timer\ui\settings.webp" media="(min-width: 780px)">
+                        <img class="logo-button-new" src=".\images\tcg_timer\ui\settings.webp" alt="Settings"
+                            width="32px" height="32px">
+                    </picture>
+                </button>
+                <button class="nav-sm-btn" id="close" data-action="close-timer">
+                    <picture class="logo-picture-sm">
+                        <source srcset=".\images\tcg_timer\ui\delete.webp" media="(min-width: 780px)">
+                        <img class="logo-button-new" src=".\images\tcg_timer\ui\delete.webp" alt="Close" width="32px"
+                            height="32px">
+                    </picture>
+                </button>
+            </nav>
+            <nav class="navbar-container">
+                <button class="nav-btn active" id="yo" data-action="toggle" data-target="yo" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\yugioh.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\yugioh_icon.webp" alt="YGO">
+                    </picture>
+                </button>
 
-            <button class="nav-btn" onclick="toggleMultiSection('op', this)">
-                <picture class="logo-picture">
-                    <source srcset=".\images\tcg_timer\onepiece.webp" media="(min-width: 720px)">
-                    <img class="logo-button" src=".\images\tcg_timer\onepiece_icon.webp" alt="OP">
-                </picture>
-            </button>
+                <button class="nav-btn active" id="op" data-action="toggle" data-target="op" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\onepiece.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\onepiece_icon.webp" alt="op">
+                    </picture>
+                </button>
 
-            <button class="nav-btn" onclick="toggleMultiSection('rb', this)">
-                <picture class="logo-picture">
-                    <source srcset=".\images\tcg_timer\riftbound.webp" media="(min-width: 720px)">
-                    <img class="logo-button" src=".\images\tcg_timer\riftbound_icon.webp" alt="RB">
-                </picture>
-            </button>
+                <button class="nav-btn active" id="rb" data-action="toggle" data-target="rb" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\riftbound.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\riftbound_icon.webp" alt="rb">
+                    </picture>
+                </button>
 
-            <button class="nav-btn" onclick="toggleMultiSection('ua', this)">
-                <picture class="logo-picture">
-                    <source srcset=".\images\tcg_timer\unionarena.webp" media="(min-width: 720px)">
-                    <img class="logo-button" src=".\images\tcg_timer\unionarena_icon.webp" alt="UA">
-                </picture>
-            </button>
+                <button class="nav-btn active" id="ua" data-action="toggle" data-target="ua" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\unionarena.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\unionarena_icon.webp" alt="ua">
+                    </picture>
+                </button>
 
-            <button class="nav-btn" onclick="toggleMultiSection('ga', this)">
-                <picture class="logo-picture">
-                    <source srcset=".\images\tcg_timer\grandarchive.webp" media="(min-width: 720px)">
-                    <img class="logo-button" src=".\images\tcg_timer\grandarchive_icon.webp" alt="GA">
-                </picture>
-            </button>
+                <button class="nav-btn active" id="ga" data-action="toggle" data-target="ga" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\grandarchive.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\grandarchive_icon.webp" alt="ga">
+                    </picture>
+                </button>
 
-            <button class="nav-btn" onclick="toggleMultiSection('dm', this)">
-                <picture class="logo-picture">
-                    <source srcset=".\images\tcg_timer\digimon.webp" media="(min-width: 720px)">
-                    <img class="logo-button" src=".\images\tcg_timer\digimon_icon.webp" alt="DM">
-                </picture>
-            </button>
-        </nav>
+                <button class="nav-btn active" id="lc" data-action="toggle" data-target="lc" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\lorcana.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\lorcana_icon.webp" alt="lc">
+                    </picture>
+                </button>
 
-        <main class="timers-container" style="-webkit-user-select:none;user-select:none;" unselectable="on">
-            <section id="timerScreen-yo" class="timerScreen-card" hidden>
-                <div class="timers-container">
-                    <img class="logo" src=".\images\tcg_timer\yugioh.webp">
-                    <div id="timerDisplay-yo" class="timerDisplay">
-                        <h1 id="time-yo" class="time"></h1>
-                    </div>
-                    <div id="button-container">
-                        <button id="startBtn-yo" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\start.webp"
-                                    alt="start">
-                        </button>
-                        <button id="resetBtn-yo" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\reset.webp"
-                                    alt="reset">
-                        </button>
-                        <button id="addBtn-yo" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\add.webp"
-                                    alt="add">
-                        </button>
-                        <button id="subBtn-yo" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\sub.webp"
-                                    alt="sub">
-                        </button>
-                        <button id="openBtn-yo" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\open.webp"
-                                    alt="open">
-                        </button>
-                        <button id="timerBtn-yo" class="button" onclick="toggleMultiSection('yo', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\custom.webp"
-                                    alt="custom">
-                        </button>
-                        <button id="alarmBtn-yo" class="button" onclick="toggleMultiSection('yo', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\alarm.webp"
-                                    alt="alarm">
-                        </button>
-                    </div>
-                    <div class="timer-input-container" id="customTimer-yo" hidden>
-                        <div class="input-group">
-                            <label for="custom-minutes-yo">
-                                <h2>Minutes</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-minutes-yo" min="0" max="999"
-                                placeholder="00" />
-                        </div>
-                        <div class="input-group">
-                            <label for="custom-seconds-yo">
-                                <h2>Seconds</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-seconds-yo" min="0" max="59"
-                                placeholder="00" />
-                        </div>
-                        <div class="button-space">
-                            <button type="button" id="customBtn-yo" class="button">
+                <button class="nav-btn active" id="gm" data-action="toggle" data-target="gm" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\gundam.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\gundam_icon.webp" alt="gm">
+                    </picture>
+                </button>
+
+                <button class="nav-btn active" id="mg" data-action="toggle" data-target="mg" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\magicthegathering.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\magicthegathering_icon.webp" alt="mg">
+                    </picture>
+                </button>
+
+                <button class="nav-btn active" id="fb" data-action="toggle" data-target="fb" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\fleshandblood.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\fleshandblood_icon.webp" alt="fb">
+                    </picture>
+                </button>
+
+                <button class="nav-btn active" id="dbs" data-action="toggle" data-target="dbs" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\dragonballsuperfusion.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\dragonballsuperfusion_icon.webp" alt="dbs">
+                    </picture>
+                </button>
+
+                <button class="nav-btn active" id="ws" data-action="toggle" data-target="ws" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\weissschwarz.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\weissschwarz_icon.webp" alt="ws">
+                    </picture>
+                </button>
+
+                <button class="nav-btn active" id="dm" data-action="toggle" data-target="dm" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\digimon.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\digimon_icon.webp" alt="dm">
+                    </picture>
+                </button>
+                <button class="nav-btn active" id="pk" data-action="toggle" data-target="pk" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\pokemon.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\pokemon_icon.webp" alt="pk">
+                    </picture>
+                </button>
+                <button class="nav-btn active" id="ff" data-action="toggle" data-target="ff" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\finalfantasy.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\finalfantasy_icon.webp" alt="ff">
+                    </picture>
+                </button>
+                <button class="nav-btn active" id="pw" data-action="toggle" data-target="pw" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\palworld.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\palworld_icon.webp" alt="pw">
+                    </picture>
+                </button>
+            </nav>
+        </div>
+        <div class="navbar-mb-wrapper" id="mobile-navbar" hidden>
+            <nav class="navbar-mb-container">
+                <button class="nav-sm-btn" id="nt" data-action="toggle" data-target="nt">
+                    <picture class="logo-picture-sm">
+                        <source srcset=".\images\tcg_timer\ui\add.webp" media="(min-width: 780px)">
+                        <img class="logo-button-new" src=".\images\tcg_timer\ui\add.webp" alt="New Timer" width="32px"
+                            height="32px">
+                    </picture>
+                </button>
+                <button class="nav-sm-btn" id="set" data-action="toggle" data-target="set">
+                    <picture class="logo-picture-sm">
+                        <source srcset=".\images\tcg_timer\ui\settings.webp" media="(min-width: 780px)">
+                        <img class="logo-button-new" src=".\images\tcg_timer\ui\settings.webp" alt="Settings"
+                            width="32px" height="32px">
+                    </picture>
+                </button>
+                <button class="nav-sm-btn" id="close" data-action="close-timer">
+                    <picture class="logo-picture-sm">
+                        <source srcset=".\images\tcg_timer\ui\delete.webp" media="(min-width: 780px)">
+                        <img class="logo-button-new" src=".\images\tcg_timer\ui\delete.webp" alt="Close" width="32px"
+                            height="32px">
+                    </picture>
+                </button>
+            </nav>
+        </div>
+        <main class="timers-container" style="-webkit-user-select:none;user-select:none;" unselectable="on"
+            id="timers-container">
+            <!-- NEW TIMER SELECTION -->
+            <section id="timerScreen-nt" class="settingScreen-card" hidden>
+                <div class="settings-container">
+                    <div id="gameTimer">
+                        <label for="timerSelection">
+                            <h2>Choose a Timer:</h2>
+                        </label>
+                        <select id="timerSelection" name="Games">
+                            <option disabled selected value>-- Select a Game --</option>
+                            <option value="dm">Digimon</option>
+                            <option value="dbs">DragonBall Super Fusion</option>
+                            <option value="ff">Final Fantasy</option>
+                            <option value="fb">Flesh and Blood</option>
+                            <option value="ga">Grand Archive</option>
+                            <option value="gm">Gundam</option>
+                            <option value="lc">Lorcana</option>
+                            <option value="mg">Magic the Gathering</option>
+                            <option value="op">One Piece</option>
+                            <option value="pw">Palworld</option>
+                            <option value="pk">Pokemon</option>
+                            <option value="rb">Riftbound</option>
+                            <option value="ua">Union Arena</option>
+                            <option value="ws">Weiss Schwarz</option>
+                            <option value="yo">YuGiOh!</option>
+                        </select>
+                        <div class="button-timer">
+                            <button id="createBtn" class="button" data-action="choose-timer"
+                                data-select="timerSelection">
                                 <picture class="ui-picture"> <img class="ui-button"
                                         src=".\images\tcg_timer\ui\confirm.webp" alt="confirm">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="sound-select-container" id="soundTimer-yo" hidden>
-                        <label for="soundSelect">
-                            <h2>Choose an alarm:</h2>
-                        </label>
-                        <select id="soundSelect-YO">
-                            <option value="alarm1" disabled selected value>-- Select an alarm --</option>
-                            <option value="alarm1">Alarm 1</option>
-                            <option value="alarm2">Alarm 2</option>
-                            <option value="siren">Siren</option>
-                            <option value="onepiece">One Piece</option>
-                        </select>
-                        <div class="button-alarm">
-                            <button id="previewBtn-yo" class="button" onclick="playSelectedSound('YO')">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\test.webp" alt="preview">
-                            </button>
-                            <button id="muteBtn-yo" class="button" onclick="toggleMute('YO')">
-                                <picture class="ui-picture">
-                                    <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute">
-                                </picture>
                             </button>
                         </div>
                     </div>
                 </div>
             </section>
-            <section id="timerScreen-op" class="timerScreen-card" hidden>
+            <section id="timerScreen-set" class="settingScreen-card" hidden>
                 <div class="timers-container">
-                    <img class="logo" src=".\images\tcg_timer\onepiece.webp">
-                    <div id="timerDisplay-op" class="timerDisplay">
-                        <h1 id="time-op" class="time"></h1>
-                    </div>
-                    <div id="button-container">
-                        <button id="startBtn-op" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\start.webp"
-                                    alt="start">
-                        </button>
-                        <button id="resetBtn-op" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\reset.webp"
-                                    alt="reset">
-                        </button>
-                        <button id="addBtn-op" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\add.webp"
-                                    alt="add">
-                        </button>
-                        <button id="subBtn-op" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\sub.webp"
-                                    alt="sub">
-                        </button>
-                        <button id="openBtn-op" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\open.webp"
-                                    alt="open">
-                        </button>
-                        <button id="timerBtn-op" class="button" onclick="toggleMultiSection('op', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\custom.webp"
-                                    alt="custom">
-                        </button>
-                        <button id="alarmBtn-op" class="button" onclick="toggleMultiSection('op', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\alarm.webp"
-                                    alt="alarm">
-                        </button>
-                    </div>
-                    <div class="timer-input-container" id="customTimer-op" hidden>
-                        <div class="input-group">
-                            <label for="custom-minutes-op">
-                                <h2>Minutes</h2>
+                    <div id="settingsTimer">
+                        <div id="theme-container">
+                            <label for="timerSettings">
+                                <h2>Theme Toggle:</h2>
                             </label>
-                            <input type="number" pattern="\d*" id="custom-minutes-op" min="0" max="999"
-                                placeholder="00" />
-                        </div>
-                        <div class="input-group">
-                            <label for="custom-seconds-op">
-                                <h2>Seconds</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-seconds-op" min="0" max="59"
-                                placeholder="00" />
-                        </div>
-                        <div class="button-space">
-                            <button type="button" id="customBtn-op" class="button">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\confirm.webp" alt="confirm">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="sound-select-container" id="soundTimer-op" hidden>
-                        <label for="soundSelect">
-                            <h2>Choose an alarm:</h2>
-                        </label>
-                        <select id="soundSelect-OP">
-                            <option value="alarm1" disabled selected value>-- Select an alarm --</option>
-                            <option value="alarm1">Alarm 1</option>
-                            <option value="alarm2">Alarm 2</option>
-                            <option value="siren">Siren</option>
-                            <option value="onepiece">One Piece</option>
-                        </select>
-                        <div class="button-alarm">
-                            <button id="previewBtn-op" class="button" onclick="playSelectedSound('OP')">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\test.webp" alt="preview">
-                            </button>
-                            <button id="muteBtn-op" class="button" onclick="toggleMute('OP')">
-                                <picture class="ui-picture">
-                                    <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute">
+                            <button class="nav-set-btn" id="theme" data-action="toggle" data-target="theme">
+                                <picture class="logo-picture-sm">
+                                    <img class="logo-button-theme" src=".\images\tcg_timer\ui\light.webp" alt="Theme"
+                                        width="32px" height="32px">
                                 </picture>
                             </button>
                         </div>
-                    </div>
-                </div>
-            </section>
-            <section id="timerScreen-rb" class="timerScreen-card" hidden>
-                <div class="timers-container">
-                    <img class="logo" src=".\images\tcg_timer\riftbound.webp">
-                    <div id="timerDisplay-rb" class="timerDisplay">
-                        <h1 id="time-rb" class="time"></h1>
-                    </div>
-                    <div id="button-container">
-                        <button id="startBtn-rb" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\start.webp"
-                                    alt="start">
-                        </button>
-                        <button id="resetBtn-rb" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\reset.webp"
-                                    alt="reset">
-                        </button>
-                        <button id="addBtn-rb" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\add.webp"
-                                    alt="add">
-                        </button>
-                        <button id="subBtn-rb" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\sub.webp"
-                                    alt="sub">
-                        </button>
-                        <button id="openBtn-rb" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\open.webp"
-                                    alt="open">
-                        </button>
-                        <button id="timerBtn-rb" class="button" onclick="toggleMultiSection('rb', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\custom.webp"
-                                    alt="custom">
-                        </button>
-                        <button id="alarmBtn-rb" class="button" onclick="toggleMultiSection('rb', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\alarm.webp"
-                                    alt="alarm">
-                        </button>
-                    </div>
-                    <div class="timer-input-container" id="customTimer-rb" hidden>
-                        <div class="input-group">
-                            <label for="custom-minutes-rb">
-                                <h2>Minutes</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-minutes-rb" min="0" max="999"
-                                placeholder="00" />
-                        </div>
-                        <div class="input-group">
-                            <label for="custom-seconds-rb">
-                                <h2>Seconds</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-seconds-rb" min="0" max="59"
-                                placeholder="00" />
-                        </div>
-                        <div class="button-space">
-                            <button type="button" id="customBtn-rb" class="button">
+                        <div id="button-container">
+                            <button id="aboutBtn" class="button" data-action="toggle" data-target="about">
                                 <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\confirm.webp" alt="confirm">
+                                        src="./images/tcg_timer/ui/about.webp" alt="About" aria-label="About Section">
                             </button>
+                            <button id="updateBtn" class="button" data-action="toggle" data-target="update">
+                                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/notes.webp" alt="Updates"
+                                        aria-label="Updates Section">
+                                    </button>
+                                    <button id="infoBtn" class="button" data-action="toggle" data-target="info">
+                                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/info.webp" alt="Info"
+                                                aria-label="Infomation Section">
+                                    </button>
+                                    </div>
+                                    <div class="about-container" id="about" hidden>
+                                        <center><label for="about">
+                                                <h2>I MADE THIS TIMER!</h2>
+                                            </label>
+                                            <img src="./images/tcg_timer/ui/salt.webp">
+                                            <label for="about">
+                                                <h2>I MADE IT FOR YOU!</h2>
+                                            </label>
+                                            <p><a href="https://www.naklwilson.net">NaklWilson</a> © <span id="current-year"></span>
+                                                <br>
+                                                <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""
+                                                    style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                                                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""
+                                                    style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                                                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt=""
+                                                    style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                                                    src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
+                                                    style="max-width: 1em;max-height:1em;margin-left: .2em;">
+                                            </p>
+                                        </center>
+                                    </div>
+                                    <div class="update-container" id="update" hidden>
+
+                            <div class="entry-header">
+                                <h2>Version Notes:</h2>
+                                <h2 class="entry-title" id="entry-title"></h2>
+                                <p class="entry-subtitle" id="entry-subtitle"></p>
+                            </div>
+
+                            <div class="entry-description" id="entry-description"></div>
+
+                            <div class="entry-controls">
+                                <div class="item"><button id="PE">&larr; Prev</button></div>
+                                <div class="item"><button id="report-btn">Report</button></div>
+                                <div class="item"><button id="RE">Next &rarr;</button></div>
+                            </div>
+
                         </div>
-                    </div>
-                    <div class="sound-select-container" id="soundTimer-rb" hidden>
-                        <label for="soundSelect">
-                            <h2>Choose an alarm:</h2>
-                        </label>
-                        <select id="soundSelect-RB">
-                            <option value="alarm1" disabled selected value>-- Select an alarm --</option>
-                            <option value="alarm1">Alarm 1</option>
-                            <option value="alarm2">Alarm 2</option>
-                            <option value="siren">Siren</option>
-                            <option value="onepiece">One Piece</option>
-                        </select>
-                        <div class="button-alarm">
-                            <button id="previewBtn-rb" class="button" onclick="playSelectedSound('RB')">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\test.webp" alt="preview">
-                            </button>
-                            <button id="muteBtn-rb" class="button" onclick="toggleMute('RB')">
-                                <picture class="ui-picture">
-                                    <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute">
-                                </picture>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="timerScreen-ua" class="timerScreen-card" hidden>
-                <div class="timers-container">
-                    <img class="logo" src=".\images\tcg_timer\unionarena.webp">
-                    <div id="timerDisplay-ua" class="timerDisplay">
-                        <h1 id="time-ua" class="time"></h1>
-                    </div>
-                    <div id="button-container">
-                        <button id="startBtn-ua" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\start.webp"
-                                    alt="start">
-                        </button>
-                        <button id="resetBtn-ua" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\reset.webp"
-                                    alt="reset">
-                        </button>
-                        <button id="addBtn-ua" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\add.webp"
-                                    alt="add">
-                        </button>
-                        <button id="subBtn-ua" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\sub.webp"
-                                    alt="sub">
-                        </button>
-                        <button id="openBtn-ua" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\open.webp"
-                                    alt="open">
-                        </button>
-                        <button id="timerBtn-ua" class="button" onclick="toggleMultiSection('ua', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\custom.webp"
-                                    alt="custom">
-                        </button>
-                        <button id="alarmBtn-ua" class="button" onclick="toggleMultiSection('ua', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\alarm.webp"
-                                    alt="alarm">
-                        </button>
-                    </div>
-                    <div class="timer-input-container" id="customTimer-ua" hidden>
-                        <div class="input-group">
-                            <label for="custom-minutes-ua">
-                                <h2>Minutes</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-minutes-ua" min="0" max="999"
-                                placeholder="00" />
-                        </div>
-                        <div class="input-group">
-                            <label for="custom-seconds-ua">
-                                <h2>Seconds</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-seconds-ua" min="0" max="59"
-                                placeholder="00" />
-                        </div>
-                        <div class="button-space">
-                            <button type="button" id="customBtn-ua" class="button">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\confirm.webp" alt="confirm">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="sound-select-container" id="soundTimer-ua" hidden>
-                        <label for="soundSelect">
-                            <h2>Choose an alarm:</h2>
-                        </label>
-                        <select id="soundSelect-UA">
-                            <option value="alarm1" disabled selected value>-- Select an alarm --</option>
-                            <option value="alarm1">Alarm 1</option>
-                            <option value="alarm2">Alarm 2</option>
-                            <option value="siren">Siren</option>
-                            <option value="onepiece">One Piece</option>
-                        </select>
-                        <div class="button-alarm">
-                            <button id="previewBtn-ua" class="button" onclick="playSelectedSound('UA')">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\test.webp" alt="preview">
-                            </button>
-                            <button id="muteBtn-ua" class="button" onclick="toggleMute('UA')">
-                                <picture class="ui-picture">
-                                    <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute">
-                                </picture>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="timerScreen-ga" class="timerScreen-card" hidden>
-                <div class="timers-container">
-                    <img class="logo" src=".\images\tcg_timer\grandarchive.webp">
-                    <div id="timerDisplay-ga" class="timerDisplay">
-                        <h1 id="time-ga" class="time"></h1>
-                    </div>
-                    <div id="button-container">
-                        <button id="startBtn-ga" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\start.webp"
-                                    alt="start">
-                        </button>
-                        <button id="resetBtn-ga" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\reset.webp"
-                                    alt="reset">
-                        </button>
-                        <button id="addBtn-ga" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\add.webp"
-                                    alt="add">
-                        </button>
-                        <button id="subBtn-ga" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\sub.webp"
-                                    alt="sub">
-                        </button>
-                        <button id="openBtn-ga" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\open.webp"
-                                    alt="open">
-                        </button>
-                        <button id="timerBtn-ga" class="button" onclick="toggleMultiSection('ga', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\custom.webp"
-                                    alt="custom">
-                        </button>
-                        <button id="alarmBtn-ga" class="button" onclick="toggleMultiSection('ga', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\alarm.webp"
-                                    alt="alarm">
-                        </button>
-                    </div>
-                    <div class="timer-input-container" id="customTimer-ga" hidden>
-                        <div class="input-group">
-                            <label for="custom-minutes-ga">
-                                <h2>Minutes</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-minutes-ga" min="0" max="999"
-                                placeholder="00" />
-                        </div>
-                        <div class="input-group">
-                            <label for="custom-seconds-ga">
-                                <h2>Seconds</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-seconds-ga" min="0" max="59"
-                                placeholder="00" />
-                        </div>
-                        <div class="button-space">
-                            <button type="button" id="customBtn-ga" class="button">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\confirm.webp" alt="confirm">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="sound-select-container" id="soundTimer-ga" hidden>
-                        <label for="soundSelect">
-                            <h2>Choose an alarm:</h2>
-                        </label>
-                        <select id="soundSelect-GA">
-                            <option value="alarm1" disabled selected value>-- Select an alarm --</option>
-                            <option value="alarm1">Alarm 1</option>
-                            <option value="alarm2">Alarm 2</option>
-                            <option value="siren">Siren</option>
-                            <option value="onepiece">One Piece</option>
-                        </select>
-                        <div class="button-alarm">
-                            <button id="previewBtn-ga" class="button" onclick="playSelectedSound('GA')">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\test.webp" alt="preview">
-                            </button>
-                            <button id="muteBtn-ga" class="button" onclick="toggleMute('GA')">
-                                <picture class="ui-picture">
-                                    <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute">
-                                </picture>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <section id="timerScreen-dm" class="timerScreen-card" hidden>
-                <div class="timers-container">
-                    <img class="logo" src=".\images\tcg_timer\digimon.webp">
-                    <div id="timerDisplay-dm" class="timerDisplay">
-                        <h1 id="time-dm" class="time"></h1>
-                    </div>
-                    <div id="button-container">
-                        <button id="startBtn-dm" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\start.webp"
-                                    alt="start">
-                        </button>
-                        <button id="resetBtn-dm" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\reset.webp"
-                                    alt="reset">
-                        </button>
-                        <button id="addBtn-dm" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\add.webp"
-                                    alt="add">
-                        </button>
-                        <button id="subBtn-dm" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\sub.webp"
-                                    alt="sub">
-                        </button>
-                        <button id="openBtn-dm" class="button">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\open.webp"
-                                    alt="open">
-                        </button>
-                        <button id="timerBtn-dm" class="button" onclick="toggleMultiSection('dm', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\custom.webp"
-                                    alt="custom">
-                        </button>
-                        <button id="alarmBtn-dm" class="button" onclick="toggleMultiSection('dm', this)">
-                            <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\alarm.webp"
-                                    alt="alarm">
-                        </button>
-                    </div>
-                    <div class="timer-input-container" id="customTimer-dm" hidden>
-                        <div class="input-group">
-                            <label for="custom-minutes-dm">
-                                <h2>Minutes</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-minutes-dm" min="0" max="999"
-                                placeholder="00" />
-                        </div>
-                        <div class="input-group">
-                            <label for="custom-seconds-dm">
-                                <h2>Seconds</h2>
-                            </label>
-                            <input type="number" pattern="\d*" id="custom-seconds-dm" min="0" max="59"
-                                placeholder="00" />
-                        </div>
-                        <div class="button-space">
-                            <button type="button" id="customBtn-dm" class="button">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\confirm.webp" alt="confirm">
-                            </button>
-                        </div>
-                    </div>
-                    <div class="sound-select-container" id="soundTimer-dm" hidden>
-                        <label for="soundSelect">
-                            <h2>Choose an alarm:</h2>
-                        </label>
-                        <select id="soundSelect-DM">
-                            <option value="alarm1" disabled selected value>-- Select an alarm --</option>
-                            <option value="alarm1">Alarm 1</option>
-                            <option value="alarm2">Alarm 2</option>
-                            <option value="siren">Siren</option>
-                            <option value="onepiece">One Piece</option>
-                        </select>
-                        <div class="button-alarm">
-                            <button id="previewBtn-dm" class="button" onclick="playSelectedSound('DM')">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src=".\images\tcg_timer\ui\test.webp" alt="preview">
-                            </button>
-                            <button id="muteBtn-dm" class="button" onclick="toggleMute('DM')">
-                                <picture class="ui-picture">
-                                    <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute">
-                                </picture>
-                            </button>
+                        <div class="info-container" id="info" hidden>
+                            <table style="width: 100%;" cellpadding="2">
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <picture class="ui-picture"> <img class="ui-button"
+                                                    src="./images/tcg_timer/ui/chromecast.webp" alt="chromecast"
+                                                    aria-label="chromecast button">
+                                        </td>
+                                        <td>This will open a specific game timer in a new window for a cleaner view for
+                                            chromecasting</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <picture class="ui-picture"> <img class="ui-button"
+                                                    src="./images/tcg_timer/ui/custom.webp" alt="Custom"
+                                                    aria-label="Custom button">
+                                        </td>
+                                        <td>This will reveal a custom timer field where you can customize how long you
+                                            want the timer to be on a specific game</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <picture class="ui-picture"> <img class="ui-button"
+                                                    src="./images/tcg_timer/ui/alarm.webp" alt="Alarm"
+                                                    aria-label="Alarm button">
+                                        </td>
+                                        <td>This will reveal a dropdown menu for choosing what alarm to play for a
+                                            specific timer</td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <picture class="ui-picture"> <img class="ui-button"
+                                                    src="./images/tcg_timer/ui/delete.webp" alt="Delete"
+                                                    aria-label="Delete button">
+                                        </td>
+                                        <td>This will delete all <strong>visible</strong> timers. Hidden timers will not
+                                            be deleted unless made visible!</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </section>
         </main>
+        <main class="timers-container" id="timer-container" unselectable="on"></main>
+        <script src=".\json\timer.js"></script>
     </div>
-    <script src=".\json\timer.js"></script>
-
 </body>
 
 </html>

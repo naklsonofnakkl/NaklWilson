@@ -33,7 +33,7 @@
             font-variant-numeric: tabular-nums;
             padding: 20px 60px;
             border-radius: 20px;
-            border: 10px solid #FFFFFF; 
+            border: 10px solid #FFFFFF;
             transition: border-color 0.3s ease, color 0.3s ease;
             color: #FFFFFF;
         }
@@ -58,12 +58,41 @@
 
     <script>
         const gameNames = {
-            "YO": "Yu-Gi-Oh!",
-            "OP": "One Piece",
-            "RB": "RiftBound",
-            "UA": "Union Arena",
-            "GA": "Grand Archive",
-            "DM": "Digimon"
+            "yo": "Yu-Gi-Oh!",
+            "op": "One Piece",
+            "rb": "RiftBound",
+            "ua": "Union Arena",
+            "ga": "Grand Archive",
+            "dm": "Digimon",
+            "ws": "Weiss Schwarz",
+            "dbs": "DragonBall Super Fusion",
+            "fb": "Flesh and Blood",
+            "lc": "Lorcana",
+            "gm": "Gundam",
+            "mg": "Magic the Gathering",
+            "pk": "Pokemon",
+            "ff": "Final Fantasy",
+            "pw": "Palworld"
+        };
+
+        // 1. Add your favicon file paths or URLs here
+        const favicons = {
+            "yo": "./images/tcg_timer/favicons/yugioh.ico",
+            "op": "./images/tcg_timer/favicons/onepiece.ico",
+            "rb": "./images/tcg_timer/favicons/riftbound.ico",
+            "ua": "./images/tcg_timer/favicons/unionarena.ico",
+            "ga": "./images/tcg_timer/favicons/grandarchive.ico",
+            "dm": "./images/tcg_timer/favicons/digimon.ico",
+            "ws": "./images/tcg_timer/favicons/weissschwarz.ico",
+            "dbs": "./images/tcg_timer/favicons/dragonball.ico",
+            "fb": "./images/tcg_timer/favicons/fleshandblood.ico",
+            "lc": "./images/tcg_timer/favicons/lorcana.ico",
+            "gm": "./images/tcg_timer/favicons/gundam.ico",
+            "mg": "./images/tcg_timer/favicons/mtg.ico",
+            "pk": "./images/tcg_timer/favicons/pokemon.ico",
+            "ff": "./images/tcg_timer/favicons/finalfantasy.ico",
+            "pw": "./images/tcg_timer/favicons/palworld.ico",
+            "default": "./favicon.ico" // Fallback icon
         };
 
         const urlParams = new URLSearchParams(window.location.search);
@@ -72,11 +101,26 @@
         const titleDisplay = document.getElementById('game-title');
         const clockDisplay = document.getElementById('timer');
 
+        // 2. Helper function to find or create the favicon link tag
+        function changeFavicon(src) {
+            let link = document.querySelector("link[rel~='icon']");
+            if (!link) {
+                link = document.createElement('link');
+                link.rel = 'icon';
+                document.head.appendChild(link);
+            }
+            link.href = src;
+        }
+
         if (activeGame && gameNames[activeGame]) {
             titleDisplay.textContent = gameNames[activeGame];
             document.title = gameNames[activeGame];
+
+            const iconPath = favicons[activeGame] || favicons["default"];
+            changeFavicon(iconPath);
         } else {
             titleDisplay.textContent = "Unknown Event";
+            changeFavicon(favicons["default"]);
         }
 
         const bc = new BroadcastChannel('tcg_timer_channel');
