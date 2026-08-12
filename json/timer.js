@@ -1,26 +1,69 @@
-// 1. Define the configuration for all your games
+/*
+NAKLWILSON TOURNEY TIMER (C) 2026
+-- INDEX --
+1A - GAME CONFIGURATION
+2A - SOUND FUNCTIONS
+    2B - SOUND EFFECT LIBRARY
+    2C - MUTE TOGGLE FUNCTION
+    2D - RESET ALARM FUNCTION
+    2E - PLAY SELECTED SOUND FUNCTION
+    2F - PLAY SPECIFIC SOUND FUNCTION
+    2G - MUTE ALL SOUNDS FUNCTION
+3A - NAVIGATION FUNCTIONS
+    3B - THEME FUNCTION
+    3C - TOGGLE BUTTON FUNCTION
+    3D - SECONDARY BUTTON FUNCTION
+    3E - THEME TOGGLE
+    3F - ACTION BUTTON BEHAVIORS
+    3G - NAVIGATION BAR BY SCREEN SIZE
+4A - COPYRIGHT YEAR
+5A - TIMER TEMPLATE
+    5B - CUSTOM INCREMENT TIME FUNCTION
+6A - GAME TIMER
+    6B - TIMER BUTTONS AND ELEMENTS 
+    6C - BIND EVENT LISTENERS
+    6D - WORKER TICK AND ALARM HANDLING
+    6E - +5 MIN BUTTON
+    6F - -5 MIN BUTTON
+    6G - CUSTOM TIMER BUTTON
+    6H - FULLSCREEN STATUS
+    6I - VISUAL TIME UPDATE
+    6J - TIMER START
+    6K - TIMER STOP
+    6L - TIMER RESET
+    6M - TIME RENDER
+    6N - BROWSER NOTIFICATION
+7A - VERSION NOTES
+    7B - DATE FORMATTING FUNCTION
+    7C - ENTRY RENDER FUNCTION
+    7D - VERSION NOTES BUTTON FUNCTION
+    7E - PAST ENTRY BUTTON
+    7F - RECENT ENTRY BUTTON
+    7G - REPORT BUTTON
+*/
+
+// GAME CONFIGURATION - 1A
 const gameConfigs = [
-    { id: 'yo', title: 'yugioh', defaultMin: 45, defaultSec: 0 },
-    { id: 'op', title: 'onepiece', defaultMin: 35, defaultSec: 0 },
-    { id: 'rb', title: 'riftbound', defaultMin: 60, defaultSec: 0 },
-    { id: 'ua', title: 'unionarena', defaultMin: 30, defaultSec: 0 },
-    { id: 'ga', title: 'grandarchive', defaultMin: 60, defaultSec: 0 },
-    { id: 'dm', title: 'digimon', defaultMin: 45, defaultSec: 0 },
-    { id: 'ws', title: 'weissschwarz', defaultMin: 30, defaultSec: 0 },
-    { id: 'dbs', title: 'dragonballsuperfusion', defaultMin: 35, defaultSec: 0 },
-    { id: 'fb', title: 'fleshandblood', defaultMin: 55, defaultSec: 0 },
-    { id: 'lc', title: 'lorcana', defaultMin: 50, defaultSec: 0 },
-    { id: 'gm', title: 'gundam', defaultMin: 30, defaultSec: 0 },
+    { id: 'yo', title: 'yugioh', defaultMin: 50, defaultSec: 0, overTime: 0 },
+    { id: 'op', title: 'onepiece', defaultMin: 30, defaultSec: 0, overTime: 5 },
+    { id: 'rb', title: 'riftbound', defaultMin: 60, defaultSec: 0, overTime: 0 },
+    { id: 'ua', title: 'unionarena', defaultMin: 30, defaultSec: 0, overTime: 5 },
+    { id: 'ga', title: 'grandarchive', defaultMin: 60, defaultSec: 0, overTime: 5 },
+    { id: 'dm', title: 'digimon', defaultMin: 45, defaultSec: 0, overTime: 5 },
+    { id: 'ws', title: 'weissschwarz', defaultMin: 30, defaultSec: 0, overTime: 0 },
+    { id: 'dbs', title: 'dragonballsuperfusion', defaultMin: 35, defaultSec: 0, overTime: 0 },
+    { id: 'fb', title: 'fleshandblood', defaultMin: 55, defaultSec: 0, overTime: 0 },
+    { id: 'lc', title: 'lorcana', defaultMin: 50, defaultSec: 0, overTime: 0 },
+    { id: 'gm', title: 'gundam', defaultMin: 30, defaultSec: 0, overTime: 5 },
     { id: 'mg', title: 'magicthegathering', defaultMin: 50, defaultSec: 0 },
-    { id: 'pk', title: 'pokemon', defaultMin: 50, defaultSec: 0 },
-    { id: 'ff', title: 'finalfantasy', defaultMin: 30, defaultSec: 0 },
-    { id: 'pw', title: 'palworld', defaultMin: 30, defaultSec: 0 }
-    // You can easily add all 15 games here!
+    { id: 'pk', title: 'pokemon', defaultMin: 50, defaultSec: 0, overTime: 0 },
+    { id: 'ff', title: 'finalfantasy', defaultMin: 30, defaultSec: 0, overTime: 0 },
+    { id: 'pw', title: 'palworld', defaultMin: 30, defaultSec: 0, overTime: 0 }
 
 ];
 
-// SOUND FUNCTIONS
-// Alarm and Sound Effects Library
+// SOUND FUNCTIONS - 2A
+// Alarm and Sound Effects Library - 2B
 const soundLibrary = {
     siren: new Audio('./music/tcg_timer/siren.flac'),
     alarm1: new Audio('./music/tcg_timer/alarm.flac'),
@@ -35,7 +78,7 @@ const soundLibrary = {
 
 const muteState = {};
 
-// function to mute specific timers
+// function to mute specific timers - 2C
 function toggleMute(idSuffix) {
     const muteBtn = document.getElementById(`muteBtn-${idSuffix.toLowerCase()}`);
     if (!muteBtn) return;
@@ -57,7 +100,7 @@ function toggleMute(idSuffix) {
     `;
 }
 
-// Reset alarm selection on page load
+// Reset alarm selection on page load -2D
 document.addEventListener('DOMContentLoaded', () => {
     const selectElements = document.querySelectorAll('select');
     selectElements.forEach(select => {
@@ -65,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// function to play alarm slected by dropdown
+// function to play alarm slected by dropdown - 2E
 function playSelectedSound(targetId) {
     if (muteState[targetId]) return;
 
@@ -82,7 +125,7 @@ function playSelectedSound(targetId) {
     }
 }
 
-// function to play specific sounds
+// function to play specific sounds - 2F
 function playSound(name, targetId) {
     if (targetId && muteState[targetId]) return;
 
@@ -95,7 +138,7 @@ function playSound(name, targetId) {
     audio.play().catch(err => console.log(`Playback failed for ${name}:`, err));
 }
 
-// function to mute sounds
+// function to mute sounds - 2G
 function stopAllSounds() {
     Object.values(soundLibrary).forEach(sound => {
         sound.pause();
@@ -104,14 +147,14 @@ function stopAllSounds() {
 }
 
 
-
+// NAVIGATION SETTINGS - 3A
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Theme Function
+    // Theme Function - 3B
     const root = document.documentElement;
     const themeLogo = document.querySelector(".logo-button-theme");
 
-        function updateThemeLogo(theme) {
+    function updateThemeLogo(theme) {
         if (themeLogo) {
             themeLogo.src = theme === "dark"
                 ? "./images/tcg_timer/ui/light.webp"
@@ -119,9 +162,50 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
+    const storedTheme = localStorage.getItem("theme") || "dark";
+    root.classList.remove("light", "dark");
+    root.classList.add(storedTheme);
+    updateThemeLogo(storedTheme);
+
+    // toggle button function - 3C
 function toggleSection(targetId, buttonId, buttonElement) {
+    if (buttonId === 'nt' || buttonId === 'set' || buttonId === 'ntm' || buttonId === 'setm') {
+        const showNt = buttonId === 'nt' || buttonId === 'ntm';
+
+        const ntSection = document.getElementById('timerScreen-nt');
+        const setSection = document.getElementById('timerScreen-set');
+
+        const ntButtons = [document.getElementById('nt'), document.getElementById('ntm')];
+        const setButtons = [document.getElementById('set'), document.getElementById('setm')];
+
+        const targetSection = showNt ? ntSection : setSection;
+        const isAlreadyOpen = targetSection && !targetSection.hasAttribute('hidden');
+
+        if (isAlreadyOpen) {
+            targetSection.setAttribute('hidden', '');
+            const activeButtons = showNt ? ntButtons : setButtons;
+            activeButtons.forEach(btn => {
+                if (btn) btn.classList.remove('active');
+            });
+            return;
+        }
+
+        if (ntSection) ntSection.hidden = !showNt;
+        if (setSection) setSection.hidden = showNt;
+
+        ntButtons.forEach(btn => {
+            if (btn) btn.classList.toggle('active', showNt);
+        });
+        setButtons.forEach(btn => {
+            if (btn) btn.classList.toggle('active', !showNt);
+        });
+
+        return;
+    }
+
     if (!targetId) return;
     const lowerId = targetId.toLowerCase();
+
     let sectionIdToToggle = null;
 
     switch (buttonId) {
@@ -130,8 +214,6 @@ function toggleSection(targetId, buttonId, buttonElement) {
         case 'aboutBtn': sectionIdToToggle = 'about'; break;
         case 'updateBtn': sectionIdToToggle = 'update'; break;
         case 'infoBtn': sectionIdToToggle = 'info'; break;
-        case 'nt': sectionIdToToggle = `timerScreen-${targetId}`; break;
-        case 'set': sectionIdToToggle = `timerScreen-${targetId}`; break;
         default: sectionIdToToggle = `timerScreen-${targetId}`; break;
     }
 
@@ -139,6 +221,8 @@ function toggleSection(targetId, buttonId, buttonElement) {
         const timerSection = document.getElementById(`customTimer-${lowerId}`);
         if (timerSection && !timerSection.hasAttribute('hidden')) {
             timerSection.setAttribute('hidden', '');
+            const alarmBtn = document.getElementById(`timerBtn-${lowerId}`);
+            if (alarmBtn) alarmBtn.classList.remove('active');
         }
     }
 
@@ -146,24 +230,53 @@ function toggleSection(targetId, buttonId, buttonElement) {
         const soundSection = document.getElementById(`soundTimer-${lowerId}`);
         if (soundSection && !soundSection.hasAttribute('hidden')) {
             soundSection.setAttribute('hidden', '');
+            const timerBtn = document.getElementById(`alarmBtn-${lowerId}`);
+            if (timerBtn) timerBtn.classList.remove('active');
         }
     }
 
-    if (buttonId === 'nt') {
-        const setSection = document.getElementById('timerScreen-set');
-        if (setSection && !setSection.hasAttribute('hidden')) {
-            setSection.setAttribute('hidden', '');
-            const setBtn = document.getElementById('set');
-            if (setBtn) setBtn.classList.remove('active');
+    if (buttonId === 'infoBtn') {
+        const upSection = document.getElementById('update');
+        const abSection = document.getElementById('about');
+        if (upSection && !upSection.hasAttribute('hidden')) {
+            upSection.setAttribute('hidden', '');
+            const upBtn = document.getElementById('updateBtn');
+            if (upBtn) upBtn.classList.remove('active');
+        }
+        if (abSection && !abSection.hasAttribute('hidden')) {
+            abSection.setAttribute('hidden', '');
+            const abBtn = document.getElementById('aboutBtn');
+            if (abBtn) abBtn.classList.remove('active');
         }
     }
 
-    if (buttonId === 'set') {
-        const ntSection = document.getElementById('timerScreen-nt');
-        if (ntSection && !ntSection.hasAttribute('hidden')) {
-            ntSection.setAttribute('hidden', '');
-            const ntBtn = document.getElementById('nt');
-            if (ntBtn) ntBtn.classList.remove('active');
+    if (buttonId === 'updateBtn') {
+        const inSection = document.getElementById('info');
+        const abSection = document.getElementById('about');
+        if (inSection && !inSection.hasAttribute('hidden')) {
+            inSection.setAttribute('hidden', '');
+            const inBtn = document.getElementById('infoBtn');
+            if (inBtn) inBtn.classList.remove('active');
+        }
+        if (abSection && !abSection.hasAttribute('hidden')) {
+            abSection.setAttribute('hidden', '');
+            const abBtn = document.getElementById('aboutBtn');
+            if (abBtn) abBtn.classList.remove('active');
+        }
+    }
+
+    if (buttonId === 'aboutBtn') {
+        const upSection = document.getElementById('update');
+        const inSection = document.getElementById('info');
+        if (inSection && !inSection.hasAttribute('hidden')) {
+            inSection.setAttribute('hidden', '');
+            const inBtn = document.getElementById('infoBtn');
+            if (inBtn) inBtn.classList.remove('active');
+        }
+        if (upSection && !upSection.hasAttribute('hidden')) {
+            upSection.setAttribute('hidden', '');
+            const upBtn = document.getElementById('updateBtn');
+            if (upBtn) upBtn.classList.remove('active');
         }
     }
 
@@ -177,6 +290,7 @@ function toggleSection(targetId, buttonId, buttonElement) {
     }
 }
 
+// secondary button function - 3D
     document.addEventListener("click", (event) => {
         const btn = event.target.closest('[data-action], #theme');
 
@@ -185,7 +299,7 @@ function toggleSection(targetId, buttonId, buttonElement) {
         const action = btn.dataset.action;
         const buttonId = btn.id;
 
-        // Theme Toggle
+        // Theme Toggle - 3E
         if (buttonId === "theme") {
             const isDark = root.classList.contains("dark");
             const newTheme = isDark ? "light" : "dark";
@@ -197,7 +311,7 @@ function toggleSection(targetId, buttonId, buttonElement) {
             return;
         }
 
-        // Action Behaviors
+        // Action Behaviors -3F
         switch (action) {
             case 'toggle': {
                 const targetId = btn.dataset.target || '';
@@ -282,7 +396,7 @@ function toggleSection(targetId, buttonId, buttonElement) {
 const mobileNav = document.getElementById('mobile-navbar');
 const normalNav = document.getElementById('normal-navbar');
 
-// Define max-screen size
+// navigation bar by screen size - 3G
 const mediaQuery = window.matchMedia('(max-width: 780px)');
 
 function handleNavVisibility(e) {
@@ -302,11 +416,11 @@ handleNavVisibility(mediaQuery);
 mediaQuery.addEventListener('change', handleNavVisibility);
 ;
 
-// COPYRIGHT YEAR
+// COPYRIGHT YEAR - 4A
 const currentYear = new Date().getFullYear();
 document.getElementById("current-year").textContent = currentYear;
 
-// TIMER TEMPLATE
+// TIMER TEMPLATE - 5A
 function createTimerHTML(config) {
     return `
 <section id="timerScreen-${config.id}" class="no-select timerScreen-card" hidden>
@@ -350,7 +464,24 @@ function createTimerHTML(config) {
                                     alt="alarm">
                         </button>
                     </div>
-                    <div class="timer-input-container" id="customTimer-${config.id}" hidden>
+<div class="timer-input-container" id="customTimer-${config.id}" hidden>
+                        <div class="area increment-area">
+                        <div class="input-group">
+                        <label for="custom-increments-${config.id}">
+                        <h2>Increment Amount</h2>
+                                                   <center> <input
+                                type="text"
+                                id="numberIncrement-${config.id}"
+                                inputmode="numeric"
+                                pattern="\\d*"
+                                value="00:01"
+                                aria-label="Time in minutes and seconds"
+                                class="incinput"
+                            >
+                            <input type="range" id="rangeIncrement-${config.id}" min="0" max="300" value="59" step="5" class="incrange">
+                            </div></center>
+                            </div>
+                            <div class="area time-area">
                         <div class="input-group">
                             <label for="custom-minutes-${config.id}">
                                 <h2>Minutes</h2>
@@ -371,9 +502,10 @@ function createTimerHTML(config) {
                                         src="./images/tcg_timer/ui/confirm.webp" alt="confirm">
                             </button>
                         </div>
+                        </div>
                     </div>
                     <div class="sound-select-container" id="soundTimer-${config.id}" hidden>
-                        <label for="soundSelect">
+                        <div class="area alarm-area"><label for="soundSelect">
                             <h2>Choose an alarm:</h2>
                         </label>
                         <select id="soundSelect-${config.id}">
@@ -397,7 +529,7 @@ function createTimerHTML(config) {
                                     <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute">
                                 </picture>
                             </button>
-                        </div>
+                        </label></div>
                     </div>
             </section>
   `;
@@ -406,8 +538,79 @@ function createTimerHTML(config) {
 const container = document.getElementById('timer-container');
 container.innerHTML = gameConfigs.map(config => createTimerHTML(config)).join('');
 
+// custom increment amount function - 5B
+// Convert total seconds -> "MM:SS" string
+function secondsToTimeString(totalSeconds) {
+    const s = Math.max(1, Math.min(300, Math.round(totalSeconds)));
+    const minutes = Math.floor(s / 60);
+    const seconds = s % 60;
+    return String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+}
 
-// GAME TIMER
+// Convert "MM:SS" or raw digit string -> total seconds (number)
+function parseTimeString(value) {
+    const cleaned = value.replace(/[^\d:]/g, '');
+
+    let minutes = 0;
+    let seconds = 0;
+
+    if (cleaned.includes(':')) {
+        const parts = cleaned.split(':');
+        minutes = parseInt(parts[0], 10) || 0;
+        seconds = parseInt(parts[1], 10) || 0;
+    } else if (cleaned.length > 0) {
+        const num = parseInt(cleaned, 10) || 0;
+        if (cleaned.length <= 2) {
+            minutes = 0;
+            seconds = num;
+        } else {
+            seconds = num % 100;
+            minutes = Math.floor(num / 100);
+        }
+    }
+
+    return (minutes * 60) + seconds;
+}
+
+function initRangeTimeSync(config) {
+    const range = document.getElementById(`rangeIncrement-${config.id}`);
+    const numberBox = document.getElementById(`numberIncrement-${config.id}`);
+
+    if (!range || !numberBox) {
+        console.warn(`initRangeTimeSync: could not find elements for targetId "${config.id}"`);
+        return;
+    }
+
+    function updateNumberBoxFromRange() {
+        numberBox.value = secondsToTimeString(range.value);
+    }
+
+    function updateRangeFromNumberBox() {
+        const totalSeconds = parseTimeString(numberBox.value);
+        const clamped = Math.max(1, Math.min(300, totalSeconds || 1));
+        range.value = clamped;
+        numberBox.value = secondsToTimeString(clamped); 
+    }
+
+    range.addEventListener('input', updateNumberBoxFromRange);
+
+    numberBox.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+            updateRangeFromNumberBox();
+            numberBox.blur();
+        }
+    });
+
+    numberBox.addEventListener('blur', updateRangeFromNumberBox);
+
+    updateNumberBoxFromRange();
+}
+
+gameConfigs.forEach(config => initRangeTimeSync(config));
+
+
+
+// GAME TIMER - 6A
 class GameTimer {
     constructor(config) {
         this.bc = new BroadcastChannel('tcg_timer_channel');
@@ -416,7 +619,9 @@ class GameTimer {
         this.remainingMs = this.durationMs;
         this.worker = new Worker('./json/timerWorker.js');
         this.isRunning = false;
+        this.overtimeM = config.overTime
 
+        // Timer buttons and elements -6B    
         this.displayElement = document.getElementById(`time-${config.id}`);
         this.startbutton = document.getElementById(`startBtn-${config.id}`);
         this.stopbutton = document.getElementById(`stopBtn-${config.id}`);
@@ -430,14 +635,18 @@ class GameTimer {
         this.customsec = document.getElementById(`custom-seconds-${config.id}`);
         this.timerElement = document.getElementById(`timerDisplay-${config.id}`);
         this.timeElement = document.getElementById(`time-${config.id}`);
+        this.customOt = document.getElementById(`customOt-${config.id}`);
+        this.overtimeButton = document.getElementById(`overBtn-${config.id}`);
+        this.customIncrement = document.getElementById(`numberIncrement-${config.id}`);
 
-        // Bind event listeners
+
+
+        // Bind event listeners - 6C
         this.startbutton.addEventListener('click', () => this.start());
         this.stopbutton.addEventListener('click', () => this.stop());
         this.resetbutton.addEventListener('click', () => this.reset());
 
-        // Worker now owns remaining-time tracking and the alarm decision,
-        // so ticks and the alarm are handled as distinct message types.
+        // Worker Tick and Alarm handling - 6D
         this.worker.onmessage = (e) => {
             const { type, remaining } = e.data;
 
@@ -473,21 +682,23 @@ class GameTimer {
             }
         };
 
-        // +5 Minutes Button
+        // Increment Button - 6E
         if (this.addbutton) {
             this.addbutton.addEventListener("click", () => {
-                this.adjustTime(5);
+                const incrementSeconds = parseTimeString(this.customIncrement.value) || 0;
+                this.adjustTime(incrementSeconds);
             });
         }
 
-        // -5 Minutes Button
+        // Increment Button - 6F
         if (this.subbutton) {
             this.subbutton.addEventListener("click", () => {
-                this.adjustTime(-5);
+                const incrementSeconds = parseTimeString(this.customIncrement.value) || 0;
+                this.adjustTime(-incrementSeconds);
             });
         }
 
-        // Custom Timer Button
+        // Custom Timer Button - 6G
         if (this.timerbutton && this.custommin && this.customsec) {
             this.timerbutton.addEventListener("click", () => {
                 const minInt = parseInt(this.custommin.value, 10) || 0;
@@ -515,6 +726,7 @@ class GameTimer {
         this.renderTime(this.durationMs / 1000);
     }
 
+    // fullscreen status - 6H
     broadcastState(status) {
         if (!this.bc) return;
         this.bc.postMessage({
@@ -525,12 +737,11 @@ class GameTimer {
         });
     }
 
-    adjustTime(minutesToChange) {
-        const msToChange = minutesToChange * 60 * 1000;
+    // Visual Time Update - 6I
+    adjustTime(secondsToChange) {
+        const msToChange = secondsToChange * 1000;
 
         if (this.isRunning) {
-            // Optimistic local update so the display responds instantly;
-            // the worker's own endTime is adjusted too, so future ticks stay in sync.
             this.remainingMs = Math.max(0, this.remainingMs + msToChange);
             this.renderTime(Math.ceil(this.remainingMs / 1000));
             this.worker.postMessage({ cmd: 'adjust', msToChange });
@@ -545,7 +756,7 @@ class GameTimer {
             this.broadcastState('stopped');
         }
     }
-
+    // TIMER START - 6J
     start() {
         if (this.isRunning) return;
 
@@ -556,12 +767,12 @@ class GameTimer {
         this.timeElement.setAttribute('is-running', '');
         this.timeElement.removeAttribute('is-stopped');
     }
-
+    // TIMER STOP - 6K
     stop() {
         if (!this.isRunning) return;
 
         this.isRunning = false;
-        this.durationMs = this.remainingMs; // preserve where it left off for the next start()
+        this.durationMs = this.remainingMs;
         this.worker.postMessage({ cmd: 'stop' });
         this.broadcastState('stopped');
         this.timerElement.setAttribute('is-stopped', '');
@@ -569,7 +780,7 @@ class GameTimer {
         this.timeElement.setAttribute('is-stopped', '');
         this.timeElement.removeAttribute('is-running');
     }
-
+    // TIMER RESET - 6L
     reset() {
         this.worker.postMessage({ cmd: 'stop' });
         this.isRunning = false;
@@ -588,7 +799,7 @@ class GameTimer {
             this.timeElement.removeAttribute('is-running');
         }
     }
-
+    // TIME RENDER - 6M
     renderTime(totalSeconds) {
         const mins = Math.floor(totalSeconds / 60);
         const secs = totalSeconds % 60;
@@ -596,6 +807,7 @@ class GameTimer {
     }
 }
 
+// BROWSER NOTIFICATION - 6N
 if ('Notification' in window && Notification.permission === 'default') {
     document.addEventListener('click', function requestOnce() {
         Notification.requestPermission();
@@ -603,9 +815,12 @@ if ('Notification' in window && Notification.permission === 'default') {
     }, { once: true });
 }
 
+// OVERTIME BUTTON
+
+
 const activeTimers = gameConfigs.map(config => new GameTimer(config));
 
-//VERSION NOTES
+//VERSION NOTES - 7A
 (function () {
     /**
      * Blog entry template:
@@ -629,10 +844,25 @@ const activeTimers = gameConfigs.map(config => new GameTimer(config));
             date: "2026-08-05",
             notes: "* Updated the Version Notes page! Wowie~!\n* Added even more new alarm sounds!\n* Added Index to settings page for button identification and instructions\n* Timer Worker has been given full dependance on counting to offset 2min drift.\n* Replaced the previous Chromecast button with a much clearer visual cue"
         },
-                {
+        {
             version: "v0.15.1",
             date: "2026-08-06",
             notes: "* Fixed an issue where the new timer, settings, custom timer and alarm buttons were not removing the 'active' state from their buttons when pressed.\n* Fixed an issue where the new timer and settings cards were not replacing one another. Only one open at a time!\n* Updated the About section, say hi back to him!\n* fixed the report button to redirect to the contact page correctly.\n* Fixed issue where theme button wasn't swapping icons."
+        },
+        {
+            version: "v0.15.2",
+            date: "2026-08-08",
+            notes: "* Added more icons to the Index section.\n* Fixed an issue where the About, Version, and Index buttons and sections were not working as intended."
+        },
+        {
+            version: "v0.16.0",
+            date: "2026-08-11",
+            notes: "* Added more icons to the Index section.\n* Added function to select a custom increase and decrease increment amount.\n* Fixed an issue with the Navigation buttons getting stuck.\n* Fixed an issue where theme button required two presses to execute a theme change.\n* Added some information in the about tab for context.\n* Updated the Version Notes design."
+        },
+        {
+            version: "v0.16.1",
+            date: "2026-08-12",
+            notes: "* Set the new default increment level to be 01:00 minute instead of 00:01 second.\n* Visual overhaul of the custom timer and alarm settings container\n* Fixed an issue where the new timer and settings buttons wouldn't close their respective sections. "
         }
     ];
 
@@ -646,7 +876,7 @@ const activeTimers = gameConfigs.map(config => new GameTimer(config));
     const reportBtn = document.getElementById("report-btn");
 
     const REPORT_PAGE_URL = "/contact";
-
+    // DATE FORMATING FUNCTION - 7B
     function formatDate(dateStr) {
         const d = new Date(dateStr + "T00:00:00");
         if (isNaN(d)) return dateStr;
@@ -656,7 +886,7 @@ const activeTimers = gameConfigs.map(config => new GameTimer(config));
             day: "numeric"
         });
     }
-
+    // ENTRY RENDER FUNCTION - 7C
     function renderEntry(index) {
         const entry = entries[index];
         titleEl.textContent = entry.version;
@@ -665,7 +895,7 @@ const activeTimers = gameConfigs.map(config => new GameTimer(config));
         descriptionEl.scrollTop = 0;
         updateControls(index);
     }
-
+    // VERSION NOTES BUTTONS FUNCTION - 7D
     function updateControls(index) {
         const isOldest = index <= 0;
         const isMostRecent = index >= entries.length - 1;
@@ -676,21 +906,21 @@ const activeTimers = gameConfigs.map(config => new GameTimer(config));
 
         reportBtn.disabled = !isMostRecent;
     }
-
+    // PAST ENTRY BUTTON - 7E
     function handlePastEntry() {
         if (currentIndex > 0) {
             currentIndex -= 1;
             renderEntry(currentIndex);
         }
     }
-
+    // RECENT ENTRY BUTTON - 7F
     function handleRecentEntry() {
         if (currentIndex < entries.length - 1) {
             currentIndex += 1;
             renderEntry(currentIndex);
         }
     }
-
+    // REPORT BUTTON - 7G
     function handleReportNav() {
         if (currentIndex === entries.length - 1) {
             window.location.href = REPORT_PAGE_URL;

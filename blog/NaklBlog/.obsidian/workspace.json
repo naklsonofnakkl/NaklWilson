@@ -31,9 +31,21 @@
               "icon": "lucide-file",
               "title": "Entry Template File"
             }
+          },
+          {
+            "id": "8d7b43fa453a08fc",
+            "type": "leaf",
+            "state": {
+              "type": "release-notes",
+              "state": {
+                "currentVersion": "1.13.4"
+              },
+              "icon": "lucide-book-up",
+              "title": "Release Notes 1.13.4"
+            }
           }
         ],
-        "currentTab": 1
+        "currentTab": 2
       },
       {
         "id": "f564efa0baea7958",
@@ -70,7 +82,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "Files"
@@ -212,7 +226,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "deb30d2e9e196782",
+  "active": "8d7b43fa453a08fc",
   "lastOpenFiles": [
     "2026-07-10.md",
     "Entry Template File.md",

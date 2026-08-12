@@ -59,17 +59,17 @@
                             height="32px">
                     </picture>
                 </button>
-                <button class="nav-sm-btn" id="set" data-action="toggle" data-target="set">
+                <button class="nav-sm-btn active" id="set" data-action="toggle" data-target="set">
                     <picture class="logo-picture-sm">
                         <source srcset=".\images\tcg_timer\ui\settings.webp" media="(min-width: 780px)">
-                        <img class="logo-button-new" src=".\images\tcg_timer\ui\settings.webp" alt="Settings"
+                        <img class="logo-button-set" src=".\images\tcg_timer\ui\settings.webp" alt="Settings"
                             width="32px" height="32px">
                     </picture>
                 </button>
                 <button class="nav-sm-btn" id="close" data-action="close-timer">
                     <picture class="logo-picture-sm">
                         <source srcset=".\images\tcg_timer\ui\delete.webp" media="(min-width: 780px)">
-                        <img class="logo-button-new" src=".\images\tcg_timer\ui\delete.webp" alt="Close" width="32px"
+                        <img class="logo-button-del" src=".\images\tcg_timer\ui\delete.webp" alt="Close" width="32px"
                             height="32px">
                     </picture>
                 </button>
@@ -180,24 +180,24 @@
         </div>
         <div class="navbar-mb-wrapper" id="mobile-navbar" hidden>
             <nav class="navbar-mb-container">
-                <button class="nav-sm-btn" id="nt" data-action="toggle" data-target="nt">
+                <button class="nav-sm-btn" id="ntm" data-action="toggle" data-target="nt">
                     <picture class="logo-picture-sm">
                         <source srcset=".\images\tcg_timer\ui\add.webp" media="(min-width: 780px)">
                         <img class="logo-button-new" src=".\images\tcg_timer\ui\add.webp" alt="New Timer" width="32px"
                             height="32px">
                     </picture>
                 </button>
-                <button class="nav-sm-btn" id="set" data-action="toggle" data-target="set">
+                <button class="nav-sm-btn active" id="setm" data-action="toggle" data-target="set">
                     <picture class="logo-picture-sm">
                         <source srcset=".\images\tcg_timer\ui\settings.webp" media="(min-width: 780px)">
-                        <img class="logo-button-new" src=".\images\tcg_timer\ui\settings.webp" alt="Settings"
+                        <img class="logo-button-set" src=".\images\tcg_timer\ui\settings.webp" alt="Settings"
                             width="32px" height="32px">
                     </picture>
                 </button>
                 <button class="nav-sm-btn" id="close" data-action="close-timer">
                     <picture class="logo-picture-sm">
                         <source srcset=".\images\tcg_timer\ui\delete.webp" media="(min-width: 780px)">
-                        <img class="logo-button-new" src=".\images\tcg_timer\ui\delete.webp" alt="Close" width="32px"
+                        <img class="logo-button-del" src=".\images\tcg_timer\ui\delete.webp" alt="Close" width="32px"
                             height="32px">
                     </picture>
                 </button>
@@ -240,7 +240,7 @@
                     </div>
                 </div>
             </section>
-            <section id="timerScreen-set" class="settingScreen-card" hidden>
+            <section id="timerScreen-set" class="settingScreen-card">
                 <div class="timers-container">
                     <div id="settingsTimer">
                         <div id="theme-container">
@@ -259,37 +259,38 @@
                                 <picture class="ui-picture"> <img class="ui-button"
                                         src="./images/tcg_timer/ui/about.webp" alt="About" aria-label="About Section">
                             </button>
-                            <button id="updateBtn" class="button" data-action="toggle" data-target="update">
-                                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/notes.webp" alt="Updates"
+                            <button id="updateBtn" class="button active" data-action="toggle" data-target="update">
+                                <picture class="ui-picture"> <img class="ui-button"
+                                        src="./images/tcg_timer/ui/notes.webp" alt="Updates"
                                         aria-label="Updates Section">
-                                    </button>
-                                    <button id="infoBtn" class="button" data-action="toggle" data-target="info">
-                                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/info.webp" alt="Info"
-                                                aria-label="Infomation Section">
-                                    </button>
-                                    </div>
-                                    <div class="about-container" id="about" hidden>
-                                        <center><label for="about">
-                                                <h2>I MADE THIS TIMER!</h2>
-                                            </label>
-                                            <img src="./images/tcg_timer/ui/salt.webp">
-                                            <label for="about">
-                                                <h2>I MADE IT FOR YOU!</h2>
-                                            </label>
-                                            <p><a href="https://www.naklwilson.net">NaklWilson</a> © <span id="current-year"></span>
-                                                <br>
-                                                <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""
-                                                    style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                                                    src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""
-                                                    style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                                                    src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt=""
-                                                    style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                                                    src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
-                                                    style="max-width: 1em;max-height:1em;margin-left: .2em;">
-                                            </p>
-                                        </center>
-                                    </div>
-                                    <div class="update-container" id="update" hidden>
+                            </button>
+                            <button id="infoBtn" class="button" data-action="toggle" data-target="info">
+                                <picture class="ui-picture"> <img class="ui-button"
+                                        src="./images/tcg_timer/ui/info.webp" alt="Info"
+                                        aria-label="Infomation Section">
+                            </button>
+                        </div>
+                        <div class="about-container" id="about" hidden>
+                            <center>
+                                <img src="./images/tcg_timer/ui/salt.webp">
+                                <label for="about"><p> This is a timer made to support and enhance the local card shop and tcg tournament hosting. <br>
+                                    The timer is a <strong style="color: red;">work in progress</strong>; so I both apologize in advance but issue a fair warning:<br>
+                                    <i>sometimes things might break unexpectedly and always perform best practices in ensuring a fallback timer solution is ready just in case!</i></p>
+                                </label>
+                                <p><a href="https://www.naklwilson.net">NaklWilson</a> © <span id="current-year"></span>
+                                    <br>
+                                    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""
+                                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                                        src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""
+                                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                                        src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt=""
+                                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                                        src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
+                                        style="max-width: 1em;max-height:1em;margin-left: .2em;">
+                                </p>
+                            </center>
+                        </div>
+                        <div class="update-container" id="update">
 
                             <div class="entry-header">
                                 <h2>Version Notes:</h2>
@@ -307,46 +308,65 @@
 
                         </div>
                         <div class="info-container" id="info" hidden>
-                            <table style="width: 100%;" cellpadding="2">
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <picture class="ui-picture"> <img class="ui-button"
-                                                    src="./images/tcg_timer/ui/chromecast.webp" alt="chromecast"
-                                                    aria-label="chromecast button">
-                                        </td>
-                                        <td>This will open a specific game timer in a new window for a cleaner view for
-                                            chromecasting</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <picture class="ui-picture"> <img class="ui-button"
-                                                    src="./images/tcg_timer/ui/custom.webp" alt="Custom"
-                                                    aria-label="Custom button">
-                                        </td>
-                                        <td>This will reveal a custom timer field where you can customize how long you
-                                            want the timer to be on a specific game</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <picture class="ui-picture"> <img class="ui-button"
-                                                    src="./images/tcg_timer/ui/alarm.webp" alt="Alarm"
-                                                    aria-label="Alarm button">
-                                        </td>
-                                        <td>This will reveal a dropdown menu for choosing what alarm to play for a
-                                            specific timer</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <picture class="ui-picture"> <img class="ui-button"
-                                                    src="./images/tcg_timer/ui/delete.webp" alt="Delete"
-                                                    aria-label="Delete button">
-                                        </td>
-                                        <td>This will delete all <strong>visible</strong> timers. Hidden timers will not
-                                            be deleted unless made visible!</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+
+                            <h2>NAVIGATION</h2>
+
+                            <div class="table-nav-container">
+                                <div class="item-nav">
+                                    <img src="./images/tcg_timer/ui/add.webp" alt="New Timer"
+                                        aria-label="New Timer Button">
+                                </div>
+                                <div class="item-nav">
+                                    <img src="./images/tcg_timer/ui/settings.webp" alt="Settings"
+                                        aria-label="Settings button">
+                                </div>
+                                <div class="item-nav">
+                                    <img src="./images/tcg_timer/ui/delete.webp" alt="Delete"
+                                        aria-label="Delete button">
+                                </div>
+                                <div class="item-nav" id="index-newtimer">This is how you select a game timer.</div>
+                                <div class="item-nav" id="index-settings">This opens the settings menu.</div>
+                                <div class="item-nav" id="index-delete">This will delete all visible timers on the screen.</div>
+                            </div>
+                            <h2>TIMER</h2>
+                            <div class="table-timer-container">
+                                <div class="item-timer">
+                                    <img src="./images/tcg_timer/ui/start.webp" alt="Start" aria-label="Start button">
+                                </div>
+                                <div class="item-timer">
+                                    <img src="./images/tcg_timer/ui/stop.webp" alt="Pause" aria-label="Pause button">
+                                </div>
+                                                                <div class="item-timer">
+                                    <img src="./images/tcg_timer/ui/reset.webp" alt="Reset" aria-label="Reset button">
+                                </div>
+                                <div class="item-timer">
+                                    <img src="./images/tcg_timer/ui/chromecast.webp" alt="chromecast"
+                                        aria-label="chromecast button">
+                                </div>
+                                                                <div class="item-timer">
+                                    <img src="./images/tcg_timer/ui/add.webp" alt="Add" aria-label="Add button">
+                                </div>
+                                <div class="item-timer">
+                                    <img src="./images/tcg_timer/ui/sub.webp" alt="Subtract" aria-label="Subtract button">
+                                </div>
+                                <div class="item-timer">
+                                    <img src="./images/tcg_timer/ui/custom.webp" alt="Custom"
+                                        aria-label="Custom button">
+                                </div>
+                                <div class="item-timer">
+                                    <img src="./images/tcg_timer/ui/alarm.webp" alt="Alarm" aria-label="Alarm button">
+                                </div>
+
+                                <div class="item-timer" id="index-start">This will start the timer.</div>
+                                <div class="item-timer" id="index-stop">This will pause the timer.</div>
+                                <div class="item-timer" id="index-restart">This will reset the timer.</div>
+                                <div class="item-timer" id="index-chromecast">This will open a timer in a new tab.</div>
+                                <div class="item-timer" id="index-add">This will add an increment of time to the timer.</div>
+                                <div class="item-timer" id="index-sub">This will subtract an increment of time from the timer.</div>
+                                <div class="item-timer" id="index-custom">This will reveal custom timer and increment settings.</div>
+                                <div class="item-timer" id="index-alarm">This will reveal custom alarm settings.</div>
+
+                            </div>
                         </div>
                     </div>
                 </div>
