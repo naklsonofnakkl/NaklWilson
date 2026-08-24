@@ -12,16 +12,6 @@
             "id": "f134f3e89d076af3",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "New tab"
-            }
-          },
-          {
-            "id": "deb30d2e9e196782",
-            "type": "leaf",
-            "state": {
               "type": "markdown",
               "state": {
                 "file": "Entry Template File.md",
@@ -31,21 +21,8 @@
               "icon": "lucide-file",
               "title": "Entry Template File"
             }
-          },
-          {
-            "id": "8d7b43fa453a08fc",
-            "type": "leaf",
-            "state": {
-              "type": "release-notes",
-              "state": {
-                "currentVersion": "1.13.4"
-              },
-              "icon": "lucide-book-up",
-              "title": "Release Notes 1.13.4"
-            }
           }
-        ],
-        "currentTab": 2
+        ]
       },
       {
         "id": "f564efa0baea7958",
@@ -226,11 +203,13 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "8d7b43fa453a08fc",
+  "active": "d916e07059864c33",
   "lastOpenFiles": [
-    "2026-07-10.md",
     "Entry Template File.md",
-    "JULY",
+    "AUGUST/2026-08-18.md",
+    "Untitled.md",
+    "2026-07-10.md",
+    "AUGUST",
     "2026",
     "2025/December/2025-12-04.md",
     "Sarah.md",

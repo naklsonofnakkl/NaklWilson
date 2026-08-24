@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, viewport-fit=cover">
     <meta name="color-scheme" content="light">
     <!-- Page Title -->
     <title>NaklWilson — Tourney Timers</title>
@@ -29,17 +29,20 @@
     <meta name="twitter:image" content="https://www.naklwilson.net/images/meta_image.webp">
     <meta name="twitter:site" content="@NaklsonofNakkl">
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
-    <link rel="shortcut icon" href="./favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
-    <meta name="apple-mobile-web-app-title" content="NaklWilson" />
-    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="icon" type="image/png" href="./images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.ico" />
+    <link rel="shortcut icon" href="./images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="NW Tourney Timer" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="./images/favicon/site.webmanifest" />
     <meta name="author" content="NaklsonofNakkl">
     <meta name="theme-color" content="#6a1480">
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_border.webp" type="image/webp">
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_sub.webp" type="image/webp">
     <meta http-equiv="Cache-control" content="max-age=604800, must-revalidate">
+    <meta name="theme-color" content="#fff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
     <link type="application/json+oembed" href="https://naklwilson.net/json/embed_info.json" />
     <link rel="preload" href="style_timer-min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript>
@@ -241,18 +244,28 @@
                 </div>
             </section>
             <section id="timerScreen-set" class="settingScreen-card">
+                <label for="Settings"><h2>Settings</h2></label>
                 <div class="timers-container">
                     <div id="settingsTimer">
-                        <div id="theme-container">
-                            <label for="timerSettings">
-                                <h2>Theme Toggle:</h2>
-                            </label>
-                            <button class="nav-set-btn" id="theme" data-action="toggle" data-target="theme">
-                                <picture class="logo-picture-sm">
-                                    <img class="logo-button-theme" src=".\images\tcg_timer\ui\light.webp" alt="Theme"
-                                        width="32px" height="32px">
-                                </picture>
-                            </button>
+                        <div class="area settings-area">
+                            <div id="theme-container">
+                                <label for="timerSettings" style="color: var(--text-color);">
+                                    Switch Themes:
+                                </label>
+                                <button class="nav-set-btn" id="theme" data-action="toggle" data-target="theme">
+                                    <picture class="logo-picture-sm">
+                                        <img class="logo-button-theme" src=".\images\tcg_timer\ui\light.webp"
+                                            alt="Theme" width="32px" height="32px">
+                                    </picture>
+                                </button>
+                            </div>
+                            <div class="notification-alarm">
+                                    <label for="notification-checkbox-set" style="color: var(--text-color);" class="custom-lock">
+                                        <span class="text">Browser Notifications</span>
+                                    <input id="notification-checkbox-set" type="checkbox" name="checkbox-set" role="switch">
+                                        <span class="switch"></span>
+                                </label>
+                            </div>
                         </div>
                         <div id="button-container">
                             <button id="aboutBtn" class="button" data-action="toggle" data-target="about">
@@ -273,9 +286,12 @@
                         <div class="about-container" id="about" hidden>
                             <center>
                                 <img src="./images/tcg_timer/ui/salt.webp">
-                                <label for="about"><p> This is a timer made to support and enhance the local card shop and tcg tournament hosting. <br>
-                                    The timer is a <strong style="color: red;">work in progress</strong>; so I both apologize in advance but issue a fair warning:<br>
-                                    <i>sometimes things might break unexpectedly and always perform best practices in ensuring a fallback timer solution is ready just in case!</i></p>
+                                <label for="about">
+                                    <p> This is a timer made to support and enhance the local card shop and tcg
+                                        tournament hosting. <br>
+                                        The timer is a <strong style="color: red;">work in progress</strong>; please
+                                        report any issues you experience and always use best practice in regards to
+                                        redundancy timers.</p>
                                 </label>
                                 <p><a href="https://www.naklwilson.net">NaklWilson</a> © <span id="current-year"></span>
                                     <br>
@@ -288,6 +304,16 @@
                                         src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
                                         style="max-width: 1em;max-height:1em;margin-left: .2em;">
                                 </p>
+                                <div class="badge-container"> <a class="outra-link" aria-label="GitHub Repositiory"
+                                        target="_blank" href="https://github.com/naklsonofnakkl/NaklWilson"><img
+                                            alt="GitHub Repo for this Website" src="./images/badges/github-export.webp"
+                                            width="80px" height="15px"></a>
+                                    <a class="outra-link" aria-label="Ko-Fi Donation Page" target="_blank"
+                                        href="https://ko-fi.com/naklwilson"><img class="kofi" alt="Ko-Fi Donation Badge" width="80px" height="15px"></a>
+                                    <a class="outra-link" aria-label="Human Made - No AI" target="_blank"
+                                        href="https://madebyhuman.iamjarl.com/"><img alt="No AI Button" src="./images/badges/NO-AI-HUMAN.webp" width="80px"
+                                        height="15px"></a>
+                                </div>
                             </center>
                         </div>
                         <div class="update-container" id="update">
@@ -326,7 +352,8 @@
                                 </div>
                                 <div class="item-nav" id="index-newtimer">This is how you select a game timer.</div>
                                 <div class="item-nav" id="index-settings">This opens the settings menu.</div>
-                                <div class="item-nav" id="index-delete">This will delete all visible timers on the screen.</div>
+                                <div class="item-nav" id="index-delete">This will delete all visible timers on the
+                                    screen.</div>
                             </div>
                             <h2>TIMER</h2>
                             <div class="table-timer-container">
@@ -336,18 +363,19 @@
                                 <div class="item-timer">
                                     <img src="./images/tcg_timer/ui/stop.webp" alt="Pause" aria-label="Pause button">
                                 </div>
-                                                                <div class="item-timer">
+                                <div class="item-timer">
                                     <img src="./images/tcg_timer/ui/reset.webp" alt="Reset" aria-label="Reset button">
                                 </div>
                                 <div class="item-timer">
                                     <img src="./images/tcg_timer/ui/chromecast.webp" alt="chromecast"
                                         aria-label="chromecast button">
                                 </div>
-                                                                <div class="item-timer">
+                                <div class="item-timer">
                                     <img src="./images/tcg_timer/ui/add.webp" alt="Add" aria-label="Add button">
                                 </div>
                                 <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/sub.webp" alt="Subtract" aria-label="Subtract button">
+                                    <img src="./images/tcg_timer/ui/sub.webp" alt="Subtract"
+                                        aria-label="Subtract button">
                                 </div>
                                 <div class="item-timer">
                                     <img src="./images/tcg_timer/ui/custom.webp" alt="Custom"
@@ -361,10 +389,14 @@
                                 <div class="item-timer" id="index-stop">This will pause the timer.</div>
                                 <div class="item-timer" id="index-restart">This will reset the timer.</div>
                                 <div class="item-timer" id="index-chromecast">This will open a timer in a new tab.</div>
-                                <div class="item-timer" id="index-add">This will add an increment of time to the timer.</div>
-                                <div class="item-timer" id="index-sub">This will subtract an increment of time from the timer.</div>
-                                <div class="item-timer" id="index-custom">This will reveal custom timer and increment settings.</div>
-                                <div class="item-timer" id="index-alarm">This will reveal custom alarm settings.</div>
+                                <div class="item-timer" id="index-add">This will add an increment of time to the timer.
+                                </div>
+                                <div class="item-timer" id="index-sub">This will subtract an increment of time from the
+                                    timer.</div>
+                                <div class="item-timer" id="index-custom">This will reveal custom timer and increment
+                                    settings.</div>
+                                <div class="item-timer" id="index-alarm">This will reveal custom alarm and Notification
+                                    settings.</div>
 
                             </div>
                         </div>
@@ -373,7 +405,7 @@
             </section>
         </main>
         <main class="timers-container" id="timer-container" unselectable="on"></main>
-        <script src=".\json\timer.js"></script>
+        <script src=".\json\timer-min.js"></script>
     </div>
 </body>
 

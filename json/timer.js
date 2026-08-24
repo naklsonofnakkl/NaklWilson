@@ -44,23 +44,25 @@ NAKLWILSON TOURNEY TIMER (C) 2026
 
 // GAME CONFIGURATION - 1A
 const gameConfigs = [
-    { id: 'yo', title: 'yugioh', defaultMin: 50, defaultSec: 0, overTime: 0 },
-    { id: 'op', title: 'onepiece', defaultMin: 30, defaultSec: 0, overTime: 5 },
-    { id: 'rb', title: 'riftbound', defaultMin: 60, defaultSec: 0, overTime: 0 },
-    { id: 'ua', title: 'unionarena', defaultMin: 30, defaultSec: 0, overTime: 5 },
-    { id: 'ga', title: 'grandarchive', defaultMin: 60, defaultSec: 0, overTime: 5 },
-    { id: 'dm', title: 'digimon', defaultMin: 45, defaultSec: 0, overTime: 5 },
-    { id: 'ws', title: 'weissschwarz', defaultMin: 30, defaultSec: 0, overTime: 0 },
-    { id: 'dbs', title: 'dragonballsuperfusion', defaultMin: 35, defaultSec: 0, overTime: 0 },
-    { id: 'fb', title: 'fleshandblood', defaultMin: 55, defaultSec: 0, overTime: 0 },
-    { id: 'lc', title: 'lorcana', defaultMin: 50, defaultSec: 0, overTime: 0 },
-    { id: 'gm', title: 'gundam', defaultMin: 30, defaultSec: 0, overTime: 5 },
-    { id: 'mg', title: 'magicthegathering', defaultMin: 50, defaultSec: 0 },
-    { id: 'pk', title: 'pokemon', defaultMin: 50, defaultSec: 0, overTime: 0 },
-    { id: 'ff', title: 'finalfantasy', defaultMin: 30, defaultSec: 0, overTime: 0 },
-    { id: 'pw', title: 'palworld', defaultMin: 30, defaultSec: 0, overTime: 0 }
+    { id: 'yo', title: 'yugioh', defaultMin: 50, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/yugioh_icon.webp' },
+    { id: 'op', title: 'onepiece', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/onepiece_icon.webp' },
+    { id: 'rb', title: 'riftbound', defaultMin: 60, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/riftbound_icon.webp' },
+    { id: 'ua', title: 'unionarena', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/unionarena_icon.webp' },
+    { id: 'ga', title: 'grandarchive', defaultMin: 60, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/grandarchive_icon.webp' },
+    { id: 'dm', title: 'digimon', defaultMin: 45, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/digimon_icon.webp' },
+    { id: 'ws', title: 'weissschwarz', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/weissschwarz_icon.webp' },
+    { id: 'dbs', title: 'dragonballsuperfusion', defaultMin: 35, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/dragonballsuperfusion_icon.webp' },
+    { id: 'fb', title: 'fleshandblood', defaultMin: 55, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/fleshandblood_icon.webp' },
+    { id: 'lc', title: 'lorcana', defaultMin: 50, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/lorcana_icon.webp' },
+    { id: 'gm', title: 'gundam', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/gundam_icon.webp' },
+    { id: 'mg', title: 'magicthegathering', defaultMin: 50, defaultSec: 0, otOn: 'off', icon: './images/tcg_timer/magicthegathering_icon.webp' },
+    { id: 'pk', title: 'pokemon', defaultMin: 50, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/pokemon_icon.webp' },
+    { id: 'ff', title: 'finalfantasy', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/finalfantasy_icon.webp' },
+    { id: 'pw', title: 'palworld', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/palworld_icon.webp' }
 
 ];
+
+document.addEventListener('touchstart', (evt) => { });
 
 // SOUND FUNCTIONS - 2A
 // Alarm and Sound Effects Library - 2B
@@ -168,129 +170,129 @@ document.addEventListener("DOMContentLoaded", () => {
     updateThemeLogo(storedTheme);
 
     // toggle button function - 3C
-function toggleSection(targetId, buttonId, buttonElement) {
-    if (buttonId === 'nt' || buttonId === 'set' || buttonId === 'ntm' || buttonId === 'setm') {
-        const showNt = buttonId === 'nt' || buttonId === 'ntm';
+    function toggleSection(targetId, buttonId, buttonElement) {
+        if (buttonId === 'nt' || buttonId === 'set' || buttonId === 'ntm' || buttonId === 'setm') {
+            const showNt = buttonId === 'nt' || buttonId === 'ntm';
 
-        const ntSection = document.getElementById('timerScreen-nt');
-        const setSection = document.getElementById('timerScreen-set');
+            const ntSection = document.getElementById('timerScreen-nt');
+            const setSection = document.getElementById('timerScreen-set');
 
-        const ntButtons = [document.getElementById('nt'), document.getElementById('ntm')];
-        const setButtons = [document.getElementById('set'), document.getElementById('setm')];
+            const ntButtons = [document.getElementById('nt'), document.getElementById('ntm')];
+            const setButtons = [document.getElementById('set'), document.getElementById('setm')];
 
-        const targetSection = showNt ? ntSection : setSection;
-        const isAlreadyOpen = targetSection && !targetSection.hasAttribute('hidden');
+            const targetSection = showNt ? ntSection : setSection;
+            const isAlreadyOpen = targetSection && !targetSection.hasAttribute('hidden');
 
-        if (isAlreadyOpen) {
-            targetSection.setAttribute('hidden', '');
-            const activeButtons = showNt ? ntButtons : setButtons;
-            activeButtons.forEach(btn => {
-                if (btn) btn.classList.remove('active');
+            if (isAlreadyOpen) {
+                targetSection.setAttribute('hidden', '');
+                const activeButtons = showNt ? ntButtons : setButtons;
+                activeButtons.forEach(btn => {
+                    if (btn) btn.classList.remove('active');
+                });
+                return;
+            }
+
+            if (ntSection) ntSection.hidden = !showNt;
+            if (setSection) setSection.hidden = showNt;
+
+            ntButtons.forEach(btn => {
+                if (btn) btn.classList.toggle('active', showNt);
             });
+            setButtons.forEach(btn => {
+                if (btn) btn.classList.toggle('active', !showNt);
+            });
+
             return;
         }
 
-        if (ntSection) ntSection.hidden = !showNt;
-        if (setSection) setSection.hidden = showNt;
+        if (!targetId) return;
+        const lowerId = targetId.toLowerCase();
 
-        ntButtons.forEach(btn => {
-            if (btn) btn.classList.toggle('active', showNt);
-        });
-        setButtons.forEach(btn => {
-            if (btn) btn.classList.toggle('active', !showNt);
-        });
+        let sectionIdToToggle = null;
 
-        return;
-    }
+        switch (buttonId) {
+            case `timerBtn-${lowerId}`: sectionIdToToggle = `customTimer-${lowerId}`; break;
+            case `alarmBtn-${lowerId}`: sectionIdToToggle = `soundTimer-${targetId}`; break;
+            case 'aboutBtn': sectionIdToToggle = 'about'; break;
+            case 'updateBtn': sectionIdToToggle = 'update'; break;
+            case 'infoBtn': sectionIdToToggle = 'info'; break;
+            default: sectionIdToToggle = `timerScreen-${targetId}`; break;
+        }
 
-    if (!targetId) return;
-    const lowerId = targetId.toLowerCase();
+        if (buttonId === `alarmBtn-${lowerId}`) {
+            const timerSection = document.getElementById(`customTimer-${lowerId}`);
+            if (timerSection && !timerSection.hasAttribute('hidden')) {
+                timerSection.setAttribute('hidden', '');
+                const alarmBtn = document.getElementById(`timerBtn-${lowerId}`);
+                if (alarmBtn) alarmBtn.classList.remove('active');
+            }
+        }
 
-    let sectionIdToToggle = null;
+        if (buttonId === `timerBtn-${lowerId}`) {
+            const soundSection = document.getElementById(`soundTimer-${lowerId}`);
+            if (soundSection && !soundSection.hasAttribute('hidden')) {
+                soundSection.setAttribute('hidden', '');
+                const timerBtn = document.getElementById(`alarmBtn-${lowerId}`);
+                if (timerBtn) timerBtn.classList.remove('active');
+            }
+        }
 
-    switch (buttonId) {
-        case `timerBtn-${lowerId}`: sectionIdToToggle = `customTimer-${lowerId}`; break;
-        case `alarmBtn-${lowerId}`: sectionIdToToggle = `soundTimer-${targetId}`; break;
-        case 'aboutBtn': sectionIdToToggle = 'about'; break;
-        case 'updateBtn': sectionIdToToggle = 'update'; break;
-        case 'infoBtn': sectionIdToToggle = 'info'; break;
-        default: sectionIdToToggle = `timerScreen-${targetId}`; break;
-    }
+        if (buttonId === 'infoBtn') {
+            const upSection = document.getElementById('update');
+            const abSection = document.getElementById('about');
+            if (upSection && !upSection.hasAttribute('hidden')) {
+                upSection.setAttribute('hidden', '');
+                const upBtn = document.getElementById('updateBtn');
+                if (upBtn) upBtn.classList.remove('active');
+            }
+            if (abSection && !abSection.hasAttribute('hidden')) {
+                abSection.setAttribute('hidden', '');
+                const abBtn = document.getElementById('aboutBtn');
+                if (abBtn) abBtn.classList.remove('active');
+            }
+        }
 
-    if (buttonId === `alarmBtn-${lowerId}`) {
-        const timerSection = document.getElementById(`customTimer-${lowerId}`);
-        if (timerSection && !timerSection.hasAttribute('hidden')) {
-            timerSection.setAttribute('hidden', '');
-            const alarmBtn = document.getElementById(`timerBtn-${lowerId}`);
-            if (alarmBtn) alarmBtn.classList.remove('active');
+        if (buttonId === 'updateBtn') {
+            const inSection = document.getElementById('info');
+            const abSection = document.getElementById('about');
+            if (inSection && !inSection.hasAttribute('hidden')) {
+                inSection.setAttribute('hidden', '');
+                const inBtn = document.getElementById('infoBtn');
+                if (inBtn) inBtn.classList.remove('active');
+            }
+            if (abSection && !abSection.hasAttribute('hidden')) {
+                abSection.setAttribute('hidden', '');
+                const abBtn = document.getElementById('aboutBtn');
+                if (abBtn) abBtn.classList.remove('active');
+            }
+        }
+
+        if (buttonId === 'aboutBtn') {
+            const upSection = document.getElementById('update');
+            const inSection = document.getElementById('info');
+            if (inSection && !inSection.hasAttribute('hidden')) {
+                inSection.setAttribute('hidden', '');
+                const inBtn = document.getElementById('infoBtn');
+                if (inBtn) inBtn.classList.remove('active');
+            }
+            if (upSection && !upSection.hasAttribute('hidden')) {
+                upSection.setAttribute('hidden', '');
+                const upBtn = document.getElementById('updateBtn');
+                if (upBtn) upBtn.classList.remove('active');
+            }
+        }
+
+        if (sectionIdToToggle) {
+            const targetSection = document.getElementById(sectionIdToToggle);
+            if (targetSection) targetSection.toggleAttribute('hidden');
+        }
+
+        if (buttonElement) {
+            buttonElement.classList.toggle('active');
         }
     }
 
-    if (buttonId === `timerBtn-${lowerId}`) {
-        const soundSection = document.getElementById(`soundTimer-${lowerId}`);
-        if (soundSection && !soundSection.hasAttribute('hidden')) {
-            soundSection.setAttribute('hidden', '');
-            const timerBtn = document.getElementById(`alarmBtn-${lowerId}`);
-            if (timerBtn) timerBtn.classList.remove('active');
-        }
-    }
-
-    if (buttonId === 'infoBtn') {
-        const upSection = document.getElementById('update');
-        const abSection = document.getElementById('about');
-        if (upSection && !upSection.hasAttribute('hidden')) {
-            upSection.setAttribute('hidden', '');
-            const upBtn = document.getElementById('updateBtn');
-            if (upBtn) upBtn.classList.remove('active');
-        }
-        if (abSection && !abSection.hasAttribute('hidden')) {
-            abSection.setAttribute('hidden', '');
-            const abBtn = document.getElementById('aboutBtn');
-            if (abBtn) abBtn.classList.remove('active');
-        }
-    }
-
-    if (buttonId === 'updateBtn') {
-        const inSection = document.getElementById('info');
-        const abSection = document.getElementById('about');
-        if (inSection && !inSection.hasAttribute('hidden')) {
-            inSection.setAttribute('hidden', '');
-            const inBtn = document.getElementById('infoBtn');
-            if (inBtn) inBtn.classList.remove('active');
-        }
-        if (abSection && !abSection.hasAttribute('hidden')) {
-            abSection.setAttribute('hidden', '');
-            const abBtn = document.getElementById('aboutBtn');
-            if (abBtn) abBtn.classList.remove('active');
-        }
-    }
-
-    if (buttonId === 'aboutBtn') {
-        const upSection = document.getElementById('update');
-        const inSection = document.getElementById('info');
-        if (inSection && !inSection.hasAttribute('hidden')) {
-            inSection.setAttribute('hidden', '');
-            const inBtn = document.getElementById('infoBtn');
-            if (inBtn) inBtn.classList.remove('active');
-        }
-        if (upSection && !upSection.hasAttribute('hidden')) {
-            upSection.setAttribute('hidden', '');
-            const upBtn = document.getElementById('updateBtn');
-            if (upBtn) upBtn.classList.remove('active');
-        }
-    }
-
-    if (sectionIdToToggle) {
-        const targetSection = document.getElementById(sectionIdToToggle);
-        if (targetSection) targetSection.toggleAttribute('hidden');
-    }
-
-    if (buttonElement) {
-        buttonElement.classList.toggle('active');
-    }
-}
-
-// secondary button function - 3D
+    // secondary button function - 3D
     document.addEventListener("click", (event) => {
         const btn = event.target.closest('[data-action], #theme');
 
@@ -433,15 +435,15 @@ function createTimerHTML(config) {
                     <div id="button-container">
                         <button id="startBtn-${config.id}" class="button">
                             <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/start.webp"
-                                    alt="start" aria-label="Start ${config.title}">
+                                    alt="start" aria-label="Start ${config.title}"></picture>
                         </button>
                         <button id="stopBtn-${config.id}" class="button">
                             <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/stop.webp"
-                                    alt="start" aria-label="Stop ${config.title}">
+                                    alt="start" aria-label="Stop ${config.title}"></picture>
                         </button>
                         <button id="resetBtn-${config.id}" class="button">
                             <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/reset.webp"
-                                    alt="reset" aria-label="Reset ${config.title}">
+                                    alt="reset" aria-label="Reset ${config.title}"></picture>
                         </button>
                                                 <button id="openBtn-${config.id}" class="button">
                             <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/chromecast.webp"
@@ -449,61 +451,92 @@ function createTimerHTML(config) {
                         </button>
                         <button id="addBtn-${config.id}" class="button">
                             <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/add.webp"
-                                    alt="add">
+                                    alt="add"></picture>
                         </button>
                         <button id="subBtn-${config.id}" class="button">
                             <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/sub.webp"
-                                    alt="sub">
+                                    alt="sub"></picture>
                         </button>
                         <button id="timerBtn-${config.id}" class="button" data-action="toggle" data-target="${config.id}">
                             <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/custom.webp"
-                                    alt="custom">
+                                    alt="custom"></picture>
                         </button>
                         <button id="alarmBtn-${config.id}" class="button" data-action="toggle" data-target="${config.id}">
                             <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/alarm.webp"
-                                    alt="alarm">
+                                    alt="alarm"></picture>
                         </button>
                     </div>
-<div class="timer-input-container" id="customTimer-${config.id}" hidden>
-                        <div class="area increment-area">
-                        <div class="input-group">
-                        <label for="custom-increments-${config.id}">
-                        <h2>Increment Amount</h2>
+                        <div class="timer-input-container" id="customTimer-${config.id}" hidden>
+                            <div class="area increment-area">
+                                <div class="input-group">
+                                    <label for="custom-increments-${config.id}">
+                                        <h2>Increment Amount</h2>
                                                    <center> <input
-                                type="text"
-                                id="numberIncrement-${config.id}"
-                                inputmode="numeric"
-                                pattern="\\d*"
-                                value="00:01"
-                                aria-label="Time in minutes and seconds"
-                                class="incinput"
-                            >
-                            <input type="range" id="rangeIncrement-${config.id}" min="0" max="300" value="59" step="5" class="incrange">
-                            </div></center>
+                                                                type="text"
+                                                                id="numberIncrement-${config.id}"
+                                                                inputmode="numeric"
+                                                                pattern="\\d*"
+                                                                value="00:01"
+                                                                aria-label="Time in minutes and seconds"
+                                                                class="incinput"
+                                                            >
+                                                            <input type="range" id="rangeIncrement-${config.id}" min="0" max="300" value="59" step="5" class="incrange">
+                                                    </center>
+                                </div>
                             </div>
-                            <div class="area time-area">
-                        <div class="input-group">
-                            <label for="custom-minutes-${config.id}">
-                                <h2>Minutes</h2>
-                            </label>
-                            <input type="number" pattern="\\d*" id="custom-minutes-${config.id}" min="0" max="999"
-                                placeholder="00" />
+                            <div class="area customtimer-area">
+                                <div class="input-group">
+                                    <label for="custom-timer-${config.id}">
+                                        <h2>Custom Timer</h2>
+                                                   <center> <input
+                                                                type="text"
+                                                                id="numberCustom-${config.id}"
+                                                                inputmode="numeric"
+                                                                pattern="\\d*"
+                                                                value="00:01"
+                                                                aria-label="Time in minutes and seconds"
+                                                                class="incinput"
+                                                            >
+                                                            <input type="range" id="rangeCustom-${config.id}" min="0" max="18000" value="69" step="5" class="incrange">
+                                                    </center>
+                                 </div>
+                                <div class="customTimer-lock">
+                                 <center>
+                                 <label for="lockCustom-${config.id}" style="color: var(--text-color);" class="custom-lock">
+                                    <input id="lockCustom-${config.id}" type="checkbox" name="lockCustom-${config.id}" role="switch">
+                                        <span class="switch"></span>
+                                        <span class="text">Lock-in Custom Time</span>
+                                </label>
+                                </center>
+                                </div>
+                            </div>
+                                                        <div class="area overtime-area">
+                                <div class="input-group">
+                                    <label for="overtime-${config.id}">
+                                        <h2>Overtime Timer</h2>
+                                                   <center> <input
+                                                                type="text"
+                                                                id="numberOvertime-${config.id}"
+                                                                inputmode="numeric"
+                                                                pattern="\\d*"
+                                                                value="00:01"
+                                                                aria-label="Time in minutes and seconds"
+                                                                class="incinput"
+                                                            >
+                                                            <input type="range" id="rangeOvertime-${config.id}" min="0" max="18000" value="69" step="5" class="incrange">
+                                                    </center>
+                                 </div>
+                                <div class="overtime-enable">
+                                 <center>                                        
+                                    <label for="overtimerActive-${config.id}" style="color: var(--text-color);" class="custom-lock">
+                                    <input id="overtimerActive-${config.id}" type="checkbox" name="overtimerActive-${config.id}" role="switch">
+                                        <span class="switch"></span>
+                                        <span class="text">Overtime Enabled</span>
+                                </label>
+                                </center>
+                                </div>
+                            </div>
                         </div>
-                        <div class="input-group">
-                            <label for="custom-seconds-${config.id}">
-                                <h2>Seconds</h2>
-                            </label>
-                            <input type="number" pattern="\\d*" id="custom-seconds-${config.id}" min="0" max="59"
-                                placeholder="00" />
-                        </div>
-                        <div class="button-space">
-                            <button type="button" id="customBtn-${config.id}" class="button">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src="./images/tcg_timer/ui/confirm.webp" alt="confirm">
-                            </button>
-                        </div>
-                        </div>
-                    </div>
                     <div class="sound-select-container" id="soundTimer-${config.id}" hidden>
                         <div class="area alarm-area"><label for="soundSelect">
                             <h2>Choose an alarm:</h2>
@@ -522,15 +555,14 @@ function createTimerHTML(config) {
                         <div class="button-alarm">
                             <button id="previewBtn-${config.id}" class="button" onclick="playSelectedSound('${config.id}')">
                                 <picture class="ui-picture"> <img class="ui-button"
-                                        src="./images/tcg_timer/ui/test.webp" alt="preview">
+                                        src="./images/tcg_timer/ui/test.webp" alt="preview"></picture>
                             </button>
                             <button id="muteBtn-${config.id}" class="button" onclick="toggleMute('${config.id}')">
                                 <picture class="ui-picture">
                                     <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute">
                                 </picture>
                             </button>
-                        </label></div>
-                    </div>
+                        </div>
             </section>
   `;
 }
@@ -539,9 +571,8 @@ const container = document.getElementById('timer-container');
 container.innerHTML = gameConfigs.map(config => createTimerHTML(config)).join('');
 
 // custom increment amount function - 5B
-// Convert total seconds -> "MM:SS" string
-function secondsToTimeString(totalSeconds) {
-    const s = Math.max(1, Math.min(300, Math.round(totalSeconds)));
+function secondsToTimeString(totalSeconds, min = 1, max = 300) {
+    const s = Math.max(min, Math.min(max, Math.round(totalSeconds)));
     const minutes = Math.floor(s / 60);
     const seconds = s % 60;
     return String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
@@ -589,7 +620,7 @@ function initRangeTimeSync(config) {
         const totalSeconds = parseTimeString(numberBox.value);
         const clamped = Math.max(1, Math.min(300, totalSeconds || 1));
         range.value = clamped;
-        numberBox.value = secondsToTimeString(clamped); 
+        numberBox.value = secondsToTimeString(clamped);
     }
 
     range.addEventListener('input', updateNumberBoxFromRange);
@@ -608,8 +639,6 @@ function initRangeTimeSync(config) {
 
 gameConfigs.forEach(config => initRangeTimeSync(config));
 
-
-
 // GAME TIMER - 6A
 class GameTimer {
     constructor(config) {
@@ -619,7 +648,8 @@ class GameTimer {
         this.remainingMs = this.durationMs;
         this.worker = new Worker('./json/timerWorker.js');
         this.isRunning = false;
-        this.overtimeM = config.overTime
+        this.overtimeM = (config.overTime || 0) * 60;
+        this.otOn = config.otOn || 'off';
 
         // Timer buttons and elements -6B    
         this.displayElement = document.getElementById(`time-${config.id}`);
@@ -629,17 +659,15 @@ class GameTimer {
         this.openbutton = document.getElementById(`openBtn-${config.id}`);
         this.addbutton = document.getElementById(`addBtn-${config.id}`);
         this.subbutton = document.getElementById(`subBtn-${config.id}`);
-        this.timerbutton = document.getElementById(`customBtn-${config.id}`);
         this.alarmbutton = document.getElementById(`alarmBtn-${config.id}`);
-        this.custommin = document.getElementById(`custom-minutes-${config.id}`);
-        this.customsec = document.getElementById(`custom-seconds-${config.id}`);
         this.timerElement = document.getElementById(`timerDisplay-${config.id}`);
         this.timeElement = document.getElementById(`time-${config.id}`);
         this.customOt = document.getElementById(`customOt-${config.id}`);
         this.overtimeButton = document.getElementById(`overBtn-${config.id}`);
         this.customIncrement = document.getElementById(`numberIncrement-${config.id}`);
+        this.notifications = document.getElementById(`notification-checkbox-set`);
 
-
+        GameTimer.initNotificationPermissionRequest(this.notifications);
 
         // Bind event listeners - 6C
         this.startbutton.addEventListener('click', () => this.start());
@@ -655,6 +683,31 @@ class GameTimer {
                 this.renderTime(Math.ceil(remaining / 1000));
                 this.broadcastState('running');
             } else if (type === 'alarm') {
+                console.log(`${this.config.title} timer finished!`);
+                stopAllSounds();
+                playSelectedSound(this.config.id);
+
+                // Notification push based on checkbox value
+                if (this.notifications.checked &&
+                    'Notification' in window &&
+                    Notification.permission === 'granted' &&
+                    document.hidden) {
+                    const n = new Notification(`${this.config.title} timer finished!`, {
+                        body: 'Call the Match!',
+                        tag: `tcg-timer-${this.config.id}`,
+                        icon: this.config.icon,
+                        requireInteraction: true
+                    });
+                    n.onclick = () => {
+                        window.focus();
+                        n.close();
+                    };
+                }
+
+                if (this.maybeStartOvertime()) {
+                    return;
+                }
+
                 this.remainingMs = 0;
                 this.isRunning = false;
                 this.renderTime(0);
@@ -663,22 +716,6 @@ class GameTimer {
                 this.timerElement.removeAttribute('is-running');
                 this.timeElement.setAttribute('is-stopped', '');
                 this.timeElement.removeAttribute('is-running');
-
-                console.log(`${this.config.id} timer finished!`);
-                stopAllSounds();
-                playSelectedSound(this.config.id);
-
-                if ('Notification' in window && Notification.permission === 'granted' && document.hidden) {
-                    const n = new Notification(`${this.config.id} timer finished!`, {
-                        body: 'Time is up.',
-                        tag: `tcg-timer-${this.config.id}`,
-                        requireInteraction: true
-                    });
-                    n.onclick = () => {
-                        window.focus();
-                        n.close();
-                    };
-                }
             }
         };
 
@@ -699,21 +736,67 @@ class GameTimer {
         }
 
         // Custom Timer Button - 6G
-        if (this.timerbutton && this.custommin && this.customsec) {
-            this.timerbutton.addEventListener("click", () => {
-                const minInt = parseInt(this.custommin.value, 10) || 0;
-                const secInt = parseInt(this.customsec.value, 10) || 0;
+        this.rangeCustom = document.getElementById(`rangeCustom-${config.id}`);
+        this.numberCustom = document.getElementById(`numberCustom-${config.id}`);
+        this.lockCustom = document.getElementById(`lockCustom-${config.id}`);
+        this.customSliderLive = true;
 
-                this.custommin.value = '';
-                this.customsec.value = '';
+        if (this.rangeCustom && this.numberCustom) {
+            const rangeMin = Number(this.rangeCustom.min) || 1;
+            const rangeMax = Number(this.rangeCustom.max) || 3600;
+
+            const defaultTotalSeconds = (config.defaultMin * 60) + config.defaultSec;
+            const initialSeconds = Math.max(rangeMin, Math.min(rangeMax, defaultTotalSeconds));
+
+            this.rangeCustom.value = initialSeconds;
+            this.numberCustom.value = secondsToTimeString(initialSeconds, rangeMin, rangeMax);
+
+            const applyCustomDuration = (totalSeconds) => {
                 if (this.isRunning) {
                     this.stop();
                 }
-                this.durationMs = ((minInt * 60) + secInt) * 1000;
+                this.durationMs = Math.round(totalSeconds) * 1000;
                 this.remainingMs = this.durationMs;
-                this.renderTime(this.durationMs / 1000);
+            };
+
+            const updateFromRange = () => {
+                if (!this.customSliderLive) return;
+                const totalSeconds = Math.round(Number(this.rangeCustom.value));
+                this.numberCustom.value = secondsToTimeString(totalSeconds, rangeMin, rangeMax);
+                this.renderTime(totalSeconds);
+            };
+
+
+            const updateFromNumberBox = () => {
+                if (!this.customSliderLive) return;
+                const parsed = parseTimeString(this.numberCustom.value);
+                const clamped = Math.max(rangeMin, Math.min(rangeMax, parsed || rangeMin));
+                this.rangeCustom.value = clamped;
+                this.numberCustom.value = secondsToTimeString(clamped, rangeMin, rangeMax);
+                this.renderTime(clamped);
+                applyCustomDuration(clamped);
+            };
+
+            this.rangeCustom.addEventListener('input', updateFromRange);
+
+
+            this.rangeCustom.addEventListener('change', () => {
+                if (!this.customSliderLive) return;
+                applyCustomDuration(Number(this.rangeCustom.value));
             });
+
+            this.numberCustom.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    updateFromNumberBox();
+                    this.numberCustom.blur();
+                }
+            });
+
+            this.numberCustom.addEventListener('blur', updateFromNumberBox);
         }
+
+
+        this.setupOvertimeSystem(config);
 
         if (this.openbutton) {
             this.openbutton.addEventListener('click', () => {
@@ -747,7 +830,7 @@ class GameTimer {
             this.worker.postMessage({ cmd: 'adjust', msToChange });
             this.broadcastState('running');
         } else {
-            this.durationMs += msToChange;
+            this.durationMs = Math.round(this.durationMs + msToChange);
             if (this.durationMs < 0) {
                 this.durationMs = 0;
             }
@@ -756,12 +839,26 @@ class GameTimer {
             this.broadcastState('stopped');
         }
     }
+
+    lockCustomSlider() {
+        this.customSliderLive = false;
+        if (this.rangeCustom) this.rangeCustom.disabled = true;
+        if (this.numberCustom) this.numberCustom.disabled = true;
+    }
+
+    unlockCustomSlider() {
+        this.customSliderLive = true;
+        if (this.rangeCustom) this.rangeCustom.disabled = false;
+        if (this.numberCustom) this.numberCustom.disabled = false;
+    }
+
     // TIMER START - 6J
     start() {
         if (this.isRunning) return;
 
         this.isRunning = true;
         this.worker.postMessage({ cmd: 'start', durationMs: this.remainingMs });
+        this.lockCustomSlider();
         this.timerElement.setAttribute('is-running', '');
         this.timerElement.removeAttribute('is-stopped');
         this.timeElement.setAttribute('is-running', '');
@@ -774,17 +871,32 @@ class GameTimer {
         this.isRunning = false;
         this.durationMs = this.remainingMs;
         this.worker.postMessage({ cmd: 'stop' });
+        this.lockCustomSlider();
         this.broadcastState('stopped');
         this.timerElement.setAttribute('is-stopped', '');
         this.timerElement.removeAttribute('is-running');
         this.timeElement.setAttribute('is-stopped', '');
         this.timeElement.removeAttribute('is-running');
     }
+
+    getResetDurationSeconds() {
+        const defaultTotalSeconds = (this.config.defaultMin * 60) + this.config.defaultSec;
+
+        if (this.lockCustom && this.lockCustom.checked && this.rangeCustom) {
+            return Math.round(Number(this.rangeCustom.value));
+        }
+
+        return defaultTotalSeconds;
+    }
+
     // TIMER RESET - 6L
     reset() {
         this.worker.postMessage({ cmd: 'stop' });
         this.isRunning = false;
-        this.durationMs = ((this.config.defaultMin * 60) + this.config.defaultSec) * 1000;
+        this.unlockCustomSlider();
+        this.overtimeUsed = false;
+        const resetSeconds = this.getResetDurationSeconds();
+        this.durationMs = resetSeconds * 1000;
         this.remainingMs = this.durationMs;
         this.renderTime(this.durationMs / 1000);
         this.broadcastState('reset');
@@ -798,25 +910,112 @@ class GameTimer {
         } else {
             this.timeElement.removeAttribute('is-running');
         }
+
+        if (this.rangeCustom && this.numberCustom) {
+            const rangeMin = Number(this.rangeCustom.min) || 1;
+            const rangeMax = Number(this.rangeCustom.max) || 3600;
+            const clamped = Math.max(rangeMin, Math.min(rangeMax, resetSeconds));
+            this.rangeCustom.value = clamped;
+            this.numberCustom.value = secondsToTimeString(clamped, rangeMin, rangeMax);
+        }
     }
     // TIME RENDER - 6M
     renderTime(totalSeconds) {
-        const mins = Math.floor(totalSeconds / 60);
-        const secs = totalSeconds % 60;
+        const safeSeconds = Math.round(totalSeconds);
+        const mins = Math.floor(safeSeconds / 60);
+        const secs = safeSeconds % 60;
         this.displayElement.textContent = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     }
+
+
+    // BROWSER NOTIFICATION - 6N
+    static initNotificationPermissionRequest(checkboxEl) {
+        if (!checkboxEl || GameTimer._notificationListenerAttached) return;
+        GameTimer._notificationListenerAttached = true;
+
+        checkboxEl.addEventListener('change', () => {
+            if (checkboxEl.checked && 'Notification' in window && Notification.permission === 'default') {
+                document.addEventListener('click', function requestOnce() {
+                    Notification.requestPermission();
+                    document.removeEventListener('click', requestOnce);
+                }, { once: true });
+            }
+        });
+    }
+
+    // OVERTIME SYSTEM
+    setupOvertimeSystem(config) {
+        this.rangeOvertime = document.getElementById(`rangeOvertime-${config.id}`);
+        this.numberOvertime = document.getElementById(`numberOvertime-${config.id}`);
+        this.overtimerActive = document.getElementById(`overtimerActive-${config.id}`);
+
+        this.overtimeUsed = false;
+
+        if (this.overtimerActive) {
+            this.overtimerActive.checked = (this.otOn === 'on');
+        }
+
+        if (!this.rangeOvertime || !this.numberOvertime) return;
+
+        const rangeMin = Number(this.rangeOvertime.min) || 0;
+        const rangeMax = Number(this.rangeOvertime.max) || 3600;
+
+        const initialSeconds = Math.max(rangeMin, Math.min(rangeMax, this.overtimeM));
+        this.rangeOvertime.value = initialSeconds;
+        this.numberOvertime.value = secondsToTimeString(initialSeconds, rangeMin, rangeMax);
+        this.overtimeM = initialSeconds;
+
+        const updateFromRange = () => {
+            const totalSeconds = Math.round(Number(this.rangeOvertime.value));
+            this.overtimeM = totalSeconds;
+            this.numberOvertime.value = secondsToTimeString(totalSeconds, rangeMin, rangeMax);
+        };
+
+        const updateFromNumberBox = () => {
+            const parsed = parseTimeString(this.numberOvertime.value);
+            const clamped = Math.max(rangeMin, Math.min(rangeMax, parsed || rangeMin));
+            this.rangeOvertime.value = clamped;
+            this.numberOvertime.value = secondsToTimeString(clamped, rangeMin, rangeMax);
+            this.overtimeM = clamped;
+        };
+
+        this.rangeOvertime.addEventListener('input', updateFromRange);
+
+        this.numberOvertime.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                updateFromNumberBox();
+                this.numberOvertime.blur();
+            }
+        });
+        this.numberOvertime.addEventListener('blur', updateFromNumberBox);
+    }
+
+    maybeStartOvertime() {
+        const active = this.overtimerActive && this.overtimerActive.checked;
+
+        if (!active || this.overtimeUsed || !this.overtimeM || this.overtimeM <= 0) {
+            return false;
+        }
+
+        this.overtimeUsed = true;
+
+        this.durationMs = this.overtimeM * 1000;
+        this.remainingMs = this.durationMs;
+        this.isRunning = true;
+        this.worker.postMessage({ cmd: 'start', durationMs: this.remainingMs });
+        this.renderTime(this.overtimeM);
+        this.broadcastState('running');
+
+        this.timerElement.setAttribute('is-running', '');
+        this.timerElement.removeAttribute('is-stopped');
+        this.timeElement.setAttribute('is-running', '');
+        this.timeElement.removeAttribute('is-stopped');
+
+        console.log(`${this.config.id} entering overtime: ${this.overtimeM}s`);
+        return true;
+    }
+
 }
-
-// BROWSER NOTIFICATION - 6N
-if ('Notification' in window && Notification.permission === 'default') {
-    document.addEventListener('click', function requestOnce() {
-        Notification.requestPermission();
-        document.removeEventListener('click', requestOnce);
-    }, { once: true });
-}
-
-// OVERTIME BUTTON
-
 
 const activeTimers = gameConfigs.map(config => new GameTimer(config));
 
@@ -863,6 +1062,36 @@ const activeTimers = gameConfigs.map(config => new GameTimer(config));
             version: "v0.16.1",
             date: "2026-08-12",
             notes: "* Set the new default increment level to be 01:00 minute instead of 00:01 second.\n* Visual overhaul of the custom timer and alarm settings container\n* Fixed an issue where the new timer and settings buttons wouldn't close their respective sections. "
+        },
+        {
+            version: "v0.16.2",
+            date: "2026-08-12",
+            notes: "* Reworded the About section and added some badges.\n* Added a toggle under settings to turn on/off browser notifications"
+        },
+        {
+            version: "v0.16.3",
+            date: "2026-08-13",
+            notes: "* Standarization of the Custom Timer settings, slider revolution!\n* Custom Time slider updates the timer in real time\n* Added a checkbox to lock the Custom Time to retain the value after resetting the timer.\n* Custom Timer can no longer be edited once the Start or Pause buttons have been pressed, but the Custom Time can still be locked or edited upon timer reset.\n* Added a picture to the Switch Theme button.\n* Reworked the Theme and Browser notification settings visually."
+        },
+        {
+            version: "v0.17.0",
+            date: "2026-08-15",
+            notes: "* Added the Overtime system under the Custom Timer Settings.\n* Overtime can only run once per timer reset!\n* Improved the design of the checkboxes."
+        },
+        {
+            version: "v0.17.1",
+            date: "2026-08-15",
+            notes: "* Removed the Overtime timer from being automatically enabled for some games."
+        },
+        {
+            version: "v0.17.2",
+            date: "2026-08-15",
+            notes: "* Fixed an issue where non-color variables were not working with the theme switching.\n* Fixed an issue where the favicon for iOS web app shortcuts was not working."
+        },
+        {
+            version: "v0.17.3",
+            date: "2026-08-24",
+            notes: "* Changed the timer notifcation to display the full name of the game instead of a progromatic shorthand id.\n* Changed the active color for the buttons so that they are more obvious when enabled.\n* Added timer specific notification icons.\n* Minified the javascript. Uncertain why I didn't do this earlier."
         }
     ];
 

@@ -1,6 +1,7 @@
 images/*
 music/*
 dev/*
+json/*
 robots.txt
 favicon.ico
 favicon_store.ico
@@ -13,4 +14,8 @@ blog/*
 CERTS/*
 fonts/*
 TEST_TIMER.HTML
-json/test_timer.js
+timer.html
+style_timer-min.css
+style_timer.css
+style_timer-test.css
+timerfs.html
