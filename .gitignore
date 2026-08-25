@@ -11,6 +11,7 @@ mobile/images/*
 webcomic/img/*
 OLD/*
 blog/*
+blog/.obsidian/*
 CERTS/*
 fonts/*
 TEST_TIMER.HTML
