@@ -1,7 +1,7 @@
 images/*
 music/*
 dev/*
-json/*
+json/test_timer.js
 robots.txt
 favicon.ico
 favicon_store.ico
