@@ -1,3 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, viewport-fit=cover">
+    <meta name="color-scheme" content="light">
+    <!-- Page Title -->
+    <title>NaklWilson — Tourney Timers</title>
+    <meta name="description" content="Free web-based timer made for TCG games.">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <!-- Current Page's URL -->
+    <link rel="canonical" href="https://www.naklwilson.net/timer">
+    <link rel="alternate" href="https://www.naklwilson.net/timer" hreflang="x-default">
+    <link rel="alternate" href="https://www.naklwilson.net/timer" hreflang="en">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="NaklWilson — Tourney Timers">
+    <meta property="og:description" content="Free web-based timer made for TCG games.">
+    <meta property="og:url" content="https://www.naklwilson.net">
+    <meta property="og:image" content="https://www.naklwilson.net/images/meta_image.webp">
+    <meta property="og:image:alt"
+        content="The logo for the NaklWilson website sporting two capital letters; N and W with a computer mouse cursor soaring in between them towards the screen.">
+    <meta property="og:site_name" content="NaklWilson">
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="NaklWilson — Tourney Timer">
+    <meta name="twitter:description" content="Free web-based timer made for TCG games.">
+    <meta name="twitter:image" content="https://www.naklwilson.net/images/meta_image.webp">
+    <meta name="twitter:site" content="@NaklsonofNakkl">
+    <!-- Favicons -->
+    <link rel="icon" type="image/png" href="./images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.ico" />
+    <link rel="shortcut icon" href="./images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="NW Tourney Timer" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="manifest" href="./images/favicon/site.webmanifest" />
+    <meta name="author" content="NaklsonofNakkl">
+    <meta name="theme-color" content="#6a1480">
+    <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_border.webp" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_sub.webp" type="image/webp">
+    <meta http-equiv="Cache-control" content="max-age=604800, must-revalidate">
+    <meta name="theme-color" content="#fff" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
+    <link type="application/json+oembed" href="https://naklwilson.net/json/embed_info.json" />
+    <style>
         :root {
             color-scheme: light dark;
             --bg-color: light-dark(#6abaf0, #111213);
@@ -538,3 +584,202 @@
             scrollbar-width: auto;
         }
         }
+    </style>
+</head>
+<body class="timers-container" style="-webkit-user-select:none;user-select:none;" unselectable="on"
+    id="timers-container">
+    <div class="column column-1">
+        <div class="navbar-wrapper section-block-nav">
+            <nav class="navbar-sm-container c1-row1" id="normal-navbar">
+                <button class="btn-52 nav-sm-btn" id="nt" data-action="toggle" data-target="nt">
+                    <picture class="logo-picture-sm">
+                        <img class="logo-button-new" src=".\images\tcg_timer\ui\add.webp" alt="New Timer" width="32px"
+                            height="32px">
+                    </picture>
+                </button>
+                <div id="TimerTooltip" popover="hint">
+                    Create Timer
+                </div>
+                <button class="btn-52 nav-sm-btn" id="set" data-action="toggle" data-target="set">
+                    <picture class="logo-picture-sm">
+                        <img class="logo-button-set" src=".\images\tcg_timer\ui\settings.webp" alt="Settings"
+                            width="32px" height="32px">
+                    </picture>
+                </button>
+                <div id="SettingsTooltip" popover="hint">
+                    Settings Menu
+                </div>
+                <button class="btn-52 nav-sm-btn" id="close" data-action="close-timer">
+                    <picture class="logo-picture-sm">
+                        <img class="logo-button-del" src=".\images\tcg_timer\ui\delete.webp" alt="Close" width="32px"
+                            height="32px">
+                    </picture>
+                </button>
+                <div id="CloseTooltip" popover="hint">
+                    Close Timers
+                </div>
+            </nav>
+        </div>
+        <div id="timer-settings-container"></div>
+        <section id="timerScreen-nt" class="settingScreen-card section-block" hidden>
+            <div class="settings-container c1-row2">
+                <div id="gameTimer" class="label-button-cell">
+                    <label for="timerSelection" class="field-label">
+                        <h2>Choose a Timer:</h2>
+                    </label>
+                    <hr class="clean-line">
+                    <select id="timerSelection" name="Games">
+                        <option disabled selected value>-- Select a Game --</option>
+                        <option value="dm">Digimon</option>
+                        <option value="dbs">DragonBall Super Fusion</option>
+                        <option value="ff">Final Fantasy</option>
+                        <option value="fb">Flesh and Blood</option>
+                        <option value="ga">Grand Archive</option>
+                        <option value="gm">Gundam</option>
+                        <option value="lc">Lorcana</option>
+                        <option value="mg">Magic the Gathering</option>
+                        <option value="op">One Piece</option>
+                        <option value="pw">Palworld</option>
+                        <option value="pk">Pokémon</option>
+                        <option value="rb">Riftbound</option>
+                        <option value="ua">Union Arena</option>
+                        <option value="ws">Weiss Schwarz</option>
+                        <option value="yo">YuGiOh!</option>
+                    </select>
+                </div>
+                <div class="button-timer field-label">
+                    <button id="createBtn" class="button btn-52" data-action="choose-timer"
+                        data-select="timerSelection">
+                        <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\confirm.webp"
+                                alt="confirm">
+                    </button>
+                    <div id="CreateTooltip" popover="hint">
+                        Create the selected Timer
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="timerScreen-set" class="settingScreen-card section-block" hidden>
+            <label for="Settings">
+                <h2>Settings</h2>
+            </label>
+            <hr class="clean-line">
+            <div class="timers-container c1-row2">
+                <div id="settingsTimer">
+                    <div class="settings-area">
+                        <div class="settings-theme-switcher settings-button-container label-button-cell">
+                            <label id="themeLabel" for="theme" class="settings-label field-label">
+                                Switch Themes:
+                            </label>
+                            <button class="nav-set-btn settings-control btn-52" id="themeBtn" data-action="toggle"
+                                data-target="theme">
+                                <picture class="logo-picture-sm">
+                                    <img class="logo-button-theme" src=".\images\tcg_timer\ui\light.webp" alt="Theme"
+                                        width="32px" height="32px">
+                                </picture>
+                            </button>
+                            <div id="ThemeTooltip" popover="hint">
+                                Switch Themes
+                            </div>
+                        </div>
+                        <div class="settings-notification-alarm settings-button-container label-button-cell">
+                            <label id="notiLabel" for="notiBtn" class="settings-label field-label">Browser
+                                Notifications:</label>
+                            <button class="nav-set-btn settings-control btn-52" id="notiBtn" data-action="toggle"
+                                data-target="noti" aria-pressed="false">
+                                <picture class="logo-picture-sm">
+                                    <img class="logo-button-notify" src=".\images\tcg_timer\ui\notify.webp"
+                                        alt="Notifications" width="32px" height="32px">
+                                </picture>
+                            </button>
+                            <div id="NotiTooltip" popover="hint">
+                                Browser Notifications:
+                            </div>
+                        </div>
+                        <div class="settings-accessibility-tips settings-button-container label-button-cell">
+                            <label id="acsLabel" for="acsBtn" class="settings-label field-label">Accessibility
+                                Mode:</label>
+                            <button class="nav-set-btn settings-control btn-52" id="acsBtn" data-action="toggle"
+                                data-target="access" aria-pressed="false">
+                                <picture class="logo-picture-sm">
+                                    <img class="logo-button-access" src=".\images\tcg_timer\ui\info.webp"
+                                        alt="Accessibility Mode" width="32px" height="32px">
+                                </picture>
+                            </button>
+                            <div id="AccessTooltip" popover="hint">
+                                Accessibility Mode:
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </section>
+        <div class="section-block" id="version-title">
+            <div id="button-container" class="c1-row2">
+                <img class="label-button-cell">
+                <hr class="clean-line">
+                <div class="label-button-cell" id="update">
+                    <div class="entry-header field-label">
+                        <h2>Version Notes:</h2>
+                        <h2 class="field-label entry-title" id="entry-title"></h2>
+                        <p class="field-label entry-subtitle" id="entry-subtitle"></p>
+                    </div>
+                    <div class="entry-description" id="entry-description"></div>
+                    <div class="entry-controls">
+                        <div class="item"><button id="PE">&larr; Prev</button></div>
+                        <div id="PrevTooltip" popover="hint">
+                            Previous Entry
+                        </div>
+                        <div class="item"><button id="report-btn">Report</button></div>
+                        <div id="ReportTooltip" popover="hint">
+                            Report Issue
+                        </div>
+                        <div class="item"><button id="RE">&rarr; Next</button></div>
+                        <div id="NextTooltip" popover="hint">
+                            Next Entry
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="column">
+        <div class="section-block-timer-nav">
+            <div class="c2-row1">
+                <nav class="navbar-container" id="navbar-container"></nav>
+            </div>
+        </div>
+        <div class="timers-container" id="timer-container" unselectable="on">
+        </div>
+    </div>
+    <div class="full-width-footer">
+        <span class="salt-wrap">
+            <img id="saltIcon" class="salt-icon" src="./images/tcg_timer/ui/salt.webp"
+                data-normal="./images/tcg_timer/ui/salt.webp" data-hover="./images/tcg_timer/ui/salt_hover.webp"
+                data-click="./images/tcg_timer/ui/salt_click.webp">
+        </span>
+        <p><a href="https://www.naklwilson.net">NaklWilson</a> © <span id="current-year"></span>
+            <br>
+            <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""
+                style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""
+                style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt=""
+                style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
+                src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
+                style="max-width: 1em;max-height:1em;margin-left: .2em;">
+        </p>
+        <div class="badge-container"> <a class="outra-link" aria-label="GitHub Repositiory" target="_blank"
+                href="https://github.com/naklsonofnakkl/NaklWilson"><img alt="GitHub Repo for this Website"
+                    src="./images/badges/github-export.webp" width="80px" height="15px"></a>
+            <a class="outra-link" aria-label="Ko-Fi Donation Page" target="_blank"
+                href="https://ko-fi.com/naklwilson"><img class="kofi" alt="Ko-Fi Donation Badge" width="80px"
+                    height="15px"></a>
+            <a class="outra-link" aria-label="Human Made - No AI" target="_blank"
+                href="https://madebyhuman.iamjarl.com/"><img alt="No AI Button" src="./images/badges/NO-AI-HUMAN.webp"
+                    width="80px" height="15px"></a>
+        </div>
+    </div>
+    <script src=".\json\test_timer.js"></script>
+</body>
+</html>
