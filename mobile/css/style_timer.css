@@ -34,8 +34,8 @@
     --indexnormaltext-color: light-dark(#ffffff, #c7c7c7);
     --indexofftext-color: light-dark(#ffffff, #ecedea);
     --indexofflinear: light-dark(linear-gradient(0deg, rgb(9, 25, 66) 0%, rgb(16, 59, 131) 6%), linear-gradient(0deg, rgba(20, 26, 31, 1) 0%, rgba(42, 46, 56, 1) 6%));
-    --themebg-image: light-dark(url(./images/tcg_timer/ui/theme_dark_bg.webp), url(./images/tcg_timer/ui/theme_light_bg.webp));
-    --kofi: light-dark(url(./images/badges/kofi_button_light.webp), url(./images/badges/kofi_button_dark.webp));
+    --themebg-image: light-dark(url(../images/tcg_timer/ui/theme_dark_bg.webp), url(../images/tcg_timer/ui/theme_light_bg.webp));
+    --kofi: light-dark(url(../images/badges/kofi_button_light.webp), url(../images/badges/kofi_button_dark.webp));
 }
 
 :root.light {
@@ -56,14 +56,14 @@ html {
 
 html.dark {
     --indexofflinear: linear-gradient(0deg, rgba(20, 26, 31, 1) 0%, rgba(42, 46, 56, 1) 6%);
-    --themebg-image: url(./images/tcg_timer/ui/theme_light_bg.webp);
-    --kofi: url(./images/badges/kofi_button_dark.webp);
+    --themebg-image: url(../images/tcg_timer/ui/theme_light_bg.webp);
+    --kofi: url(../images/badges/kofi_button_dark.webp);
 }
 
 html.light {
     --indexofflinear: linear-gradient(0deg, rgb(9, 25, 66) 0%, rgb(16, 59, 131) 6%);
-    --themebg-image: url(./images/tcg_timer/ui/theme_dark_bg.webp);
-    --kofi: url(./images/badges/kofi_button_light.webp);
+    --themebg-image: url(../images/tcg_timer/ui/theme_dark_bg.webp);
+    --kofi: url(../images/badges/kofi_button_light.webp);
 }
 
 h2,

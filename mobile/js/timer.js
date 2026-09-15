@@ -816,7 +816,7 @@ class GameTimer {
         this.iid = `${config.id}-${instanceNum}`;
         this.durationMs = ((config.defaultMin * 60) + config.defaultSec) * 1000;
         this.remainingMs = this.durationMs;
-        this.worker = new Worker('./json/timerWorker.js');
+        this.worker = new Worker('./js/timerWorker.js');
         this.isRunning = false;
         this.overtimeM = (config.overTime || 0) * 60;
         this.otOn = config.otOn || 'off';

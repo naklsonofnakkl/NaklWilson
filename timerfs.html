@@ -48,12 +48,22 @@
             border-color: #b72f2f !important;
             color: #b72f2f !important;
         }
+
+        #timer-name {
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #ddd;
+    margin-bottom: 6px;
+    min-height: 2.4rem;   /* reserves space so the clock doesn't jump when a name appears/disappears */
+}
     </style>
 </head>
 
 <body>
 
     <div id="game-title">Loading Game...</div>
+    <div id="timer-name"></div>
     <div id="timer">--:--</div>
 
     <script>
@@ -101,6 +111,7 @@
 
         const titleDisplay = document.getElementById('game-title');
         const clockDisplay = document.getElementById('timer');
+        const nameDisplay = document.getElementById('timer-name');
 
         // 2. Helper function to find or create the favicon link tag
         function changeFavicon(src) {
@@ -129,24 +140,28 @@
 
         const bc = new BroadcastChannel('tcg_timer_channel');
 
-        bc.onmessage = (event) => {
-            const { type, game, time, status, instance } = event.data;
-            const instanceMatches = activeInstance == null || String(instance) === activeInstance;
+bc.onmessage = (event) => {
+    const { type, game, time, status, instance, name } = event.data;
+    const instanceMatches = activeInstance == null || String(instance) === activeInstance;
 
-            if (type === 'UPDATE' && game === activeGame && instanceMatches) {
-                clockDisplay.textContent = time;
+    if (type === 'UPDATE' && game === activeGame && instanceMatches) {
+        clockDisplay.textContent = time;
 
-                if (status === "running") {
-                    clockDisplay.classList.add("is-running");
-                    clockDisplay.classList.remove("is-stopped");
-                } else if (status === "stopped") {
-                    clockDisplay.classList.remove("is-running");
-                    clockDisplay.classList.add("is-stopped");
-                } else if (status === "reset") {
-                    clockDisplay.classList.remove("is-running", "is-stopped");
-                }
-            }
-        };
+        const fallbackName = activeInstance ? `Timer ${activeInstance}` : '';
+        const displayName = name && name.trim() ? name : fallbackName;
+        nameDisplay.textContent = displayName;
+
+        if (status === "running") {
+            clockDisplay.classList.add("is-running");
+            clockDisplay.classList.remove("is-stopped");
+        } else if (status === "stopped") {
+            clockDisplay.classList.remove("is-running");
+            clockDisplay.classList.add("is-stopped");
+        } else if (status === "reset") {
+            clockDisplay.classList.remove("is-running", "is-stopped");
+        }
+    }
+};
     </script>
 </body>
 

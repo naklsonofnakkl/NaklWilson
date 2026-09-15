@@ -40,12 +40,12 @@
     <meta name="twitter:image" content="https://www.naklwilson.net/images/meta_image.webp">
     <meta name="twitter:site" content="@NaklsonofNakkl">
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
-    <link rel="shortcut icon" href="./favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="NaklWilson" />
-    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
     <meta name="author" content="NaklsonofNakkl">
     <meta name="theme-color" content="#6a1480">
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_border.webp" type="image/webp">
@@ -73,6 +73,8 @@
             <a class="intra-link" aria-label="art page" id="art" target="_blank"
                 href="https://webcomic.naklwilson.net/"></a><img alt="Art Navigation Button" src="./images/art.webp"
                 width="37px" height="8px">
+            <a class="intra-link" aria-label="Tourney Timer" id="timer" href="https://timer.naklwilson.net/"></a><img
+                alt="Tourney Timer Navigation Button" src="./images/timer.webp" width="26px" height="8px">
             <a class="intra-link" aria-label="webring" id="webring"
                 href="https://www.naklwilson.net/webring.html"></a><img alt="Webring Navigation Button"
                 src="./images/webring.webp" width="40px" height="8px">
@@ -86,86 +88,99 @@
 
         <main>
             <article>
-                <h1>
-                    <center>Work Inquires</center>
-                </h1>
-                <center>Select one of the buttons below to start a commission order!</center>
-                <br>
-                <div class="parent flex-parent">
-                    <div class="child flex-child" id="contactBannerStart" style="width: 45px;"></div>
-                    <div class="child flex-child" id="contactBannerContent"><a class="intra-link"
-                            aria-label="Twitch Layout" id="twitchlayout"
-                            href="mailto:work@naklwilson.net?&subject=Twitch Layout Commission"></a>
-                    </div>
-                    <div class="child flex-child" id="contactBannerContent"><img
-                            src="./images/layout/contact_collapse_screw.webp" id="screw"></div>
-                    <div class="child flex-child" id="contactBannerContent"><a class="intra-link"
-                            aria-label="Level Design" id="leveldesign"
-                            href="mailto:work@naklwilson.net?&subject=Level Design Commission"></a>
-                    </div>
-                    <div class="child flex-child" id="contactBannerEnd"></div>
-                </div>
-                <div class='parent flex-parent'>
-                    <div class='child flex-child'>
-                        <article style="width: auto;" id="commissioninfo">
-                            <!-- <center><img src="./images/layout/contact_twitch_layout_ad_icon.webp"></center> -->
-                            More details regarding Twitch Layout
-                            commissions coming soon!
-                        </article>
-                    </div>
-                    <div class='child flex-child'>
-                        <article style="width: auto;" id="commissioninfo">More details regarding Level Design
-                            commissions coming soon!
-                        </article>
-                    </div>
-                </div>
-                <div class="parent flex-parent">
-                    <div class="child flex-child" id="contactBannerStart" style="width: 45px;"></div>
-                    <div class="child flex-child" id="contactBannerContent"><a class="intra-link"
-                            aria-label="Profile Picture" id="profileicon"
-                            href="mailto:work@naklwilson.net?&subject=Profile Icon Commission"></a>
-                    </div>
-                    <div class="child flex-child" id="contactBannerContent"><img
-                            src="./images/layout/contact_collapse_screw.webp" id="screw"></div>
-                    <div class="child flex-child" id="contactBannerContent"><a class="intra-link" aria-label="Half-Body"
-                            id="halfbody" href="mailto:work@naklwilson.net?&subject=Half-Body Commission"></a>
-                    </div>
-                    <div class="child flex-child" id="contactBannerEnd"></div>
-                </div>
-                <div class='parent flex-parent'>
-                    <div class='child flex-child'>
-                        <article style="width: auto;" id="commissioninfo">
-                            More details regarding Profile Icon
-                            commissions coming soon!
-                        </article>
-                    </div>
-                    <div class='child flex-child'>
-                        <article style="width: auto;" id="commissioninfo">More details regarding Half-Body
-                            commissions coming soon!
-                        </article>
-                    </div>
-                </div>
-                <div class="parent flex-parent">
-                    <div class="child flex-child" id="contactBannerStart"></div>
+<div class="card">
+  <h1>Contact Form</h1>
+  <p class="subtitle">Fill out the form below and it will be sent to admin@naklwilson.net</p>
 
-                    <div class="child flex-child" id="contactBannerContent">
-                        <p class="commissionText">I will get back to you in the most timely manner as possible!</p>
-                    </div>
+  <form id="contactForm">
+    <label for="name">Name <span class="required">*</span></label>
+    <input type="text" id="name" name="name" required>
 
-                    <div class="child flex-child" id="contactBannerEnd"></div>
-                </div>
-                <div></div>
-            </article>
-            <article>
-                <h1>
-                    <center>Site Inquires</center>
-                </h1>
-                <p> Please use this button to send any issues/questions regarding the site.
-                </p>
-                <CENTER><a class="outra-link" aria-label="Site Inquiry" id="siteinquiry"
-                        href="mailto:admin@naklwilson.net?&subject=Site Inquiry"></a></CENTER>
-                <div></div>
-            </article>
+    <label for="reason">Reason for Report <span class="required">*</span></label>
+    <select id="reason" name="reason" required>
+      <option value="" disabled selected>Select a reason...</option>
+      <option value="Report Site Issue">Report Site Issue</option>
+      <option value="Commission Request" disabled>Commission Request</option>
+      <option value="Other">Other</option>
+    </select>
+
+    <!-- Report Site Issue fields -->
+    <div class="field-group" id="group-site-issue">
+      <div class="field">
+        <label for="affectedUrl">Affected URL</label>
+        <input type="url" id="affectedUrl" name="affectedUrl" placeholder="https://example.com/page">
+      </div>
+
+      <div class="field">
+        <label for="versionNumber">Version Number</label>
+        <input type="text" id="versionNumber" name="versionNumber" placeholder="e.g. 1.4.2">
+      </div>
+
+      <div class="field span-3">
+        <label for="issueDescription">Description of Issue</label>
+        <textarea id="issueDescription" name="issueDescription" placeholder="What went wrong?"></textarea>
+      </div>
+    </div>
+
+    <!-- Commission Request fields -->
+    <div class="field-group" id="group-commission">
+      <div class="field span-2">
+        <label>Preferred Payment Method</label>
+        <div class="payment-options">
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Venmo">
+            <span class="payment-badge badge-venmo">VENMO</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="PayPal">
+            <span class="payment-badge badge-paypal">PAYPAL</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Zelle">
+            <span class="payment-badge badge-zelle">ZELLE</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Revolut">
+            <span class="payment-badge badge-revolut">REVOLUT</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Cash App">
+            <span class="payment-badge badge-cashapp">CASH APP</span>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="paymentMethod" value="Chime">
+            <span class="payment-badge badge-chime">CHIME</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="field span-3">
+        <label for="budgetSlider">Budget Range ($1 – $1000)</label>
+        <div class="budget-row">
+          <input type="range" id="budgetSlider" min="1" max="1000" value="100">
+          <input type="number" id="budgetNumber" class="budget-number" min="1" max="1000" value="100">
+        </div>
+      </div>
+
+      <div class="field span-3">
+        <label for="commissionDescription">Description of Commission</label>
+        <textarea id="commissionDescription" name="commissionDescription" placeholder="Describe what you'd like commissioned"></textarea>
+      </div>
+    </div>
+
+    <!-- Other fields -->
+    <div class="field-group" id="group-other">
+      <div class="field span-3">
+        <label for="otherDescription">Description</label>
+        <textarea id="otherDescription" name="otherDescription" placeholder="Tell us more"></textarea>
+      </div>
+    </div>
+
+    <button class="outra-link" aria-label="Submit Form" type="submit">Submit</button>
+    <p class="note">Submitting opens your email client with the message pre-filled, addressed to admin@naklwilson.net.</p>
+  </form>
+</div>
+
         </main>
 
         <nav id="right-col">
@@ -209,9 +224,79 @@
             <button class="contact" onclick="document.getElementById('playaudio').pause()">⏸️</button>
         </div> --->
     </footer>
-    <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
+  <script>
+    const reasonSelect = document.getElementById('reason');
+  const groups = {
+    'Report Site Issue': document.getElementById('group-site-issue'),
+    'Commission Request': document.getElementById('group-commission'),
+    'Other': document.getElementById('group-other')
+  };
+
+  reasonSelect.addEventListener('change', () => {
+    Object.values(groups).forEach(g => g.classList.remove('active'));
+    const selected = groups[reasonSelect.value];
+    if (selected) selected.classList.add('active');
+  });
+
+  const budgetSlider = document.getElementById('budgetSlider');
+  const budgetNumber = document.getElementById('budgetNumber');
+
+  budgetSlider.addEventListener('input', () => {
+    budgetNumber.value = budgetSlider.value;
+  });
+
+  budgetNumber.addEventListener('input', () => {
+    let val = parseInt(budgetNumber.value, 10);
+    if (isNaN(val)) return;
+    if (val < 1) val = 1;
+    if (val > 1000) val = 1000;
+    budgetSlider.value = val;
+  });
+
+  budgetNumber.addEventListener('blur', () => {
+    let val = parseInt(budgetNumber.value, 10);
+    if (isNaN(val) || val < 1) val = 1;
+    if (val > 1000) val = 1000;
+    budgetNumber.value = val;
+    budgetSlider.value = val;
+  });
+
+  document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const name = document.getElementById('name').value.trim();
+    const reason = reasonSelect.value;
+
+    if (!name || !reason) {
+      alert('Please fill out your name and select a reason.');
+      return;
+    }
+
+    let subject = `${reason} - ${name}`;
+    let bodyLines = [`Name: ${name}`, `Reason: ${reason}`, ''];
+
+    if (reason === 'Report Site Issue') {
+      bodyLines.push(`Affected URL: ${document.getElementById('affectedUrl').value}`);
+      bodyLines.push(`Version Number: ${document.getElementById('versionNumber').value}`);
+      bodyLines.push(`Description of Issue: ${document.getElementById('issueDescription').value}`);
+    } else if (reason === 'Commission Request') {
+      const paymentInput = document.querySelector('input[name="paymentMethod"]:checked');
+      const payment = paymentInput ? paymentInput.value : '(none selected)';
+      bodyLines.push(`Preferred Payment Method: ${payment}`);
+      bodyLines.push(`Budget: $${budgetNumber.value}`);
+      bodyLines.push(`Description of Commission: ${document.getElementById('commissionDescription').value}`);
+    } else if (reason === 'Other') {
+      bodyLines.push(`Description: ${document.getElementById('otherDescription').value}`);
+    }
+
+    const mailto = `mailto:admin@naklwilson.net?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+    window.location.href = mailto;
+  });
+  window.addEventListener('pageshow', function () {
+  document.getElementById('contactForm').reset();
+});
 </script>
+<script src=".\json\holiday.js"></script>
 </body>
 
 </html>

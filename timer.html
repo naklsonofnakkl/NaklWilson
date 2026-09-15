@@ -49,6 +49,7 @@
         <link rel="stylesheet" href="style_timer-min.css">
     </noscript>
 </head>
+
 <body class="timers-container" style="-webkit-user-select:none;user-select:none;" unselectable="on"
     id="timers-container">
     <div class="column column-1">
@@ -93,6 +94,7 @@
                     <hr class="clean-line">
                     <select id="timerSelection" name="Games">
                         <option disabled selected value>-- Select a Game --</option>
+                        <option value="cp">Cyberpunk</option>
                         <option value="dm">Digimon</option>
                         <option value="dbs">DragonBall Super Fusion</option>
                         <option value="ff">Final Fantasy</option>
@@ -173,6 +175,18 @@
                                 Accessibility Mode:
                             </div>
                         </div>
+                        <div class="settings-mobile-version settings-button-container label-button-cell">
+                            <label id="mobLabel" for="mobBtn" class="settings-label field-label">Mobile Version:</label>
+                            <a href="https://m.naklwilson.net/timer" id="mobBtn" class="btn-52 mobBtn">
+                                <picture class="logo-picture-sm">
+                                    <img class="logo-button-access" src=".\images\tcg_timer\ui\mobile.webp"
+                                        alt="Mobile Version" width="32px" height="32px">
+                                </picture>
+                            </a>
+                            <div id="MobileTooltip" popover="hint">
+                                Mobile Version:
+                            </div>
+                        </div>
                     </div>
                 </div>
         </section>
@@ -221,28 +235,25 @@
                 data-normal="./images/tcg_timer/ui/salt.webp" data-hover="./images/tcg_timer/ui/salt_hover.webp"
                 data-click="./images/tcg_timer/ui/salt_click.webp">
         </span>
-        <p><a href="https://www.naklwilson.net">NaklWilson</a> © <span id="current-year"></span>
-            <br>
-            <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""
-                style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""
-                style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt=""
-                style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
-                style="max-width: 1em;max-height:1em;margin-left: .2em;">
-        </p>
-        <div class="badge-container"> <a class="outra-link" aria-label="GitHub Repositiory" target="_blank"
+        <div class="badge-container">
+            <a class="intra-link" aria-label="NaklWilson Homepage" target="_blank"
+                href="https://www.naklwilson.net"><img alt="NaklWilson Homepage Badge" class="naklwilson" width="80px"
+                    height="15px"></a>
+            <a class="outra-link" aria-label="Creative Commons License - by-nc-nd"
+                href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.en" target="_blank"><img
+                    alt="Creative Commons License" src="./images/badges/creative_commons_badge.webp" width="80px"
+                    height="15px"></a>
+            <a class="outra-link" aria-label="GitHub Repositiory" target="_blank"
                 href="https://github.com/naklsonofnakkl/NaklWilson"><img alt="GitHub Repo for this Website"
                     src="./images/badges/github-export.webp" width="80px" height="15px"></a>
-            <a class="outra-link" aria-label="Ko-Fi Donation Page" target="_blank"
-                href="https://ko-fi.com/naklwilson"><img class="kofi" alt="Ko-Fi Donation Badge" width="80px"
-                    height="15px"></a>
             <a class="outra-link" aria-label="Human Made - No AI" target="_blank"
                 href="https://madebyhuman.iamjarl.com/"><img alt="No AI Button" src="./images/badges/NO-AI-HUMAN.webp"
                     width="80px" height="15px"></a>
+            <a class="outra-link" aria-label="Ko-Fi Donation Page" target="_blank"
+                href="https://ko-fi.com/naklwilson"><img class="kofi" alt="Ko-Fi Donation Badge" width="80px"
+                    height="15px"></a>
         </div>
-    </div>
-    <script src=".\json\timer-min.js"></script>
+        <script src=".\json\timer-min.js"></script>
 </body>
+
 </html>

@@ -40,12 +40,12 @@
     <meta name="twitter:image" content="https://www.naklwilson.net/images/meta_image.webp">
     <meta name="twitter:site" content="@NaklsonofNakkl">
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
-    <link rel="shortcut icon" href="./favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="./images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="./images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="./images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./images/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="NaklWilson" />
-    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="manifest" href="./images/favicon/site.webmanifest" />
     <meta name="author" content="NaklsonofNakkl">
     <meta name="theme-color" content="#6a1480">
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_border.webp" type="image/webp">
@@ -162,10 +162,6 @@
             display: block;
         }
 
-        p {
-            text-indent: 40px;
-        }
-
         #social {
             background: url(./images/layout/social_icon.webp) no-repeat;
             margin: 15px auto 5px auto;
@@ -249,6 +245,129 @@
         #octoberDiv,
         #decemberDiv {
             display: none;
+        }
+
+        .entry-header {
+            width: 100%;
+            text-align: center;
+        }
+
+        .entry-title {
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        .entry-subtitle {
+            margin: 0.25rem 0 0;
+            font-weight: 400;
+            width: 80px;
+            height: 15px;
+            box-sizing: border-box;
+            background-color: #752194;
+            color: #FFFFFF;
+            border: 1px solid #FFFFFF;
+            outline: 1px solid #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: Silkscreen;
+            font-size: 8px;
+        }
+
+        .entry-description {
+            width: 100%;
+            height: 250px;
+            overflow-y: auto;
+            color: #FFFFFF;
+            background: #561350;
+            border: 2px solid #d77bba;
+            border-radius: 12px;
+            font-size: 1rem;
+            white-space: pre-wrap;
+            z-index: 1;
+            text-indent: 40px;
+        }
+
+        .entry-description::-webkit-scrollbar,
+        .mini-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .entry-description::-webkit-scrollbar-track,
+        .mini-grid::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .entry-description::-webkit-scrollbar-thumb,
+        .mini-grid::-webkit-scrollbar-track {
+            background: var(--border-color);
+            border-radius: 8px;
+        }
+
+        .entry-controls {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 3px;
+            margin-top: 5px;
+        }
+
+        button#PE {
+            height: 52px;
+            width: 52px;
+            background: #dedede;
+            content: url(./images/layout/prev.webp);
+        }
+
+        button#RE {
+            height: 52px;
+            width: 52px;
+            background: #dedede;
+            content: url(./images/layout/next.webp);
+        }
+
+        button#HM {
+            height: 52px;
+            width: 52px;
+            background: #dedede;
+            content: url(./images/layout/home.webp);
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        button#PE:disabled {
+            height: 52px;
+            width: 52px;
+            background: #dedede;
+            content: url(./images/layout/prev_disabled.webp);
+        }
+
+        button#HM:disabled {
+            height: 52px;
+            width: 52px;
+            background: #dedede;
+            content: url(./images/layout/home_disabled.webp);
+        }
+
+        button#RE:disabled {
+            height: 52px;
+            width: 52px;
+            background: #dedede;
+            content: url(./images/layout/next_disabled.webp);
+        }
+
+        .clean-line {
+            border: none;
+            height: 3px;
+            background-color: #d77bba;
+            width: 100%;
+            margin: 5px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -345,9 +464,8 @@
             <a class="intra-link" aria-label="art page" id="art" target="_blank"
                 href="https://webcomic.naklwilson.net/"></a><img alt="Art Navigation Button" src="./images/art.webp"
                 width="37px" height="8px">
-            <a class="intra-link" aria-label="Tourney Timer" id="timer"
-                href="https://timer.naklwilson.net/"></a><img alt="Tourney Timer Navigation Button"
-                src="./images/timer.webp" width="26px" height="8px">
+            <a class="intra-link" aria-label="Tourney Timer" id="timer" href="https://timer.naklwilson.net/"></a><img
+                alt="Tourney Timer Navigation Button" src="./images/timer.webp" width="26px" height="8px">
             <a class="intra-link" aria-label="webring" id="webring"
                 href="https://www.naklwilson.net/webring.html"></a><img alt="Webring Navigation Button"
                 src="./images/webring.webp" width="40px" height="8px">
@@ -386,39 +504,25 @@
                 <h1>
                     <center>Latest Updates</center>
                 </h1>
-                <center>
-                    <table style="margin: -15px;">
-                        <tr>
-                            <td><img src="./images/badges/Blog Dates/2026/2026-01-20.webp"
-                                    alt="Badge with the date January 20th 2026"
-                                    style="width: 80px; height: 15px; padding-right: 5px;"></td>
-                            <td>
-                                <h3>
-                                    Thematic Efficency
-                                </h3>
-                            </td>
-                        </tr>
-                    </table>
-
-                </center>
-                <p>
-                    As none of you may notice, the website has been given a signifigant performance improvement and a
-                    handful of various SEO and Accesibility updates. My hope is to maintain both the visual and the
-                    logistical vibe that reminisces early internet era websites. In order to achieve this I focused my
-                    efforts on speeding up the loading times of pages, particularly ones like <a href="./downloads.html"
-                        alt="Downloads Page Link" class="intra-link" aria-label="Downloads Page">Downloads</a> or <a
-                        href="./webring.html" alt="Webring Page Link" class="intra-link"
-                        aria-label="Webring page">Webring</a> which tend to be
-                    more dense with images. </p>
-                <p>
-                    I have also worked to do a visual overhaul of the <a href="./webring.html" alt="Webring Page Link"
-                        class="intra-link" aria-label="Webring page">Webring</a> page in order to give it a naudical
-                    theme to harken back to
-                    the Windows 95 'Underwater' screensaver with a touch of a modern flare! My goal this year is to
-                    further refine and enhance the theming of each page while also making sure load times are fast
-                    on even the slowest internet speeds available!
-                </p>
-
+                <div class="section-block" id="version-title">
+                    <div id="button-container" class="c1-row2">
+                        <div class="label-button-cell" id="update">
+                            <div class="entry-header field-label">
+                                <h2 class="field-label entry-title" id="entry-title"></h2>
+                                <center>
+                                    <p class="field-label entry-subtitle" id="entry-subtitle"></p>
+                                </center>
+                            </div>
+                            <hr class="clean-line">
+                            <div class="entry-description" id="entry-description"></div>
+                            <div class="entry-controls">
+                                <div class="item"><button id="PE"></button></div>
+                                <div class="item"><button id="HM"></button></div>
+                                <div class="item"><button id="RE"></button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </article>
         </main>
 
@@ -462,35 +566,8 @@
   <button class="home-cursor" onclick="document.getElementById('playaudio').pause()">⏸️</button>
 </div> --->
     </footer>
-    <script>
-        // JavaScript function to check the current month and display the correct div
-        function checkMonth() {
-            const currentMonth = new Date().getMonth(); // Get the current month (0 = January)
-            const octoberDiv = document.getElementById('octoberDiv');
-            const decemberDiv = document.getElementById('decemberDiv');
-
-            // Show October div and hide others
-            if (currentMonth === 9) { // October is month 9 (0-indexed)
-                octoberDiv.style.display = 'block';
-                decemberDiv.style.display = 'none';
-            }
-            // Show December div and hide others
-            else if (currentMonth === 11) { // December is month 11 (0-indexed)
-                decemberDiv.style.display = 'block';
-                octoberDiv.style.display = 'none';
-            }
-            // Hide both divs if not October or December
-            else {
-                octoberDiv.style.display = 'none';
-                decemberDiv.style.display = 'none';
-            }
-        }
-
-        // Call the function on page load
-        window.onload = checkMonth;
-
-        document.getElementById("year").textContent = new Date().getFullYear();
-    </script>
+    <script src=".\json\holiday.js"></script>
+    <script src=".\json\index_blog.js"></script>
 
 </body>
 

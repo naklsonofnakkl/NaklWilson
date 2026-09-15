@@ -20,7 +20,7 @@ NAKLWILSON TOURNEY TIMER (C) 2026
 5A - TIMER TEMPLATE
     5B - CUSTOM INCREMENT TIME FUNCTION
 6A - GAME TIMER
-    6B - TIMER BUTTONS AND ELEMENTS 
+    6B - TIMER BUTTONS AND ELEMENTS
     6C - BIND EVENT LISTENERS
     6D - WORKER TICK AND ALARM HANDLING
     6E - +5 MIN BUTTON
@@ -47,20 +47,21 @@ NAKLWILSON TOURNEY TIMER (C) 2026
 // GAME CONFIGURATION - 1A
 const gameConfigs = [
     { id: 'yo', title: 'YuGiOh!', defaultMin: 50, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/yugioh_icon.webp', logo: './images/tcg_timer/yugioh.webp' },
-    { id: 'op', title: 'One Piece', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/onepiece_icon.webp', logo: './images/tcg_timer/onepiece.webp' },
+    { id: 'op', title: 'One Piece', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'on', icon: './images/tcg_timer/onepiece_icon.webp', logo: './images/tcg_timer/onepiece.webp' },
     { id: 'rb', title: 'Riftbound', defaultMin: 60, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/riftbound_icon.webp', logo: './images/tcg_timer/riftbound.webp' },
-    { id: 'ua', title: 'Union Arena', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/unionarena_icon.webp', logo: './images/tcg_timer/unionarena.webp' },
-    { id: 'ga', title: 'Grand Archive', defaultMin: 60, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/grandarchive_icon.webp', logo: './images/tcg_timer/grandarchive.webp' },
-    { id: 'dm', title: 'Digimon', defaultMin: 45, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/digimon_icon.webp', logo: './images/tcg_timer/digimon.webp' },
+    { id: 'ua', title: 'Union Arena', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'on', icon: './images/tcg_timer/unionarena_icon.webp', logo: './images/tcg_timer/unionarena.webp' },
+    { id: 'ga', title: 'Grand Archive', defaultMin: 60, defaultSec: 0, overTime: 5, otOn: 'on', icon: './images/tcg_timer/grandarchive_icon.webp', logo: './images/tcg_timer/grandarchive.webp' },
+    { id: 'dm', title: 'Digimon', defaultMin: 45, defaultSec: 0, overTime: 5, otOn: 'on', icon: './images/tcg_timer/digimon_icon.webp', logo: './images/tcg_timer/digimon.webp' },
     { id: 'ws', title: 'Weiss Schwarz', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/weissschwarz_icon.webp', logo: './images/tcg_timer/weissschwarz.webp' },
     { id: 'dbs', title: 'DragonBall Super Fusion', defaultMin: 35, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/dragonballsuperfusion_icon.webp', logo: './images/tcg_timer/dragonballsuperfusion.webp' },
     { id: 'fb', title: 'Flesh and Blood', defaultMin: 55, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/fleshandblood_icon.webp', logo: './images/tcg_timer/fleshandblood.webp' },
     { id: 'lc', title: 'Lorcana', defaultMin: 50, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/lorcana_icon.webp', logo: './images/tcg_timer/lorcana.webp' },
-    { id: 'gm', title: 'Gundam', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'off', icon: './images/tcg_timer/gundam_icon.webp', logo: './images/tcg_timer/gundam.webp' },
+    { id: 'gm', title: 'Gundam', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'on', icon: './images/tcg_timer/gundam_icon.webp', logo: './images/tcg_timer/gundam.webp' },
     { id: 'mg', title: 'Magic the Gathering', defaultMin: 50, defaultSec: 0, otOn: 'off', icon: './images/tcg_timer/magicthegathering_icon.webp', logo: './images/tcg_timer/magicthegathering.webp' },
     { id: 'pk', title: 'Pokémon', defaultMin: 50, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/pokemon_icon.webp', logo: './images/tcg_timer/pokemon.webp' },
     { id: 'ff', title: 'Final Fantasy', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/finalfantasy_icon.webp', logo: './images/tcg_timer/finalfantasy.webp' },
-    { id: 'pw', title: 'Palworld', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/palworld_icon.webp', logo: './images/tcg_timer/palworld.webp' }
+    { id: 'pw', title: 'Palworld', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/palworld_icon.webp', logo: './images/tcg_timer/palworld.webp' },
+    { id: 'cp', title: 'Cyberpunk', defaultMin: 50, defaultSec: 0, overTime: 10, otOn: 'on', icon: './images/tcg_timer/cyberpunk_icon.webp', logo: './images/tcg_timer/cyberpunk.webp' }
 ];
 document.addEventListener('touchstart', (evt) => { });
 // SOUND FUNCTIONS - 2A
@@ -90,7 +91,7 @@ function toggleMute(idSuffix) {
     const imageFile = isMuted ? "mute.webp" : "unmute.webp";
     const altText = isMuted ? "Mute" : "Unmute";
     muteBtn.innerHTML = `
-        <picture class="ui-picture"> 
+        <picture class="ui-picture">
             <img class="ui-button" src="./images/tcg_timer/ui/${imageFile}" alt="${altText}">
         </picture>
     `;
@@ -132,16 +133,13 @@ function stopAllSounds() {
     });
 }
 // NAVIGATION SETTINGS - 3A
-//Accessibility Tooltip Function
+
+// Accessibility Tooltip Function
 function tooltipsEnabled() {
     const acsBtn = document.getElementById('acsBtn');
     return acsBtn ? acsBtn.classList.contains('active') : false;
 }
-document.getElementById('acsBtn').addEventListener('click', () => {
-    if (!tooltipsEnabled()) {
-        document.querySelectorAll('[popover]:popover-open').forEach(el => el.hidePopover());
-    }
-});
+
 // Generated Buttons (config.id)
 const TOOLTIP_MAP = [
     ['startBtn', 'StartTooltip'],
@@ -154,8 +152,14 @@ const TOOLTIP_MAP = [
     ['alarmBtn', 'AlarmTooltip'],
     ['tabBtn', 'TabTooltip'],
     ['muteBtn', 'MuteTooltip'],
-    ['lockCustom', 'LockTimeTooltip']
+    ['lockCustom', 'LockTimeTooltip'],
+    ['numBtn', 'NumTooltip'],
+    ['numsetBtn', 'NumSetTooltip'],
+    ['clearName', 'ClearNameTooltip'],
+    ['timerOT', 'OTTooltip'],
+    ['instanceCloseBtn', 'CloseInstanceTooltip']
 ];
+
 // Static Buttons
 const STATIC_TOOLTIP_MAP = [
     ['nt', 'TimerTooltip'],
@@ -173,8 +177,10 @@ const STATIC_TOOLTIP_MAP = [
     ['acsBtn', 'AccessTooltip'],
     ['PE', 'PrevTooltip'],
     ['report-btn', 'ReportTooltip'],
-    ['RE', 'NextTooltip']
+    ['RE', 'NextTooltip'],
+    ['mobBtn', 'MobileTooltip']
 ];
+
 function wireTooltip(elementId, tooltipId) {
     const element = document.getElementById(elementId);
     const tooltip = document.getElementById(tooltipId);
@@ -198,57 +204,120 @@ function wireTooltip(elementId, tooltipId) {
     element.addEventListener('pointerleave', hide);
     element.addEventListener('blur', hide);
 }
+
 function wireTimerTooltips(iid) {
     TOOLTIP_MAP.forEach(([btnPrefix, tooltipPrefix]) => {
         wireTooltip(`${btnPrefix}-${iid}`, `${tooltipPrefix}-${iid}`);
     });
 }
+
 function wireStaticTooltips() {
     STATIC_TOOLTIP_MAP.forEach(([elementId, tooltipId]) => {
         wireTooltip(elementId, tooltipId);
     });
 }
+
+function updateRow2Visibility(gameId, count) {
+    const ROW2_REVEAL_THRESHOLD = 2;
+    const showRow2 = count > ROW2_REVEAL_THRESHOLD;
+    document.getElementById(`timerCell-${gameId}-3`)?.toggleAttribute('hidden', !showRow2);
+    document.getElementById(`timerCell-${gameId}-4`)?.toggleAttribute('hidden', !showRow2);
+}
+
+function updateInstanceControlsVisibility(gameId, count) {
+    const showControls = count > 1;
+    document.getElementById(`instanceControlsA-${gameId}`)?.toggleAttribute('hidden', !showControls);
+    document.getElementById(`instanceControlsB-${gameId}`)?.toggleAttribute('hidden', !showControls);
+}
+
+function updateAddSecondButton(gameId, count) {
+    document.getElementById(`addSecondBtn-${gameId}`)?.toggleAttribute('hidden', count > 1);
+}
+
+function setVisibleCount(gameId, count) {
+    count = Math.max(1, Math.min(NUM_INSTANCES, count));
+    for (let i = 1; i <= NUM_INSTANCES; i++) {
+        const row = document.getElementById(`timerInstance-${gameId}-${i}`);
+        const tabBtn = document.getElementById(`tabBtn-${gameId}-${i}`);
+        const revealed = i <= count;
+        if (row) row.hidden = !revealed;
+        if (tabBtn) tabBtn.classList.toggle('timer-tab-active-view', revealed);
+    }
+    updateRow2Visibility(gameId, count);
+    updateInstanceControlsVisibility(gameId, count);
+    updateAddSecondButton(gameId, count);
+    updateCloseButtonVisibility(gameId, count);
+}
+
+function getVisibleCount(gameId) {
+    let count = 0;
+    for (let i = 1; i <= NUM_INSTANCES; i++) {
+        const row = document.getElementById(`timerInstance-${gameId}-${i}`);
+        if (row && !row.hidden) count = i;
+    }
+    return count || 1;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     wireStaticTooltips();
+
+    const acsBtn = document.getElementById('acsBtn');
+    if (acsBtn) {
+        acsBtn.addEventListener('click', () => {
+            if (!tooltipsEnabled()) {
+                document.querySelectorAll('[popover]:popover-open').forEach(el => el.hidePopover());
+            }
+        });
+    }
+
     // EXCLUSIVE VIEW MANAGER
     // Ensures only one of the 4 specified IDs is open. Defaults to 'version-title'.
     function updateExclusiveViews(viewToOpen) {
         const views = ['timer-settings-container', 'timerScreen-set', 'version-title', 'timerScreen-nt'];
-        let targetView = views.includes(viewToOpen) ? viewToOpen : 'version-title';
+        const targetView = views.includes(viewToOpen) ? viewToOpen : 'version-title';
+
         views.forEach(viewId => {
             const el = document.getElementById(viewId);
             if (!el) return;
+
             if (viewId === targetView) {
                 el.removeAttribute('hidden');
-            } else {
-                el.setAttribute('hidden', '');
-                
-                // Cleanup internal button active states when a view is forcibly hidden
-                if (viewId === 'timer-settings-container') {
-                    document.querySelectorAll('button[id^="timerBtn-"], button[id^="alarmBtn-"]').forEach(btn => {
-                        btn.classList.remove('active');
-                        if (btn.hasAttribute('aria-pressed')) btn.setAttribute('aria-pressed', 'false');
-                    });
-                    document.querySelectorAll('.timer-input-container, .sound-select-container').forEach(panel => {
-                        panel.setAttribute('hidden', '');
-                    });
-                } else if (viewId === 'timerScreen-nt') {
-                    ['nt', 'ntm'].forEach(id => {
-                        const btn = document.getElementById(id);
-                        if (btn) btn.classList.remove('active');
-                    });
-                } else if (viewId === 'timerScreen-set') {
-                    ['set', 'setm'].forEach(id => {
-                        const btn = document.getElementById(id);
-                        if (btn) btn.classList.remove('active');
-                    });
-                }
+                return;
+            }
+
+            el.setAttribute('hidden', '');
+
+            // Cleanup internal button/panel state when a view is forcibly closed
+            if (viewId === 'timer-settings-container') {
+                hideAllSettingsPanels();
+                clearSettingsButtonStates();
+            } else if (viewId === 'timerScreen-nt') {
+                ['nt', 'ntm'].forEach(id => document.getElementById(id)?.classList.remove('active'));
+            } else if (viewId === 'timerScreen-set') {
+                ['set', 'setm'].forEach(id => document.getElementById(id)?.classList.remove('active'));
             }
         });
     }
+
+    // Shared by every path that closes settings sub-panels (numBtn/Home/timerBtn/alarmBtn/
+    // and the forced-close path above) so all four stay in sync with each other.
+    function hideAllSettingsPanels() {
+        document.querySelectorAll('.timer-controls-container, .timer-input-container, .sound-select-container')
+            .forEach(panel => panel.setAttribute('hidden', ''));
+    }
+
+    function clearSettingsButtonStates() {
+        document.querySelectorAll('button[id^="numBtn-"], button[id^="numsetBtn-"], button[id^="timerBtn-"], button[id^="alarmBtn-"]')
+            .forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.hasAttribute('aria-pressed')) btn.setAttribute('aria-pressed', 'false');
+            });
+    }
+
     // Theme Function - 3B
     const root = document.documentElement;
     const themeLogo = document.querySelector(".logo-button-theme");
+
     function updateThemeLogo(theme) {
         if (themeLogo) {
             themeLogo.src = theme === "dark"
@@ -256,31 +325,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 : "./images/tcg_timer/ui/dark.webp";
         }
     }
+
     const storedTheme = localStorage.getItem("theme") || "dark";
     root.classList.remove("light", "dark");
     root.classList.add(storedTheme);
     updateThemeLogo(storedTheme);
+
     // instance reveal count (per game, timers 1-4) - 3C-prep
-    function setVisibleCount(gameId, count) {
-        count = Math.max(1, Math.min(NUM_INSTANCES, count));
-        for (let i = 1; i <= NUM_INSTANCES; i++) {
-            const row = document.getElementById(`timerInstance-${gameId}-${i}`);
-            const row2 = document.getElementById(`buttonsRow2-${gameId}-${i}`);
-            const tabBtn = document.getElementById(`tabBtn-${gameId}-${i}`);
-            const revealed = i <= count;
-            if (row) row.hidden = !revealed;
-            if (row2) row2.hidden = !revealed;
-            if (tabBtn) tabBtn.classList.toggle('timer-tab-active-view', revealed);
-        }
-    }
-    function getVisibleCount(gameId) {
-        let count = 0;
-        for (let i = 1; i <= NUM_INSTANCES; i++) {
-            const row = document.getElementById(`timerInstance-${gameId}-${i}`);
-            if (row && !row.hidden) count = i;
-        }
-        return count || 1;
-    }
+
     function setupInstanceTabs(config) {
         for (let n = 1; n <= NUM_INSTANCES; n++) {
             const btn = document.getElementById(`tabBtn-${config.id}-${n}`);
@@ -289,61 +341,86 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     gameConfigs.forEach(setupInstanceTabs);
+gameConfigs.forEach(config => {
+    const count = getVisibleCount(config.id);
+    updateRow2Visibility(config.id, count);
+    updateInstanceControlsVisibility(config.id, count);
+    updateAddSecondButton(config.id, count);
+    updateCloseButtonVisibility(config.id, count);
+});
+    gameConfigs.forEach(config => {
+    wireTooltip(`addSecondBtn-${config.id}`, `AddSecondTooltip-${config.id}`);
+});
+
     // toggle button function - 3C
     function toggleSection(targetId, buttonId, buttonElement) {
-        
+
         // NT and SET Exclusivity Block
         if (buttonId === 'nt' || buttonId === 'set' || buttonId === 'ntm' || buttonId === 'setm') {
             const showNt = buttonId === 'nt' || buttonId === 'ntm';
             const targetViewId = showNt ? 'timerScreen-nt' : 'timerScreen-set';
             const targetSection = document.getElementById(targetViewId);
-            
             const isAlreadyOpen = targetSection && !targetSection.hasAttribute('hidden');
+
             if (isAlreadyOpen) {
                 updateExclusiveViews('version-title');
             } else {
                 updateExclusiveViews(targetViewId);
-                const activeButtons = showNt ? ['nt', 'ntm'] : ['set', 'setm'];
-                activeButtons.forEach(id => {
-                    const btn = document.getElementById(id);
-                    if (btn) btn.classList.add('active');
-                });
+                const activeIds = showNt ? ['nt', 'ntm'] : ['set', 'setm'];
+                activeIds.forEach(id => document.getElementById(id)?.classList.add('active'));
             }
             return;
         }
+
         if (!targetId) return;
-        // TIMER SETTINGS Exclusivity Block
+
+        const isNumBtn = buttonId.startsWith('numBtn-');
+        const isNumSetBtn = buttonId.startsWith('numsetBtn-');
+        const isHomeBtn = buttonId.startsWith('Home-');
         const isTimerBtn = buttonId.startsWith('timerBtn-');
         const isAlarmBtn = buttonId.startsWith('alarmBtn-');
+
+        // numBtn — closes the entire settings drill-down, back to the mini-grid
+        if (isNumBtn || isNumSetBtn) {
+            hideAllSettingsPanels();
+            clearSettingsButtonStates();
+            updateExclusiveViews('version-title');
+            return;
+        }
+
+        // Home — steps back to timerControls specifically, from customTimer or soundTimer
+        if (isHomeBtn) {
+            hideAllSettingsPanels();
+            clearSettingsButtonStates();
+            document.getElementById(`timerControls-${targetId}`)?.removeAttribute('hidden');
+            updateExclusiveViews('timer-settings-container');
+            return;
+        }
+
+        // timerBtn / alarmBtn — open customTimer/soundTimer, hide timerControls + each other
         if (isTimerBtn || isAlarmBtn) {
             const sectionIdToToggle = isTimerBtn ? `customTimer-${targetId}` : `soundTimer-${targetId}`;
             const targetSection = document.getElementById(sectionIdToToggle);
             const isAlreadyOpen = targetSection && !targetSection.hasAttribute('hidden');
-            // Hide ALL individual timer and sound panels across all instances first
-            document.querySelectorAll('.timer-input-container, .sound-select-container').forEach(panel => {
-                panel.setAttribute('hidden', '');
-            });
-            // Remove active state and reset aria-pressed on ALL timer and alarm buttons
-            document.querySelectorAll('button[id^="timerBtn-"], button[id^="alarmBtn-"]').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.hasAttribute('aria-pressed')) {
-                    btn.setAttribute('aria-pressed', 'false');
-                }
-            });
+
+            hideAllSettingsPanels();
+            clearSettingsButtonStates();
+
             if (!isAlreadyOpen) {
                 updateExclusiveViews('timer-settings-container');
-                if (targetSection) targetSection.removeAttribute('hidden');
+                targetSection?.removeAttribute('hidden');
                 if (buttonElement) {
                     buttonElement.classList.add('active');
-                    if (buttonElement.hasAttribute('aria-pressed')) {
-                        buttonElement.setAttribute('aria-pressed', 'true');
-                    }
+                    if (buttonElement.hasAttribute('aria-pressed')) buttonElement.setAttribute('aria-pressed', 'true');
                 }
+                document.getElementById(`Home-${targetId}`)?.classList.add('active');
+                document.getElementById(`Home-${targetId}`)?.setAttribute('aria-pressed', 'true');
             } else {
                 updateExclusiveViews('version-title');
             }
             return;
         }
+
         let sectionIdToToggle = null;
         switch (buttonId) {
             case 'aboutBtn': sectionIdToToggle = 'about'; break;
@@ -351,51 +428,22 @@ document.addEventListener("DOMContentLoaded", () => {
             case 'infoBtn': sectionIdToToggle = 'info'; break;
             default: sectionIdToToggle = `timerScreen-${targetId}`; break;
         }
-        if (buttonId === 'infoBtn') {
-            const upSection = document.getElementById('update');
-            const abSection = document.getElementById('about');
-            if (upSection && !upSection.hasAttribute('hidden')) {
-                upSection.setAttribute('hidden', '');
-                const upBtn = document.getElementById('updateBtn');
-                if (upBtn) upBtn.classList.remove('active');
-            }
-            if (abSection && !abSection.hasAttribute('hidden')) {
-                abSection.setAttribute('hidden', '');
-                const abBtn = document.getElementById('aboutBtn');
-                if (abBtn) abBtn.classList.remove('active');
-            }
+
+        // About / Update / Info are mutually exclusive with each other
+        const ABOUT_GROUP = { aboutBtn: 'about', updateBtn: 'update', infoBtn: 'info' };
+        if (buttonId in ABOUT_GROUP) {
+            Object.entries(ABOUT_GROUP).forEach(([otherBtnId, otherSectionId]) => {
+                if (otherBtnId === buttonId) return;
+                const otherSection = document.getElementById(otherSectionId);
+                if (otherSection && !otherSection.hasAttribute('hidden')) {
+                    otherSection.setAttribute('hidden', '');
+                    document.getElementById(otherBtnId)?.classList.remove('active');
+                }
+            });
         }
-        if (buttonId === 'updateBtn') {
-            const inSection = document.getElementById('info');
-            const abSection = document.getElementById('about');
-            if (inSection && !inSection.hasAttribute('hidden')) {
-                inSection.setAttribute('hidden', '');
-                const inBtn = document.getElementById('infoBtn');
-                if (inBtn) inBtn.classList.remove('active');
-            }
-            if (abSection && !abSection.hasAttribute('hidden')) {
-                abSection.setAttribute('hidden', '');
-                const abBtn = document.getElementById('aboutBtn');
-                if (abBtn) abBtn.classList.remove('active');
-            }
-        }
-        if (buttonId === 'aboutBtn') {
-            const upSection = document.getElementById('update');
-            const inSection = document.getElementById('info');
-            if (inSection && !inSection.hasAttribute('hidden')) {
-                inSection.setAttribute('hidden', '');
-                const inBtn = document.getElementById('infoBtn');
-                if (inBtn) inBtn.classList.remove('active');
-            }
-            if (upSection && !upSection.hasAttribute('hidden')) {
-                upSection.setAttribute('hidden', '');
-                const upBtn = document.getElementById('updateBtn');
-                if (upBtn) upBtn.classList.remove('active');
-            }
-        }
+
         if (sectionIdToToggle) {
-            const targetSection = document.getElementById(sectionIdToToggle);
-            if (targetSection) targetSection.toggleAttribute('hidden');
+            document.getElementById(sectionIdToToggle)?.toggleAttribute('hidden');
         }
         if (buttonElement) {
             buttonElement.classList.toggle('active');
@@ -404,12 +452,15 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
     }
+
     // secondary button function - 3D
     document.addEventListener("click", (event) => {
         const btn = event.target.closest('[data-action], #themeBtn');
         if (!btn) return;
+
         const action = btn.dataset.action;
         const buttonId = btn.id;
+
         // Theme Toggle - 3E
         if (buttonId === "themeBtn") {
             const isDark = root.classList.contains("dark");
@@ -420,25 +471,14 @@ document.addEventListener("DOMContentLoaded", () => {
             updateThemeLogo(newTheme);
             return;
         }
+
         // Action Behaviors -3F
         switch (action) {
             case 'toggle': {
-                const targetId = btn.dataset.target || '';
-                toggleSection(targetId, buttonId, btn);
+                toggleSection(btn.dataset.target || '', buttonId, btn);
                 break;
             }
-            case 'add-instance': {
-                const gameId = btn.dataset.target;
-                if (!gameId) return;
-                setVisibleCount(gameId, getVisibleCount(gameId) + 1);
-                break;
-            }
-            case 'remove-instance': {
-                const gameId = btn.dataset.target;
-                if (!gameId) return;
-                setVisibleCount(gameId, getVisibleCount(gameId) - 1);
-                break;
-            }
+
             case 'choose-timer': {
                 const selectId = btn.dataset.select || 'timerSelection';
                 const selectElement = document.getElementById(selectId);
@@ -457,45 +497,58 @@ document.addEventListener("DOMContentLoaded", () => {
                     selectedOption.disabled = true;
                 }
                 selectElement.selectedIndex = 0;
-                updateExclusiveViews('version-title'); 
+                updateExclusiveViews('version-title');
+
                 const config = gameConfigs.find(c => c.id === selectedValue);
                 if (!config) {
                     console.error(`choose-timer: no gameConfigs entry for "${selectedValue}"`);
                     return;
                 }
                 createNavButton(config);
+                document.getElementById('timer-container')
+                    ?.appendChild(document.getElementById(`timerScreen-${config.id}`));
                 toggleSection(selectedValue, buttonId, btn);
-                btn.classList.toggle('active');
                 break;
             }
+
             case 'close-timer': {
                 const visibleScreens = document.querySelectorAll('[id^="timerScreen-"]:not([hidden])');
                 const selectElement = document.getElementById('timerSelection');
+
                 visibleScreens.forEach((screen) => {
                     const targetId = screen.id.replace('timerScreen-', '');
                     if (targetId === 'nt' || targetId === 'set') return;
-                    if (selectElement) {
-                        const optionToRestore = selectElement.querySelector(`option[value="${targetId}"]`);
-                        if (optionToRestore) {
-                            optionToRestore.hidden = false;
-                            optionToRestore.disabled = false;
-                        }
+
+                    const optionToRestore = selectElement?.querySelector(`option[value="${targetId}"]`);
+                    if (optionToRestore) {
+                        optionToRestore.hidden = false;
+                        optionToRestore.disabled = false;
                     }
+
                     removeNavButton(targetId);
                     screen.setAttribute('hidden', '');
                     setVisibleCount(targetId, 1);
+
                     for (let n = 1; n <= NUM_INSTANCES; n++) {
-                        const timer = GameTimer.registry.get(`${targetId}-${n}`);
-                        if (timer) timer.resetToDefault();
+                        GameTimer.registry.get(`${targetId}-${n}`)?.resetToDefault();
                     }
                 });
+                break;
+            }
+
+            case 'reveal-second': {
+                const gameId = btn.dataset.target;
+                if (!gameId) return;
+                setVisibleCount(gameId, 2);
                 break;
             }
         }
     });
 });
+
+
 const salt = document.getElementById('saltIcon');
-let saltClickCount = 0; 
+let saltClickCount = 0;
 function restartAnimation(el, className) {
     el.classList.remove(className);
     void el.offsetWidth;
@@ -514,14 +567,14 @@ salt.addEventListener('click', () => {
     restartAnimation(salt, 'pop');
     saltClickCount++;
     if (saltClickCount === 20) {
-        playSound('easterEgg'); 
-        
+        playSound('easterEgg');
+
         saltClickCount = 0;
     }
     if (!saltClickCount) {
-                    console.error(`STOP HITTING HIM!!`);
-                    return;
-                }
+        console.error(`STOP HITTING HIM!!`);
+        return;
+    }
 });
 salt.addEventListener('animationend', (e) => {
     if (e.animationName === 'shrink-grow') {
@@ -529,206 +582,239 @@ salt.addEventListener('animationend', (e) => {
         salt.src = salt.matches(':hover') ? salt.dataset.hover : salt.dataset.normal;
     }
 });
-// COPYRIGHT YEAR - 4A
-const currentYear = new Date().getFullYear();
-document.getElementById("current-year").textContent = currentYear;
 // TIMER TEMPLATE - 5A
 const NUM_INSTANCES = 4;
+
+// Timer Cell
 function createInstanceHTML(config, n) {
     const iid = `${config.id}-${n}`;
+    const closeLabel = n === 1 ? `Reset Timer ${n} for ${config.title}` : `Reset and Close Timer ${n} for ${config.title}`;
     return `
-        <div class="btn-row-32" id="timerInstance-${iid}"${n === 1 ? '' : ' hidden'}>
-            <picture class="data-game="${config.id} ui-picture timer-tab-idle${n === 1 ? ' timer-tab-active-view' : ''}"> <img class="ui-button" src="./images/tcg_timer/ui/timer_${n}.webp"
-                    alt="Timer_${n}" aria-label="Timer ${n} for ${config.title}"
-                    aria-describedby="TabTooltip-${iid}"></picture>
-        <div id="TabTooltip-${iid}" popover="hint">
-        ${config.title} Timer ${n}
-        </div>
-            <img class="grid-item item-1 logo" src="${config.icon}" style="max-height: 60px;">
-            <div id="timerDisplay-${iid}" class="grid-item item-2 timerDisplay">
+    <div class="timer-cell" id="timerCell-${iid}">
+        <div class="timer-cell-inner" id="timerInstance-${iid}"${n === 1 ? '' : ' hidden'}>
+            <button id="Home-${iid}" aria-pressed="false" class="timer-num-btn" data-action="toggle" data-target="${iid}">
+                <picture class="ui-picture">
+                    <img class="ui-button" src="./images/tcg_timer/ui/settings.webp"
+                         alt="Settings" aria-label="Timer ${n} controls for ${config.title}"
+                         aria-describedby="NumTooltip-${iid}">
+                </picture>
+            </button>
+            <div id="NumTooltip-${iid}" popover="hint" style="text-wrap: pretty;">
+            ${config.title} Timer ${n} Controls
+            </div>
+
+<button id="instanceCloseBtn-${iid}" class="timer-close-btn"${n === 1 ? '' : ' hidden'}
+        aria-label="${closeLabel}" aria-describedby="CloseInstanceTooltip-${iid}">
+                        <picture class="ui-picture">
+                    <img class="ui-button" src="./images/tcg_timer/ui/delete.webp" alt="Close">
+                </picture>
+            </button>
+            <div id="CloseInstanceTooltip-${iid}" popover="hint" style="text-wrap: pretty;">
+            ${closeLabel}
+            </div>
+
+            <img class="logo" src="${config.logo}">
+
+            <div id="timerDisplay-${iid}" class="timerDisplay">
+                <span id="timerName-${iid}" class="timer-name">Timer ${n}</span>
                 <h1 id="time-${iid}" class="time">
                 ${String(config.defaultMin).padStart(2, '0')}:${String(config.defaultSec).padStart(2, '0')}
                 </h1>
             </div>
-            <button id="startBtn-${iid}" class="btn-32 button">
-                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/start.webp"
-                        alt="start" aria-label="Start ${config.title}" aria-describedby="StartTooltip-${iid}"></picture>
-            </button>
-            <div id="StartTooltip-${iid}" popover="hint">
-            Start Timer for ${config.title}
+            <div id="timerOptions-${iid}" class="timerOptions">
+                <span class="timer-OT">OT</span>
+                <button type="button" id="timerOT-${iid}" class="otbutton"
+                        aria-pressed="${config.otOn === 'on'}"
+                        aria-label="Toggle Overtime for ${config.title} Timer ${n}"
+                        aria-describedby="OTTooltip-${iid}">
+                    <picture class="ui-picture">
+                        <img src="./images/tcg_timer/ui/setting_${config.otOn}.webp" id="timerOTIcon-${iid}" class="ui-button"
+                            alt="Overtime ${config.otOn === 'on' ? 'enabled' : 'disabled'}">
+                    </picture>
+                </button>
             </div>
-            <button id="stopBtn-${iid}" class="btn-32 button">
-                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/stop.webp"
-                        alt="start" aria-label="Stop ${config.title}" aria-describedby="StopTooltip-${iid}"></picture>
-            </button>
-            <div id="StopTooltip-${iid}" popover="hint">
-            Stop Timer for ${config.title}
+            <div id="OTTooltip-${iid}" popover="hint">
+                Toggle Overtime for ${config.title} Timer ${n}
             </div>
-            <button id="resetBtn-${iid}" class="btn-32 button">
-                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/reset.webp"
-                        alt="reset" aria-label="Reset ${config.title}" aria-describedby="ResetTooltip-${iid}"></picture>
-            </button>
-            <div id="ResetTooltip-${iid}" popover="hint">
-            Reset Timer for ${config.title}
-            </div>
-            <button id="openBtn-${iid}" class="btn-32 button">
-                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/chromecast.webp"
-                        alt="open" aria-describedby="OpenTooltip-${iid}"></picture>
-            </button>
-            <div id="OpenTooltip-${iid}" popover="hint">
-            Open FullScreen Timer for ${config.title}
-            </div>
-            <button id="addBtn-${iid}" class="btn-32 button">
-                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/increment.webp"
-                        alt="add" aria-describedby="AddTooltip-${iid}"></picture>
-            </button>
-            <div id="AddTooltip-${iid}" popover="hint">
-            Add Increment of Time for ${config.title}
-            </div>
-            <button id="subBtn-${iid}" class="btn-32 button">
-                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/decrement.webp"
-                        alt="sub" aria-describedby="SubTooltip-${iid}"></picture>
-            </button>
-            <div id="SubTooltip-${iid}" popover="hint">
-            Subtract Increment of Time for ${config.title}
-            </div>
-            <button id="timerBtn-${iid}" class="btn-32 button" data-action="toggle" data-target="${iid}">
-                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/custom.webp"
-                        alt="custom" aria-describedby="CustomTooltip-${iid}"></picture>
-            </button>
-            <div id="CustomTooltip-${iid}" popover="hint">
-            Custom Timer Settings for ${config.title}
-            </div>
-            <button id="alarmBtn-${iid}" class="btn-32 button" data-action="toggle" data-target="${iid}">
-                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/alarm.webp"
-                        alt="alarm" aria-describedby="AlarmTooltip-${iid}"></picture>
-            </button>
-            <div id="AlarmTooltip-${iid}" popover="hint">
-            Alarm Settings for ${config.title}
-            </div>
-            <button id="muteBtn-${iid}" class="btn-32 button" onclick="toggleMute('${iid}')">
-                <picture class="ui-picture">
-                    <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute" aria-describedby="MuteTooltip-${iid}">
-                </picture>
-            </button>
-            <div id="MuteTooltip-${iid}" popover="hint">
-            Mute Alarm for ${config.title}
-            </div>
-        </div>`;
+        </div>
+        ${n === 2 ? `
+        <button type="button" id="addSecondBtn-${config.id}" class="add-instance-btn"
+                data-action="reveal-second" data-target="${config.id}"
+                aria-label="Add a second timer for ${config.title}"
+                aria-describedby="AddSecondTooltip-${config.id}">
+            <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/add.webp" alt="Add"></picture>
+        </button>
+        <div id="AddSecondTooltip-${config.id}" popover="hint">
+        Add a second timer for ${config.title}
+        </div>` : ''}
+    </div>`;
 }
+
 function createInstanceControlsHTML(config) {
-    const tabsHTML = Array.from({ length: NUM_INSTANCES }, (_, i) => i + 1).map(t => `
+    const tabHTML = (start, end) => Array.from({ length: end - start + 1 }, (_, i) => start + i).map(t => `
         <button id="tabBtn-${config.id}-${t}"
                 class="btn-16 button timer-tab timer-tab-idle${t === 1 ? ' timer-tab-active-view' : ''}"
                 data-game="${config.id}" data-instance="${t}">
-            <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/timer_${t}.webp"
+            <picture class="ui-picture"> <img class="ui-button-timer-num" src="./images/tcg_timer/ui/timer_${t}.webp"
                     alt="Timer_${t}" aria-label="Timer ${t} for ${config.title}"
                     aria-describedby="TabTooltip-${config.id}-${t}"></picture>
         </button>
-        <div id="TabTooltip-${config.id}-${t}" popover="hint">
+        <div id="TabTooltip-${config.id}-${t}" popover="hint" style="text-wrap: pretty;">
         ${config.title} Timer ${t}
         </div>`).join('');
+
     return `
-        <div class="btn-row-16" id="instanceControls-${config.id}">
-            ${tabsHTML}
+        <div class="btn-row-16 tab-group tab-group-left" id="instanceControlsA-${config.id}" hidden>
+            ${tabHTML(1, 2)}
+        </div>
+        <div class="btn-row-16 tab-group tab-group-right" id="instanceControlsB-${config.id}" hidden>
+            ${tabHTML(3, 4)}
         </div>`;
 }
+
 function createSettingsHTML(config, n) {
     const iid = `${config.id}-${n}`;
     return `
+        <div class="section-block timer-controls-container" id="timerControls-${iid}" hidden>
+            <div class="area controls-area c1-row2">
+                ${createTimerSettingsNav(config, n, 'controls')}
+                <div class="input-group name-input-group" id="nameInputGroup-${iid}" hidden>
+                    <label for="nameInput-${iid}">
+                        <h2>Timer Name</h2>
+                    </label>
+                    <div class="name-input-row">
+                        <input type="text" id="nameInput-${iid}" maxlength="10"
+                            placeholder="Timer ${n}" class="incinput name-input"
+                            aria-label="Custom name for ${config.title} Timer ${n}">
+                        <button type="button" id="clearName-${iid}" class="clear-name-btn"
+                                aria-describedby="ClearNameTooltip-${iid}">
+                            <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/delete.webp"
+                                    alt="Clear Name" aria-label="Clear Name for ${iid}"></picture>
+                        </button>
+                    </div>
+                </div>
+                <div id="ClearNameTooltip-${iid}" popover="hint">
+                Clear the custom name for ${config.title} Timer ${n}
+                </div>
+                <hr class="clean-line">
+
+                <div class="btn-row-32">
+                    <button id="startBtn-${iid}" class="btn-32">
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/start.webp"
+                                alt="start" aria-label="Start ${config.title}" aria-describedby="StartTooltip-${iid}"></picture>
+                    </button>
+                    <div id="StartTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Start Timer for ${config.title}</div>
+
+                    <button id="stopBtn-${iid}" class="btn-32">
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/stop.webp"
+                                alt="stop" aria-label="Stop ${config.title}" aria-describedby="StopTooltip-${iid}"></picture>
+                    </button>
+                    <div id="StopTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Stop Timer for ${config.title}</div>
+
+                    <button id="resetBtn-${iid}" class="btn-32">
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/reset.webp"
+                                alt="reset" aria-label="Reset ${config.title}" aria-describedby="ResetTooltip-${iid}"></picture>
+                    </button>
+                    <div id="ResetTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Reset Timer for ${config.title}</div>
+
+                    <button id="timerBtn-${iid}" class="btn-32" data-action="toggle" data-target="${iid}">
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/custom.webp"
+                                alt="custom" aria-describedby="CustomTooltip-${iid}"></picture>
+                    </button>
+                    <div id="CustomTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Custom Timer Settings for ${config.title}</div>
+
+                    <button id="addBtn-${iid}" class="btn-32">
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/increment.webp"
+                                alt="add" aria-describedby="AddTooltip-${iid}"></picture>
+                    </button>
+                    <div id="AddTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Add Increment of Time for ${config.title}</div>
+
+                    <button id="subBtn-${iid}" class="btn-32">
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/decrement.webp"
+                                alt="sub" aria-describedby="SubTooltip-${iid}"></picture>
+                    </button>
+                    <div id="SubTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Subtract Increment of Time for ${config.title}</div>
+
+                    <button id="openBtn-${iid}" class="btn-32">
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/chromecast.webp"
+                                alt="open" aria-describedby="OpenTooltip-${iid}"></picture>
+                    </button>
+                    <div id="OpenTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Open FullScreen Timer for ${config.title}</div>
+
+                    <button id="alarmBtn-${iid}" class="btn-32" data-action="toggle" data-target="${iid}">
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/alarm.webp"
+                                alt="alarm" aria-describedby="AlarmTooltip-${iid}"></picture>
+                    </button>
+                    <div id="AlarmTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Alarm Settings for ${config.title}</div>
+
+                    <button id="muteBtn-${iid}" class="btn-32" onclick="toggleMute('${iid}')">
+                        <picture class="ui-picture">
+                            <img class="ui-button" src="./images/tcg_timer/ui/unmute.webp" alt="unmute" aria-describedby="MuteTooltip-${iid}">
+                        </picture>
+                    </button>
+                    <div id="MuteTooltip-${iid}" popover="hint" style="text-wrap: pretty;">Mute Alarm for ${config.title}</div>
+                </div>
+            </div>
+        </div>
+
         <div class="section-block timer-input-container" id="customTimer-${iid}" hidden>
-            <div class="area increment-area  c1-row2">
-            <div style="display: flex; justify-content: center;"> <img class="grid-item item-1 logo" src="${config.icon}" style="max-height: 60px;">
-            
-            <button
-                class="btn-52 button timer-tab"
-                data-game="${config.id}">
-            <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/timer_${n}.webp"
-                    alt="Timer_${n}" aria-label="Timer ${n} for ${config.title}"
-                    aria-describedby="TabTooltip-${iid}"></picture>
-        </button>
-        <div id="TabTooltip-${iid}" popover="hint">
-        ${config.title} Custom Timer Settings ${n}
-        </div>
-        </div>
-                <div class="input-group">
-                    <label for="numberIncrement-${iid}" class="label-button-cell">
-                        <h2>Increment Amount</h2>
-                        <center>
-                            <input type="text" id="numberIncrement-${iid}" inputmode="numeric" pattern="\\d*"
-                                   value="00:01" aria-label="Time in minutes and seconds" class="incinput">
-                            <input type="range" id="rangeIncrement-${iid}" min="0" max="300" value="59" step="5" class="incrange">
-                        </center>
-                    </label>
+            ${createTimerSettingsNav(config, n, 'ct')}
+
+            <div class="customtimer-grid">
+                <h2 id="incrementLabel-${iid}" class="ct-row-1">Increment Amount</h2>
+                <center class="ct-row-2">
+                    <input type="text" id="numberIncrement-${iid}" inputmode="numeric" pattern="\\d*"
+                           value="00:01" aria-labelledby="incrementLabel-${iid}" class="incinput">
+                </center>
+                <center class="ct-row-3">
+                    <input type="range" id="rangeIncrement-${iid}" min="0" max="300" value="59" step="5"
+                           aria-labelledby="incrementLabel-${iid}" class="incrange">
+                </center>
+
+                <h2 id="customTimerLabel-${iid}" class="ct-row-4">Custom Timer</h2>
+                <div class="dual-col-row ct-row-5">
+                    <input type="range" id="rangeCustom-${iid}" min="0" max="18000" value="69" step="5"
+                           aria-labelledby="customTimerLabel-${iid}" class="incrange">
+                    <button type="button" id="lockCustom-${iid}" class="toggle-btn" aria-pressed="false">
+                        <span class="switch"></span>
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/decline.webp"
+                                alt="Lock Custom Time" aria-label="Lock Custom Time for ${iid}"
+                                aria-describedby="LockTimeTooltip-${iid}"></picture>
+                    </button>
+                    <div id="LockTimeTooltip-${iid}" popover="hint" style="text-wrap: pretty;">
+                    Lock Custom Timer for ${config.title}
+                    </div>
                 </div>
-            </div>
-            <hr class="clean-line">
-            <div class="area customtimer-area">
-                <div class="input-group">
-                    <label for="numberCustom-${iid}">
-                        <h2>Custom Timer</h2>
-                        <center>
-                            <input type="text" id="numberCustom-${iid}" inputmode="numeric" pattern="\\d*"
-                                   value="00:01" aria-label="Time in minutes and seconds" class="incinput">
-                            <input type="range" id="rangeCustom-${iid}" min="0" max="18000" value="69" step="5" class="incrange">
-                        </center>
-                    </label>
+                <center class="ct-row-6">
+                    <input type="text" id="numberCustom-${iid}" inputmode="numeric" pattern="\\d*"
+                           value="00:01" aria-labelledby="customTimerLabel-${iid}" class="incinput">
+                </center>
+
+                <h2 id="overtimeLabel-${iid}" class="ct-row-7">Overtime Timer</h2>
+                <div class="dual-col-row ct-row-8">
+                    <input type="range" id="rangeOvertime-${iid}" min="0" max="18000" value="69" step="5"
+                           aria-labelledby="overtimeLabel-${iid}" class="incrange">
+                    <button type="button" id="overtimerActive-${iid}" class="toggle-btn" aria-pressed="false">
+                        <span class="switch"></span>
+                        <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/decline.webp"
+                                alt="Enable Overtime" aria-label="Enable Overtime for ${iid}"
+                                aria-describedby="LockOvertimeTooltip-${iid}"></picture>
+                    </button>
+                    <div id="LockOvertimeTooltip-${iid}" popover="hint" style="text-wrap: pretty;">
+                    Enable Overtime for ${config.title}
+                    </div>
                 </div>
-                <div class="customTimer-lock">
-                    <center>
-                        <button type="button" id="lockCustom-${iid}" class="button toggle-btn" aria-pressed="false">
-                            <span class="switch"></span>
-<picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/decline.webp"
-                    alt="Lock Custom Time" aria-label="Lock Custom Time for ${iid}"
-                    aria-describedby="LockTimeTooltip-${iid}"></picture>
-                        </button>
-                                <div id="LockTimeTooltip-${iid}" popover="hint" style="text-wrap: Pretty;">
-        Lock Custom Timer for ${config.title}
-        </div>
-                    </center>
-                </div>
-            </div>
-            <div class="area overtime-area">
-                <div class="input-group">
-                    <label for="numberOvertime-${iid}">
-                        <h2>Overtime Timer</h2>
-                        <center>
-                            <input type="text" id="numberOvertime-${iid}" inputmode="numeric" pattern="\\d*"
-                                   value="00:01" aria-label="Time in minutes and seconds" class="incinput">
-                            <input type="range" id="rangeOvertime-${iid}" min="0" max="18000" value="69" step="5" class="incrange">
-                        </center>
-                    </label>
-                </div>
-                <div class="overtime-enable">
-                    <center>
-                        <button type="button" id="overtimerActive-${iid}" class="button toggle-btn" aria-pressed="false">
-<span class="switch"></span>
-<picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/decline.webp"
-                    alt="Lock Custom Time" aria-label="Lock Custom Time for ${iid}"
-                    aria-describedby="LockOvertimeTooltip-${iid}"></picture>
-                        </button>
-                                <div id="LockOvertimeTooltip-${iid}" popover="hint" style="text-wrap: Pretty;">
-        Enable Overtime for ${config.title}
-        </div>
-                    </center>
-                </div>
+                <center class="ct-row-9">
+                    <input type="text" id="numberOvertime-${iid}" inputmode="numeric" pattern="\\d*"
+                           value="00:01" aria-labelledby="overtimeLabel-${iid}" class="incinput">
+                </center>
             </div>
         </div>
+
         <div class="section-block sound-select-container" id="soundTimer-${iid}" hidden>
             <div class="area alarm-area c1-row2">
-                        <div style="display: flex; justify-content: center;"> <img class="grid-item item-1 logo" src="${config.icon}" style="max-height: 60px;">
-            
-            <button
-                class="btn-52 button timer-tab"
-                data-game="${config.id}">
-            <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/timer_${n}.webp"
-                    alt="Timer_${n}" aria-label="Timer ${n} for ${config.title}"
-                    aria-describedby="TabTooltip-${iid}"></picture>
-        </button>
-        <div id="TabTooltip-${iid}" popover="hint">
-        ${config.title} Custom Alarm Settings ${n}
-        </div>
-        </div>
+                ${createTimerSettingsNav(config, n, 'st')}
+
                 <label for="soundSelect-${iid}">
                     <h2>Choose an alarm:</h2>
                 </label>
@@ -745,7 +831,7 @@ function createSettingsHTML(config, n) {
                     <option value="dragonball">Dragonball</option>
                 </select>
                 <div class="button-alarm">
-                    <button id="previewBtn-${iid}" class="btn-52 button" onclick="playSelectedSound('${iid}')" style="cursor:help;">
+                    <button id="previewBtn-${iid}" class="btn-52" onclick="playSelectedSound('${iid}')" style="cursor:help;">
                         <picture class="ui-picture"> <img class="ui-button"
                                 src="./images/tcg_timer/ui/test.webp" alt="preview"></picture>
                     </button>
@@ -760,7 +846,7 @@ function createTimerHTML(config) {
             <div class="c2-row2">
                 <div class="mini-grid" id="timerGroup-${config.id}">
                     ${Array.from({ length: NUM_INSTANCES }, (_, i) => i + 1)
-                        .map(n => createInstanceHTML(config, n)).join('')}
+            .map(n => createInstanceHTML(config, n)).join('')}
                     ${createInstanceControlsHTML(config)}
                 </div>
             </div>
@@ -771,9 +857,43 @@ function createNavButtonHTML(config) {
     return `
     <button class="btn-125 nav-btn active" id="${config.id}" data-action="toggle" data-target="${config.id}">
         <picture class="logo-picture">
-            <img class="logo-button" src="${config.logo}" alt="${config.id}">
+            <img class="logo-button" src="${config.icon}" alt="${config.id}">
         </picture>
     </button>`;
+}
+function createTimerSettingsNav(config, n, variant) {
+    const iid = `${config.id}-${n}`;
+    const isControls = variant === 'controls';
+    const suffix = `-${variant}`;
+
+    return `
+        <div class="timer-settings-nav">
+            <div class="nav-icon-wrap">
+                <img class="logo" src="${config.icon}">
+                <button id="numsetBtn${suffix}-${iid}" class="timer-num-btn small-num-btn"
+                        data-action="toggle" data-target="${iid}"
+                        ${isControls ? `aria-describedby="NumSetTooltip-${iid}"` : `aria-label="Back to ${config.title} Timer ${n} controls"`}>
+                    <picture class="ui-picture"> <img class="ui-button small-ui-button" src="./images/tcg_timer/ui/decline.webp"
+                            alt="Timer_${n}" aria-label="Timer ${n} for ${config.title}"></picture>
+                </button>
+                ${isControls ? `
+                <div id="NumSetTooltip-${iid}" popover="hint" style="text-wrap: pretty;">
+                ${config.title} Timer ${n} Controls
+                </div>` : ''}
+            </div>
+
+            <button id="Home${suffix}-${iid}" aria-pressed="false" class="btn-52" data-action="toggle" data-target="${iid}"><picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/home.webp"
+                                alt="Timer Settings" aria-label="Timer Settings for ${iid}"
+                                aria-describedby="NumTooltip-${iid}"></picture></button>
+
+            <div class="nav-col-3"${isControls ? '' : ' hidden'}>
+                ${isControls ? `
+                <button id="TimerName-${iid}" class="btn-52" aria-pressed="false">
+                <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/notes.webp"
+                                alt="Show Custom Timer Name" aria-label="Custom Timer Name for ${iid}"
+                                aria-describedby="customNameTimeTooltip-${iid}"></picture></button>` : ''}
+            </div>
+        </div>`;
 }
 function createNavButton(config) {
     const container = document.getElementById('navbar-container');
@@ -785,6 +905,12 @@ function createNavButton(config) {
     if (existing) return existing;
     container.insertAdjacentHTML('beforeend', createNavButtonHTML(config));
     return document.getElementById(config.id);
+}
+function updateCloseButtonVisibility(gameId, count) {
+    for (let i = 1; i <= NUM_INSTANCES; i++) {
+        const closeBtn = document.getElementById(`instanceCloseBtn-${gameId}-${i}`);
+        if (closeBtn) closeBtn.hidden = (i !== count);
+    }
 }
 function removeNavButton(gameId) {
     const btn = document.getElementById(gameId);
@@ -801,6 +927,7 @@ if (settingsContainer) {
             .map(n => createSettingsHTML(config, n)).join('');
     }).join('');
 }
+
 gameConfigs.forEach(config => {
     for (let n = 1; n <= NUM_INSTANCES; n++) {
         wireTimerTooltips(`${config.id}-${n}`);
@@ -824,6 +951,7 @@ function setToggleButtonState(el, isActive) {
     el.classList.toggle('active', isActive);
     el.setAttribute('aria-pressed', String(isActive));
 }
+
 // custom increment amount function - 5C
 function secondsToTimeString(totalSeconds, min = 1, max = 300) {
     const s = Math.max(min, Math.min(max, Math.round(totalSeconds)));
@@ -898,7 +1026,7 @@ class GameTimer {
         this.isRunning = false;
         this.overtimeM = (config.overTime || 0) * 60;
         this.otOn = config.otOn || 'off';
-        // Timer buttons and elements -6B    
+        // Timer buttons and elements -6B
         this.displayElement = document.getElementById(`time-${this.iid}`);
         this.startbutton = document.getElementById(`startBtn-${this.iid}`);
         this.stopbutton = document.getElementById(`stopBtn-${this.iid}`);
@@ -914,9 +1042,26 @@ class GameTimer {
         this.customIncrement = document.getElementById(`numberIncrement-${this.iid}`);
         this.notifications = document.getElementById(`notiBtn`);
         this.tabButton = document.getElementById(`tabBtn-${config.id}-${instanceNum}`);
+        this.nameInput = document.getElementById(`nameInput-${this.iid}`);
+        this.nameDisplay = document.getElementById(`timerName-${this.iid}`);
+        this.clearNameBtn = document.getElementById(`clearName-${this.iid}`);
+        this.timerNameBtn = document.getElementById(`TimerName-${this.iid}`);
+        this.nameInputGroup = document.getElementById(`nameInputGroup-${this.iid}`);
+        this.timerOTBtn = document.getElementById(`timerOT-${this.iid}`);
+        this.timerOTIcon = document.getElementById(`timerOTIcon-${this.iid}`);
+        this.instanceCloseBtn = document.getElementById(`instanceCloseBtn-${this.iid}`);
+        this.defaultName = `Timer ${this.instanceNum}`;
         if (!this.startbutton) {
             console.error(`GameTimer: missing startBtn for iid="${this.iid}" — check createInstanceHTML output matches this id.`);
         }
+        if (this.instanceCloseBtn) {
+    this.instanceCloseBtn.addEventListener('click', () => {
+        this.reset();
+        if (this.instanceNum > 1) {
+            setVisibleCount(this.config.id, this.instanceNum - 1);
+        }
+    });
+}
         GameTimer.registry.set(this.iid, this);
         GameTimer.initNotificationPermissionRequest(this.notifications);
         // Bind event listeners - 6C
@@ -1026,16 +1171,69 @@ class GameTimer {
             });
             this.numberCustom.addEventListener('blur', updateFromNumberBox);
         }
-        this.setupOvertimeSystem(config);
-        if (this.openbutton) {
-            this.openbutton.addEventListener('click', () => {
-                window.open(`timerfs.html?game=${this.config.id}&instance=${this.instanceNum}`, '_blank'); setTimeout(() => {
-                    this.broadcastState(this.isRunning ? 'running' : 'stopped');
-                }, 500);
+            this.setupOvertimeSystem(config);
+
+            if (this.timerOTBtn && this.overtimerActive) {
+                this.timerOTBtn.addEventListener('click', () => {
+                    const isOn = this.overtimerActive.classList.contains('active');
+                    setToggleButtonState(this.overtimerActive, !isOn);
+                    this.updateOTIcon();
+                });
+            }
+        //Custom Timer Name
+        if (this.nameInput && this.nameDisplay) {
+            const nameKey = `timerName-${this.iid}`;
+
+            const savedName = localStorage.getItem(nameKey);
+            if (savedName) {
+                this.nameInput.value = savedName;
+                this.nameDisplay.textContent = savedName;
+            }
+
+            const applyName = () => {
+                const value = this.nameInput.value.trim();
+                this.nameDisplay.textContent = value || this.defaultName;
+                if (value) {
+                    localStorage.setItem(nameKey, value);
+                } else {
+                    localStorage.removeItem(nameKey);
+                }
+                this.broadcastState(this.isRunning ? 'running' : 'stopped');
+            };
+
+            this.nameInput.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    applyName();
+                    this.nameInput.blur();
+                }
+            });
+            this.nameInput.addEventListener('blur', applyName);
+        }
+
+        if (this.clearNameBtn) {
+            this.clearNameBtn.addEventListener('click', () => {
+                this.clearName();
+                this.broadcastState(this.isRunning ? 'running' : 'stopped');
             });
         }
+
+        if (this.timerNameBtn && this.nameInputGroup) {
+            this.timerNameBtn.addEventListener('click', () => {
+                const nowVisible = this.nameInputGroup.hasAttribute('hidden');
+                if (nowVisible) {
+                    this.nameInputGroup.removeAttribute('hidden');
+                } else {
+                    this.nameInputGroup.setAttribute('hidden', '');
+                }
+                this.timerNameBtn.classList.toggle('active', nowVisible);
+                this.timerNameBtn.setAttribute('aria-pressed', String(nowVisible));
+            });
+        }
+
         this.renderTime(this.durationMs / 1000);
     }
+
+
     // fullscreen status - 6H
     broadcastState(status) {
         if (!this.bc) return;
@@ -1044,7 +1242,8 @@ class GameTimer {
             game: this.config.id,
             time: this.displayElement.textContent,
             status: status,
-            instance: this.instanceNum
+            instance: this.instanceNum,
+            name: this.nameDisplay ? this.nameDisplay.textContent : this.defaultName
         });
     }
     // Visual Time Update - 6I
@@ -1166,10 +1365,14 @@ class GameTimer {
         this.numberOvertime = document.getElementById(`numberOvertime-${this.iid}`);
         this.overtimerActive = document.getElementById(`overtimerActive-${this.iid}`);
         wireToggleButton(this.overtimerActive);
+
         this.overtimeUsed = false;
         if (this.overtimerActive) {
             setToggleButtonState(this.overtimerActive, this.otOn === 'on');
+            this.overtimerActive.addEventListener('click', () => this.updateOTIcon());
+            this.updateOTIcon();
         }
+
         if (!this.rangeOvertime || !this.numberOvertime) return;
         const rangeMin = Number(this.rangeOvertime.min) || 0;
         const rangeMax = Number(this.rangeOvertime.max) || 3600;
@@ -1218,6 +1421,15 @@ class GameTimer {
         console.log(`${this.iid} entering overtime: ${this.overtimeM}s`);
         return true;
     }
+
+updateOTIcon() {
+    if (!this.timerOTIcon || !this.overtimerActive) return;
+    const isOn = this.overtimerActive.classList.contains('active');
+    this.timerOTIcon.src = `./images/tcg_timer/ui/setting_${isOn ? 'on' : 'off'}.webp`;
+    this.timerOTIcon.alt = `Overtime ${isOn ? 'enabled' : 'disabled'}`;
+    if (this.timerOTBtn) this.timerOTBtn.setAttribute('aria-pressed', String(isOn));
+}
+
     // TAB STATUS - 6P
     updateTabStatus(status) {
         if (!this.tabButton) return;
@@ -1225,6 +1437,15 @@ class GameTimer {
         if (status === 'running') this.tabButton.classList.add('timer-tab-running');
         else if (status === 'stopped') this.tabButton.classList.add('timer-tab-stopped');
     }
+
+    // CLEAR TIMER NAME
+    clearName() {
+        if (this.nameInput) this.nameInput.value = '';
+        if (this.nameDisplay) this.nameDisplay.textContent = this.defaultName;
+        localStorage.removeItem(`timerName-${this.iid}`);
+    }
+
+
     // FULL RESET TO DEFAULTS - 6Q
     resetToDefault() {
         this.worker.postMessage({ cmd: 'stop' });
@@ -1255,6 +1476,7 @@ class GameTimer {
         if (this.overtimerActive) {
             setToggleButtonState(this.overtimerActive, this.config.otOn === 'on');
         }
+        this.updateOTIcon();
         // Apply the reverted duration as the active timer duration and re-render
         this.durationMs = defaultTotalSeconds * 1000;
         this.remainingMs = this.durationMs;
@@ -1265,6 +1487,7 @@ class GameTimer {
         this.timeElement.removeAttribute('is-stopped');
         this.timeElement.removeAttribute('is-running');
         this.updateTabStatus('reset');
+        this.clearName();
     }
 }
 const activeTimers = [];
@@ -1366,6 +1589,26 @@ gameConfigs.forEach(config => {
             version: "v0.19.0",
             date: "2026-09-08",
             notes: "* Changed the entire visuals of the desktop experience...in case you didn't notice.\n* Removed the 'Info Button' as the Accessibility feature replaces that purpose.\n* You can now punch Nakl...not that you want to...right?\n* Mute Alarm button has moved to the timer navigation bar.\n* Added a logo.\n* Old layout was converted into Mobile version."
+        },
+        {
+            version: "v0.19.1",
+            date: "2026-09-08",
+            notes: "* Added the ability to switch back to the mobile theme from the desktop version. (Mobile version will not get a switch because mobile browsers natively provide the option to switch to desktop view for any website)"
+        },
+        {
+            version: "v0.19.2",
+            date: "2026-09-10",
+            notes: "* Further improved the timer design.\n* Clicking the settings icon on the timer will open timer settings.\n* Imrpoved Logo thickness.\n* Added more badges to the footer for a cleaner asthetic.\n* Timers are now organized in the order in which you opened them.\n* Moved some colors around. \n* Fixed some issues with the settings navigation."
+        },
+        {
+            version: "v0.19.3",
+            date: "2026-09-11",
+            notes: "* Fixed the broken Home button.\n* Swapped the navbar and timer game icons.\n* Added a background to the timer name similar to the time.\n* Added a Overtime Status indicator to more easily identify if Overtime is enabled per timer."
+        },
+        {
+            version: "v0.19.4",
+            date: "2026-09-15",
+            notes: "* Visual changes to the exit button under timer settings.\n* Enlarged the game logo within timers.\n* Condensed the contents of the game timers to fit on smaller screens.\n* Made the OT button on the timer truly clickable.\n* Reworked the new timer function to look cleaner with only a single timer open.\n* Added the Cyberpunk TCG tourney settings."
         }
     ];
     let currentIndex = entries.length - 1;

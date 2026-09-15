@@ -40,12 +40,12 @@
     <meta name="twitter:image" content="https://www.naklwilson.net/images/meta_image.webp">
     <meta name="twitter:site" content="@NaklsonofNakkl">
     <!-- Favicons -->
-    <link rel="icon" type="image/png" href="./favicon/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/svg+xml" href="./favicon/favicon.svg" />
-    <link rel="shortcut icon" href="./favicon/favicon.ico" />
-    <link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/images/favicon/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="/images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="/images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-touch-icon.png" />
     <meta name="apple-mobile-web-app-title" content="NaklWilson" />
-    <link rel="manifest" href="./favicon/site.webmanifest" />
+    <link rel="manifest" href="/images/favicon/site.webmanifest" />
     <meta name="author" content="NaklsonofNakkl">
     <meta name="theme-color" content="#6a1480">
     <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_border.webp" type="image/webp">
@@ -73,6 +73,8 @@
             <a class="intra-link" aria-label="art page" id="art" target="_blank"
                 href="https://webcomic.naklwilson.net/"></a><img alt="Art Navigation Button" src="./images/art.webp"
                 width="37px" height="8px">
+            <a class="intra-link" aria-label="Tourney Timer" id="timer" href="https://timer.naklwilson.net/"></a><img
+                alt="Tourney Timer Navigation Button" src="./images/timer.webp" width="26px" height="8px">
             <a class="intra-link" aria-label="webring" id="webring"
                 href="https://www.naklwilson.net/webring.html"></a><img alt="Webring Navigation Button"
                 src="./images/webring.webp" width="40px" height="8px">
@@ -234,9 +236,7 @@
   <button class="home-cursor" onclick="document.getElementById('playaudio').pause()">⏸️</button>
  --->
     </footer>
-    <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
+    <script src=".\json\holiday.js"></script>
 </body>
 
 </html>
