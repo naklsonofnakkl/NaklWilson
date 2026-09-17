@@ -5,6 +5,7 @@
     color-scheme: light dark;
     --bg-color: light-dark(#6abaf0, #111213);
     --text-color: light-dark(#ffffff, #c7c7c7);
+    --smtext-color: light-dark(#ffffff, #000000);
     --card-color: light-dark(#2f6fb7, #1c1e20);
     --navbtn-color: light-dark(#1753b6, #50596c);
     --navbtnhover-color: light-dark(#1753b6, #3b82f6);
@@ -65,6 +66,13 @@ html {
         --themebg-image: url(./images/tcg_timer/ui/theme_dark_bg.webp);
         --kofi: url(./images/badges/kofi_button_light.webp);
     }
+}
+
+  @font-face {
+    font-family: 'Silkscreen';
+    src: url('./fonts/slkscr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
 
 /* ============================================================
@@ -424,12 +432,25 @@ label.field-label {
     align-items: center;
     justify-content: center;
     background: var(--plate-dark);
-    border: 2px dashed var(--border-color);
+    border: none;
     cursor: pointer;
+}
+
+.add-instance-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px dashed var(--border-color);
+    pointer-events: none;
 }
 
 .add-instance-btn:hover {
     background: var(--navbtnhover-color);
+}
+
+.add-instance-btn:hover::before {
+    animation: spin-360 1.4s linear infinite;
 }
 
 .timer-close-btn {
@@ -573,7 +594,7 @@ label.field-label {
 }
 
 /* ============================================================
-   CUSTOM TIMER PANEL — 9-row grid layout
+   TIMER SETTINGS PANEL — 9-row grid layout
    ============================================================ */
 .customtimer-grid {
     display: grid;
@@ -612,6 +633,7 @@ label.field-label {
 .timer-num-btn.active .ui-button {
     animation: spin-360 1.4s linear infinite;
 }
+
 
 /* ============================================================
    RANGE INPUT — customTimer panel
@@ -687,7 +709,7 @@ button {
     color: var(--text-color);
     border-radius: 6px;
 
-    &:active {
+    &.active {
         border-color: var(--navbtnactiveborder-color);
         background-color: var(--navbtnactive-color);
     }
@@ -792,8 +814,8 @@ button {
 
 .badge-container {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, auto) auto;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, auto) auto;
     gap: 5px;
 
 }
@@ -971,6 +993,23 @@ img.label-button-cell {
 
 .salt-icon.shake { animation: shake 0.4s ease; cursor: grab; }
 .salt-icon.pop   { animation: shrink-grow 0.35s ease; cursor: grabbing; }
+
+.sm-badge {
+    margin: 0.25rem 0 0;
+    font-weight: 400;
+    width: 80px;
+    height: 15px;
+    box-sizing: border-box;
+    background-color: var(--navbtn-color);
+    color: var(--text-color);
+    border: 1px solid var(--navborder-color);
+    outline: 1px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Silkscreen;
+    font-size: 8px;
+}
 
 /* ============================================================
    RESPONSIVE

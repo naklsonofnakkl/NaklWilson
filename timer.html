@@ -38,8 +38,9 @@
     <link rel="manifest" href="./images/favicon/site.webmanifest" />
     <meta name="author" content="NaklsonofNakkl">
     <meta name="theme-color" content="#6a1480">
-    <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_border.webp" type="image/webp">
-    <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_sub.webp" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="./images/tcg_timer/ui/logo_dark.webp" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="./images/tcg_timer/ui/logo_dark.webp" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="./images/tcg_timer/ui/salt.webp" type="image/webp">
     <meta http-equiv="Cache-control" content="max-age=604800, must-revalidate">
     <meta name="theme-color" content="#fff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
@@ -61,7 +62,7 @@
                             height="32px">
                     </picture>
                 </button>
-                <div id="TimerTooltip" popover="hint">
+                <div id="TimerTooltip" popover="hint" style="text-wrap: pretty;">
                     Create Timer
                 </div>
                 <button class="btn-52 nav-sm-btn" id="set" data-action="toggle" data-target="set">
@@ -70,7 +71,7 @@
                             width="32px" height="32px">
                     </picture>
                 </button>
-                <div id="SettingsTooltip" popover="hint">
+                <div id="SettingsTooltip" popover="hint" style="text-wrap: pretty;">
                     Settings Menu
                 </div>
                 <button class="btn-52 nav-sm-btn" id="close" data-action="close-timer">
@@ -79,7 +80,7 @@
                             height="32px">
                     </picture>
                 </button>
-                <div id="CloseTooltip" popover="hint">
+                <div id="CloseTooltip" popover="hint" style="text-wrap: pretty;">
                     Close Timers
                 </div>
             </nav>
@@ -118,7 +119,7 @@
                         <picture class="ui-picture"> <img class="ui-button" src=".\images\tcg_timer\ui\confirm.webp"
                                 alt="confirm">
                     </button>
-                    <div id="CreateTooltip" popover="hint">
+                    <div id="CreateTooltip" popover="hint" style="text-wrap: pretty;">
                         Create the selected Timer
                     </div>
                 </div>
@@ -143,36 +144,34 @@
                                         width="32px" height="32px">
                                 </picture>
                             </button>
-                            <div id="ThemeTooltip" popover="hint">
+                            <div id="ThemeTooltip" popover="hint" style="text-wrap: pretty;">
                                 Switch Themes
                             </div>
                         </div>
                         <div class="settings-notification-alarm settings-button-container label-button-cell">
                             <label id="notiLabel" for="notiBtn" class="settings-label field-label">Browser
                                 Notifications:</label>
-                            <button class="nav-set-btn settings-control btn-52" id="notiBtn" data-action="toggle"
-                                data-target="noti" aria-pressed="false">
-                                <picture class="logo-picture-sm">
-                                    <img class="logo-button-notify" src=".\images\tcg_timer\ui\notify.webp"
-                                        alt="Notifications" width="32px" height="32px">
+                            <button id="notiBtn" class="btn-52 nav-set-btn settings-control" data-action="toggle"
+                                    aria-pressed="false" aria-describedby="NotiTooltip">
+                                <picture class="ui-picture">
+                                    <img class="ui-button" src="./images/tcg_timer/ui/notify.webp" alt="Browser Notifications">
                                 </picture>
                             </button>
-                            <div id="NotiTooltip" popover="hint">
-                                Browser Notifications:
+                            <div id="NotiTooltip" popover="hint" style="text-wrap: pretty;">
+                                Browser Notifications
                             </div>
                         </div>
                         <div class="settings-accessibility-tips settings-button-container label-button-cell">
                             <label id="acsLabel" for="acsBtn" class="settings-label field-label">Accessibility
                                 Mode:</label>
-                            <button class="nav-set-btn settings-control btn-52" id="acsBtn" data-action="toggle"
-                                data-target="access" aria-pressed="false">
-                                <picture class="logo-picture-sm">
-                                    <img class="logo-button-access" src=".\images\tcg_timer\ui\info.webp"
-                                        alt="Accessibility Mode" width="32px" height="32px">
+                            <button id="acsBtn" class="btn-52 nav-set-btn settings-control" data-action="toggle"
+                                    aria-pressed="false" aria-describedby="AccessTooltip">
+                                <picture class="ui-picture">
+                                    <img class="ui-button" src="./images/tcg_timer/ui/info.webp" alt="Accessibility Mode">
                                 </picture>
                             </button>
-                            <div id="AccessTooltip" popover="hint">
-                                Accessibility Mode:
+                            <div id="AccessTooltip" popover="hint" style="text-wrap: pretty;">
+                                Accessibility Mode
                             </div>
                         </div>
                         <div class="settings-mobile-version settings-button-container label-button-cell">
@@ -183,8 +182,8 @@
                                         alt="Mobile Version" width="32px" height="32px">
                                 </picture>
                             </a>
-                            <div id="MobileTooltip" popover="hint">
-                                Mobile Version:
+                            <div id="MobileTooltip" popover="hint" style="text-wrap: pretty;">
+                                Mobile Version
                             </div>
                         </div>
                     </div>
@@ -203,15 +202,15 @@
                     <div class="entry-description" id="entry-description"></div>
                     <div class="entry-controls">
                         <div class="item"><button id="PE">&larr; Prev</button></div>
-                        <div id="PrevTooltip" popover="hint">
+                        <div id="PrevTooltip" popover="hint" style="text-wrap: pretty;">
                             Previous Entry
                         </div>
                         <div class="item"><button id="report-btn">Report</button></div>
-                        <div id="ReportTooltip" popover="hint">
+                        <div id="ReportTooltip" popover="hint" style="text-wrap: pretty;">
                             Report Issue
                         </div>
                         <div class="item"><button id="RE">&rarr; Next</button></div>
-                        <div id="NextTooltip" popover="hint">
+                        <div id="NextTooltip" popover="hint" style="text-wrap: pretty;">
                             Next Entry
                         </div>
                     </div>
@@ -230,12 +229,7 @@
         </div>
     </div>
     <div class="full-width-footer">
-        <span class="salt-wrap">
-            <img id="saltIcon" class="salt-icon" src="./images/tcg_timer/ui/salt.webp"
-                data-normal="./images/tcg_timer/ui/salt.webp" data-hover="./images/tcg_timer/ui/salt_hover.webp"
-                data-click="./images/tcg_timer/ui/salt_click.webp">
-        </span>
-        <div class="badge-container">
+                <div class="badge-container">
             <a class="intra-link" aria-label="NaklWilson Homepage" target="_blank"
                 href="https://www.naklwilson.net"><img alt="NaklWilson Homepage Badge" class="naklwilson" width="80px"
                     height="15px"></a>
@@ -246,6 +240,14 @@
             <a class="outra-link" aria-label="GitHub Repositiory" target="_blank"
                 href="https://github.com/naklsonofnakkl/NaklWilson"><img alt="GitHub Repo for this Website"
                     src="./images/badges/github-export.webp" width="80px" height="15px"></a>
+        </div>
+        <span class="salt-wrap">
+            <img id="saltIcon" class="salt-icon" src="./images/tcg_timer/ui/salt.webp"
+                data-normal="./images/tcg_timer/ui/salt.webp" data-hover="./images/tcg_timer/ui/salt_hover.webp"
+                data-click="./images/tcg_timer/ui/salt_click.webp">
+        </span>
+        <div class="badge-container">
+            <p class="sm-badge" id="current-year"></p>
             <a class="outra-link" aria-label="Human Made - No AI" target="_blank"
                 href="https://madebyhuman.iamjarl.com/"><img alt="No AI Button" src="./images/badges/NO-AI-HUMAN.webp"
                     width="80px" height="15px"></a>
