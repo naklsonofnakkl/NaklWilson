@@ -41,6 +41,7 @@
     <link rel="preload" fetchpriority="high" as="image" href="./images/tcg_timer/ui/logo_dark.webp" type="image/webp">
     <link rel="preload" fetchpriority="high" as="image" href="./images/tcg_timer/ui/logo_dark.webp" type="image/webp">
     <link rel="preload" fetchpriority="high" as="image" href="./images/tcg_timer/ui/salt.webp" type="image/webp">
+    <link rel="preload" fetchpriority="high" as="image" href="./images/tcg_timer/ui/salt_hover.webp" type="image/webp">
     <meta http-equiv="Cache-control" content="max-age=604800, must-revalidate">
     <meta name="theme-color" content="#fff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
@@ -93,25 +94,35 @@
                         <h2>Choose a Timer:</h2>
                     </label>
                     <hr class="clean-line">
-                    <select id="timerSelection" name="Games">
-                        <option disabled selected value>-- Select a Game --</option>
-                        <option value="cp">Cyberpunk</option>
-                        <option value="dm">Digimon</option>
-                        <option value="dbs">DragonBall Super Fusion</option>
-                        <option value="ff">Final Fantasy</option>
-                        <option value="fb">Flesh and Blood</option>
-                        <option value="ga">Grand Archive</option>
-                        <option value="gm">Gundam</option>
-                        <option value="lc">Lorcana</option>
-                        <option value="mg">Magic the Gathering</option>
-                        <option value="op">One Piece</option>
-                        <option value="pw">Palworld</option>
-                        <option value="pk">Pokémon</option>
-                        <option value="rb">Riftbound</option>
-                        <option value="ua">Union Arena</option>
-                        <option value="ws">Weiss Schwarz</option>
-                        <option value="yo">YuGiOh!</option>
-                    </select>
+                    <div class="custom-select-wrap" id="customSelectWrap">
+                        <select id="timerSelection" name="Games" style="display:none;">
+                            <option disabled selected value>-- Select a Game --</option>
+                            <option value="cp">Cyberpunk</option>
+                            <option value="dm">Digimon</option>
+                            <option value="dbs">DragonBall Super Fusion</option>
+                            <option value="ff">Final Fantasy</option>
+                            <option value="fb">Flesh and Blood</option>
+                            <option value="ga">Grand Archive</option>
+                            <option value="gm">Gundam</option>
+                            <option value="lc">Lorcana</option>
+                            <option value="mg">Magic the Gathering</option>
+                            <option value="nr">Naruto</option>
+                            <option value="op">One Piece</option>
+                            <option value="pw">Palworld</option>
+                            <option value="pk">Pokémon</option>
+                            <option value="rb">Riftbound</option>
+                            <option value="ua">Union Arena</option>
+                            <option value="ws">Weiss Schwarz</option>
+                            <option value="yo">YuGiOh!</option>
+                        </select>
+                        <button type="button" id="customSelectTrigger" class="custom-select-trigger"
+                                aria-haspopup="listbox" aria-expanded="false">
+                            <span id="customSelectLabel">-- Select a Game --</span>
+                            <span class="custom-select-arrow" aria-hidden="true">▾</span>
+                        </button>
+
+                        <ul id="customSelectList" class="custom-select-list" role="listbox" hidden></ul>
+                    </div>
                 </div>
                 <div class="button-timer field-label">
                     <button id="createBtn" class="button btn-52" data-action="choose-timer"
@@ -242,7 +253,7 @@
                     src="./images/badges/github-export.webp" width="80px" height="15px"></a>
         </div>
         <span class="salt-wrap">
-            <img id="saltIcon" class="salt-icon" src="./images/tcg_timer/ui/salt.webp"
+            <img id="saltIcon" width="64px" height="64px" class="salt-icon" src="./images/tcg_timer/ui/salt.webp"
                 data-normal="./images/tcg_timer/ui/salt.webp" data-hover="./images/tcg_timer/ui/salt_hover.webp"
                 data-click="./images/tcg_timer/ui/salt_click.webp">
         </span>
@@ -255,6 +266,7 @@
                 href="https://ko-fi.com/naklwilson"><img class="kofi" alt="Ko-Fi Donation Badge" width="80px"
                     height="15px"></a>
         </div>
+    </div>
         <script src=".\json\timer-min.js"></script>
 </body>
 

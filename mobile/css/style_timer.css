@@ -3,6 +3,7 @@
     color-scheme: light dark;
     --bg-color: light-dark(#6abaf0, #111213);
     --text-color: light-dark(#ffffff, #c7c7c7);
+    --smtext-color: light-dark(#ffffff, #000000);
     --card-color: light-dark(#2f6fb7, #1c1e20);
     --navbtn-color: light-dark(#1753b6, #50596c);
     --navbtnhover-color: light-dark(#1753b6, #3b82f6);
@@ -16,9 +17,9 @@
     --btnactive-color: light-dark(#3b82f6, #1753b6);
     --btn-color: light-dark(#919bb1, #50596c);
     --btnhover-color: light-dark(#4a4f5a, #979ca7);
-    --timerstop-color: light-dark(#b72f2f, #c44d4d);
-    --timerstopborder-color: light-dark(#791e1e, #e95b5b);
-    --timergo-color: light-dark(#43b72f, #5ec44d);
+    --timerstop-color: light-dark(#eb3939, #c44d4d);
+    --timerstopborder-color: light-dark(#791e1e, #791e1e);
+    --timergo-color: light-dark(#66e94f, #5ec44d);
     --border-color: light-dark(#e5e5e5, #979ca7);
     --timerborder-color: light-dark(#e5e5e5, #979ca7);
     --timerbg-color: light-dark(#1753b6, #50596c);
@@ -35,7 +36,15 @@
     --indexofftext-color: light-dark(#ffffff, #ecedea);
     --indexofflinear: light-dark(linear-gradient(0deg, rgb(9, 25, 66) 0%, rgb(16, 59, 131) 6%), linear-gradient(0deg, rgba(20, 26, 31, 1) 0%, rgba(42, 46, 56, 1) 6%));
     --themebg-image: light-dark(url(../images/tcg_timer/ui/theme_dark_bg.webp), url(../images/tcg_timer/ui/theme_light_bg.webp));
+    --logo: light-dark(url(../images/tcg_timer/ui/logo_light.webp), url(../images/tcg_timer/ui/logo_dark.webp));
     --kofi: light-dark(url(../images/badges/kofi_button_light.webp), url(../images/badges/kofi_button_dark.webp));
+    --plate: light-dark(#1753b6, #50596c);
+    --plate-dark: light-dark(#0e3063, #252b30);
+    --trim: light-dark(#6abaf0, #111213);
+    --trim-dim: light-dark(linear-gradient(0deg, rgb(9, 25, 66) 0%, rgb(16, 59, 131) 6%), linear-gradient(0deg, rgba(20, 26, 31, 1) 0%, rgba(42, 46, 56, 1) 6%));
+    --ink: light-dark(#ffffff, #c7c7c7);
+    --shadow: light-dark(#091942, #141a1f);
+    --glossborder: light-dark(#549fe1, #2f3b46);
 }
 
 :root.light {
@@ -74,6 +83,7 @@ p {
     text-align: center;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
         'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    margin: inherit;
 }
 
 a {
@@ -97,13 +107,24 @@ input {
         'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }
 
-.kofi {
-    content: var(--kofi);
+.kofi { content: var(--kofi); }
+.naklwilson  {
+    content: url(../images/badges/naklwilson_static.webp);
+    &:hover {
+        content: url(../images/badges/naklwilson.webp);
+    }
 }
 
 @font-face {
     font-family: 'ChocolateMono';
     src: url('./fonts/ChevyRay-Chocolate-Mono.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Silkscreen';
+    src: url('./fonts/slkscr.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
@@ -129,31 +150,22 @@ input {
 
 .settings-area {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto auto;
-    gap: 10px;
-    background: var(--indexofflinear);
-    background-color: var(--indexoffbg-color);
-    border: 2px solid var(--indexnormalbg-color);
-    border-radius: 16px;
-    padding: 25px;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: stretch;
+    gap: 16px 10px;
 }
 
 .settings-theme-switcher,
 .settings-notification-alarm,
-.settings-accessibility-tips {
+.settings-accessibility-tips,
+.settings-desktop-switcher {
     display: contents;
-    /* let their children become items of .settings-area */
 }
 
 .timerScreen-card {
     container-type: inline-size;
     container-name: card;
-    border: 5px solid var(--border-color);
+    border: 5px solid var(--plate);
     border-radius: 30px;
     background-color: var(--card-color);
     box-shadow: 10px 10px 50px rgba(128, 128, 128, 0.3);
@@ -163,7 +175,7 @@ input {
     padding: 0.5rem;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: repeat(5, minmax(60px, auto));
+    grid-template-rows: repeat(6, minmax(60px, auto));
     gap: 5px 5px;
     justify-items: center;
     width: inherit;
@@ -183,10 +195,11 @@ input {
     justify-content: space-between;
     container-type: inline-size;
     container-name: card;
-    border: 5px solid var(--border-color);
+    border: 5px solid var(--plate);
     border-radius: 30px;
     background-color: var(--card-color);
     box-shadow: 10px 10px 50px rgba(128, 128, 128, 0.3);
+    margin-bottom: 5px;
 }
 
 .timerDisplay {
@@ -205,7 +218,7 @@ input {
     border-radius: 50%;
     font-weight: bold;
     transition: transform 330ms ease-in-out;
-    margin-bottom: 5%;
+    margin: 5px;
 }
 
 .timerDisplay[is-running] {
@@ -231,12 +244,11 @@ input {
     align-self: center;
 }
 
-.timer-input-container,
 .sound-select-container,
 .timer-selection-container,
 .timer-settings-container {
-    background-color: var(--navbtn-color);
-    border: 2px solid var(--indexnormalbg-color);
+    background-color: var(--plate);
+    border: 2px solid transparent;
     color: var(--text-color);
     padding: 1rem;
     width: 100%;
@@ -244,18 +256,41 @@ input {
     max-width: 250px;
     border-radius: 30px;
     display: flex;
-    gap: 15px;
+    gap: 16px;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     align-content: start;
+            box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.timer-input-container {
+    background-color: var(--plate);
+    border: 2px solid transparent;
+    color: var(--text-color);
+    padding: 1rem;
+    width: 100%;
+    min-width: 150px;
+    max-width: 260px;
+    border-radius: 30px;
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    align-content: start;
+        box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .about-container,
 .update-container,
 .info-container {
     background-color: var(--navbtn-color);
-    border: 5px solid var(--border-color);
+    border: 5px solid transparent;
     color: var(--text-color);
     padding: 1rem;
     width: 100%;
@@ -270,6 +305,16 @@ input {
     grid-template-columns: 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px 10px;
+        box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.sm-badge-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(1, auto) auto;
+    gap: 5px;
 }
 
 .entry-header {
@@ -298,13 +343,16 @@ input {
     overflow-y: auto;
     background: var(--indexoffbg-color);
     background: var(--indexofflinear);
-    border: 2px solid var(--indexnormalbg-color);
+    border: 2px solid transparent;
     border-radius: 12px;
     padding: 0.75rem;
     font-size: 0.9rem;
     line-height: 1.5;
     white-space: pre-wrap;
     z-index: 1;
+    box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .entry-description::-webkit-scrollbar {
@@ -378,14 +426,14 @@ input {
 
 .input-group label {
     font-size: 0.85rem;
-    margin-bottom: 5px;
+    margin: inherit;
     font-weight: bold;
 }
 
 .input-group input {
     padding: 8px;
     border: 1px solid var(--border-color);
-    border-radius: 2px;
+    border-radius: 4px;
     text-align: center;
 }
 
@@ -422,8 +470,6 @@ input {
 }
 
 .button {
-    border: 2px solid var(--border-color);
-    background-color: var(--btn-color);
     font-family: 'Courier New', Courier, monospace;
     color: var(--text-color);
     font-size: 18px;
@@ -436,9 +482,14 @@ input {
     border-radius: 6px;
 }
 
+.button.ui {
+    border: 2px solid var(--border-color);
+    background-color: var(--btn-color);
+}
+
 .button:hover {
     color: var(--bg-color);
-    background-color: var(--btnhover-color);
+    background-color: var(--navbtnactive-color);
     border: 2px solid var(--navbtn-color);
 }
 
@@ -483,7 +534,9 @@ input {
 }
 
 .logo-button-theme,
-.logo-button-notify {
+.logo-button-notify,
+.logo-button-desktop,
+.logo-button-acs {
     aspect-ratio: 1/1;
     margin: -11px;
     transition: transform 15s;
@@ -492,7 +545,7 @@ input {
 .logo-button-set {
     aspect-ratio: 1/1;
     margin: -11px;
-    transition: transform 5s;
+    background-color: transparent;
 }
 
 .logo {
@@ -516,6 +569,24 @@ input {
     color: var(--timerstop-color);
 }
 
+.toggle-btn {
+    width: 100%;
+    height: 52px;
+    background: var(--navbtn-color);
+    border-radius: 5px;
+    border: 2px solid var(--navborder-color);
+    margin: inherit;
+
+    &.active {
+        background: var(--btnspace-color);
+        border: 2px solid var(--timergo-color);
+
+        .ui-button {
+            content: url(../images/tcg_timer/ui/confirm.webp);
+        }
+    }
+}
+
 .navbar-container {
     display: flex;
     flex-direction: row;
@@ -534,6 +605,10 @@ input {
     box-sizing: border-box;
     align-self: stretch;
     padding-left: 5px;
+    border-radius: 2%;
+        box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-container::-webkit-scrollbar {
@@ -545,6 +620,16 @@ input {
     background: var(--bg-color);
     margin-top: 10px;
     border-radius: 10px;
+}
+
+.nav-set-btn.settings-control.active {
+    border-color: var(--navbtnactiveborder-color);
+    background-color: var(--navbtnactive-color);
+}
+
+.nav-set-btn.settings-control.active:hover {
+    border-color: transparent;
+    background-color: var(--navbtnactive-color);
 }
 
 .navbar-sm-container {
@@ -583,12 +668,15 @@ input {
     align-items: stretch;
     width: 100%;
     background-color: var(--navbar-color);
-    border: 4px solid var(--border-color);
+    border: 4px solid transparent;
     box-sizing: border-box;
     border-radius: 8px;
     margin-bottom: 5px;
     margin-top: 5px;
-    height: 175px;
+    height: 185px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-mb-wrapper {
@@ -597,11 +685,15 @@ input {
     align-items: center;
     width: 100%;
     background-color: var(--navbar-color);
-    border: 4px solid var(--border-color);
+    border: 2px solid transparent;
     box-sizing: border-box;
     border-radius: 6px;
     margin-top: 5px;
     margin-bottom: 5px;
+    padding-top: 5px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .nav-btn {
@@ -616,13 +708,14 @@ input {
     box-sizing: border-box;
     overflow: hidden;
     cursor: pointer;
-    border: 2px solid var(--navborder-color);
-    background-color: var(--navbtn-color);
+    border: 2px solid transparent;
+    background-color: transparent;
     border-radius: 6px;
     transition: all 0.2s ease;
     flex: 0 0 calc((100% - 80px) / 4);
     width: calc((100% - 80px) / 4);
     min-width: 32px;
+    transition: transform 0.2s ease;
 }
 
 .button-timer {
@@ -655,19 +748,8 @@ input {
     border-radius: 6px;
     transition: all 0.2s ease;
     text-align: center;
-    min-height: 45px;
+    min-height: 50px;
     box-sizing: border-box;
-
-    &.active {
-        .logo-button-set {
-            transform: rotate(1080deg);
-        }
-
-        border-color: var(--navbtnactiveborder-color);
-        background-color: var(--navbtnactive-color);
-    }
-
-    ;
 }
 
 .nav-set-btn {
@@ -693,17 +775,49 @@ input {
     text-align: center;
     min-height: 32px;
     box-sizing: border-box;
+    margin: inherit;
 }
 
-.nav-btn:hover,
 .nav-sm-btn:hover {
     background-color: var(--navbtnhover-color);
-    border-color: var(--navbtnhover-color);
+    border-color: transparent;
+        box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.nav-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: var(--glossborder);
+    border-radius: inherit;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+.nav-btn .logo-picture,
+.nav-btn .logo-button {
+    position: relative;
+    z-index: 1;
+}
+
+.nav-btn:hover {
+    border: 1px solid rgba(255,255,255,.06);
+    box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    transform: translateY(2px);
 }
 
 .nav-set-btn:hover {
-    background-color: var(--btnhover-color);
-    border-color: var(--btnhover-color);
+    background-color: var(--navbtnhover-color);
+    border-color: transparent;
+        box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .nav-set-btn:active {
@@ -720,10 +834,39 @@ input {
 }
 
 .nav-btn.active,
-.button.active,
 .nav-sm-btn.active {
     border-color: var(--navbtnactiveborder-color);
     background-color: var(--navbtnactive-color);
+}
+
+.nav-btn.active:hover,
+.nav-sm-btn.active:hover {
+    border-color: transparent;
+    background-color: var(--navbtn-color);
+}
+
+.button.toggle {
+    border-color: var(--timerstop-color);
+    background-color: var(--timerstopborder-color);
+}
+
+.button.toggle.active {
+    border-color: var(--timergo-color);
+    background-color: var(--btnspacehover-color);
+}
+
+.button.ui.active {
+    border-color: var(--navbtn-color);
+    background-color: var(--navbtnactive-color);
+}
+
+.button.toggle.active:hover,
+.button.toggle:hover {
+    border-color: transparent;
+    background-color: var(--navbtn-color);
+            box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .navbar-buttons-scroll {
@@ -785,10 +928,13 @@ input {
     grid-template-columns: 0.3fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     border-radius: 6px;
-    border: 2px solid var(--indexnormalbg-color);
+    border: 2px solid transparent;
     background: var(--indexofflinear) !important;
     background: var(--indexoffbg-color);
     padding: inherit;
+        box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
 
     .grid-container {
         display: grid;
@@ -797,12 +943,22 @@ input {
 
 }
 
+.button.name-clear-btn {
+    background-color: var(--navbtn-color);
+    border-color: var(--navborder-color);
+}
+
+.button.name-clear-btn:hover {
+    background-color: var(--timerstopborder-color);
+    border-color: var(--timerstop-color);
+}
+
 .tabs-row {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     width: 100%;
 }
@@ -817,31 +973,161 @@ input {
 }
 
 .grid-item {
+    &.item-1 { grid-column: 1 / 2; grid-row: 2 / 3; justify-self: center; }
+    &.item-name { grid-column: 1 / 2; grid-row: 3 / 4; }
+    &.item-2 { grid-column: 1 / 2; grid-row: 4 / 5; justify-self: center; }
+    &.panel-buttons { grid-column: 1 / 2; grid-row: 5 / 6; }
+}
+
+.panel-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    width: 100%;
+}
+
+.panel-buttons .button {
+    flex: 1 1 0;
+    max-width: 90px;
+}
+
+.timer-panel {
+    grid-column: 1 / 2;
+    grid-row: 6 / 7;
+    justify-self: center;
+}
+
+.settings-panel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: none; /* no chrome, so the buttons look exactly as before */
+}
+
+.buttons-row-1,
+.buttons-row-2 {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.overtime-btn {
+    font-family: inherit;
+    font-weight: 700;
+    font-size: 16px;
+    color: #FFFFFF;
+    height: 52px;
+    width: 52px;
+}
+
+.overtime-btn.overtime-off {
+    background-color: var(--timerstopborder-color);
+    border-color: var(--timerstop-color);
+}
+
+.overtime-btn.overtime-on {
+    background-color: var(--btnspacehover-color);
+    border-color: var(--timergo-color);
+}
+
+.overtime-btn:hover {
+    color: #FFFFFF;
+    filter: brightness(0.85);
+}
+
+.timerNameRow {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
-
-    &.item-1 {
-        grid-column: 1 / 2;
-        grid-row: 2 / 3;
-        justify-self: center;
-    }
-
-    &.item-2 {
-        grid-column: 1 / 2;
-        grid-row: 3 / 4;
-        justify-self: center;
-    }
-
+    gap: 6px;
+    width: 100%;
 }
 
-.buttons-row-1 {
-    grid-row: 4 / 5;
+.timerName {
+    flex: 0 1 auto;
+    min-width: 0;
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    overflow-wrap: anywhere;
+    text-overflow: ellipsis;
+    text-shadow: 0 0 8px rgba(109, 39, 201, 0.35);
 }
 
-.buttons-row-2 {
-    grid-row: 5 / 6;
+.name-input-row {
+    display: flex;
+    align-items: center;
+}
+
+.timername-input {
+    flex: 1 1 auto;
+    min-width: 0;
+    -webkit-user-select: text;
+    user-select: text;
+}
+
+.name-clear-btn {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    padding: 0;
+    border-radius: 3px;
+    border-radius: 50%;
+
+    &:hover {
+        background: var(--btnhover-color);
+    }
+}
+
+.clean-line {
+    border: none;
+    height: 2px;
+    background-color: var(--border-color);
+    width: 100%;
+    margin: 2px 0;
+}
+
+.btn-52 {
+    width: 100%;
+    height: 52px;
+    padding: 8px 4px;
+    cursor: pointer;
+    border: 2px solid var(--border-color);
+    background-color: var(--navbtn-color);
+    color: var(--text-color);
+    border-radius: 6px;
+
+    &.active {
+        border-color: var(--navbtnactiveborder-color);
+        background-color: var(--navbtnactive-color);
+    }
+
+    &:hover {
+        background-color: var(--navbtnactive-color);
+    }
+}
+
+.label-button-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+img.label-button-cell {
+    content: var(--logo);
+    justify-self: center;
+}
+
+.lock-label {
+    display: block;
+    font-size: 14.5px;
+    font-weight: 500;
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
 /* INFO NAVIGATION GRID */
@@ -1002,12 +1288,12 @@ input {
 
 .area {
     flex-direction: column;
-    background: var(--indexofflinear);
-    background-color: var(--indexoffbg-color);
-    border: 2px solid var(--indexnormalbg-color);
+    background-color: var(--plate-dark);
+    border: 2px solid transparent;
     border-radius: 16px;
-    padding: 10px;
+    padding: 8px;
     width: 100%;
+    margin: inherit;
 }
 
 .increment-area {
@@ -1124,20 +1410,22 @@ input {
 }
 
 .timer-tab {
-    background: var(--btn-color);
+    background: var(--navbtn-color);
+    border-color: var(--btnborder-color);
 }
 
 .timer-tab-stopped {
-    background: var(--timerstop-color);
+    background: var(--timerstopborder-color);
+    border-color: var(--timerstop-color);
 }
 
 .timer-tab-running {
-    background: var(--timergo-color);
+    background: var(--btnspace-color);
+    border-color: var(--timergo-color)
 }
 
 .timer-tab-active-view {
-    outline: 2px solid var(--navbtnactive-color);
-    background: var(--btnactive-color);
+    background-color: var(--btnactive-color);
 }
 
 .instance-screen {
@@ -1146,11 +1434,12 @@ input {
 
 .settings-button-container {
     display: grid;
-    justify-content: start;
+    justify-content: stretch; /* was start; makes all four controls the same width */
 }
 
 .settings-label {
     text-align: center;
+    color: var(--text-color); /* the new label has no inline color style */
 }
 
 /* ID GROUPS */
@@ -1187,7 +1476,8 @@ input {
 
 #themeLabel,
 #notiLabel,
-#acsLabel {
+#acsLabel,
+#deskLabel {
     justify-self: stretch;
     align-self: start;
     width: auto;
@@ -1196,11 +1486,78 @@ input {
 
 #acsBtn,
 #notiBtn,
-#themeBtn {
+#themeBtn,
+#deskBtn {
     justify-self: stretch;
     align-self: end;
     width: auto;
     height: 45px;
+}
+
+/* the desktop button is an <a>, so center its icon and drop the underline */
+#deskBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* ============================================================
+   SALT ICON & ANIMATIONS
+   ============================================================ */
+.salt-wrap {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.salt-wrap:hover { transform: translateY(-15px); }
+
+.salt-icon {
+    display: block;
+    aspect-ratio: 1/1;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-6px); }
+    40%, 80% { transform: translateX(6px); }
+}
+
+@keyframes shrink-grow {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(0.7); }
+    70%  { transform: scale(1.15); }
+    100% { transform: scale(1); }
+}
+
+.salt-icon.shake { animation: shake 0.4s ease; cursor: grab; }
+.salt-icon.pop   { animation: shrink-grow 0.35s ease; cursor: grabbing; }
+
+.sm-badge {
+    margin: 0.1rem 0 0;
+    font-weight: 400;
+    width: 80px;
+    height: 15px;
+    box-sizing: border-box;
+    background-color: var(--navbtn-color);
+    color: var(--text-color);
+    border: 1px solid var(--navborder-color);
+    outline: 1px solid #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Silkscreen;
+    font-size: 8px;
+}
+
+@keyframes spin-360 {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+.nav-sm-btn.active .logo-button-set {
+    animation: spin-360 1.4s linear infinite;
+    border-color: var(--navbtnactiveborder-color);
 }
 
 /* MOBILE */
@@ -1227,6 +1584,6 @@ input {
     }
 
     .navbar-wrapper {
-        height: 150px;
+        height: 135px;
     }
 }

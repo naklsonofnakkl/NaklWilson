@@ -54,6 +54,7 @@
 <body>
 
     <div id="game-title">Loading Game...</div>
+    <div id="timer-name" style="font-size:2rem;color:#fff;min-height:1.2em;margin-bottom:10px;"></div>
     <div id="timer">--:--</div>
 
     <script>
@@ -101,6 +102,7 @@
 
         const titleDisplay = document.getElementById('game-title');
         const clockDisplay = document.getElementById('timer');
+        const nameDisplay = document.getElementById('timer-name');
 
         // 2. Helper function to find or create the favicon link tag
         function changeFavicon(src) {
@@ -130,10 +132,13 @@
         const bc = new BroadcastChannel('tcg_timer_channel');
 
         bc.onmessage = (event) => {
-            const { type, game, time, status, instance } = event.data;
+            const { type, game, time, status, instance, name } = event.data;
             const instanceMatches = activeInstance == null || String(instance) === activeInstance;
+            if (game !== activeGame || !instanceMatches) return;
 
-            if (type === 'UPDATE' && game === activeGame && instanceMatches) {
+            if (name !== undefined) nameDisplay.textContent = name;
+
+            if (type === 'UPDATE') {
                 clockDisplay.textContent = time;
 
                 if (status === "running") {

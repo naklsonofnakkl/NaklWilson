@@ -61,7 +61,8 @@ const gameConfigs = [
     { id: 'pk', title: 'Pokémon', defaultMin: 50, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/pokemon_icon.webp', logo: './images/tcg_timer/pokemon.webp' },
     { id: 'ff', title: 'Final Fantasy', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/finalfantasy_icon.webp', logo: './images/tcg_timer/finalfantasy.webp' },
     { id: 'pw', title: 'Palworld', defaultMin: 30, defaultSec: 0, overTime: 0, otOn: 'off', icon: './images/tcg_timer/palworld_icon.webp', logo: './images/tcg_timer/palworld.webp' },
-    { id: 'cp', title: 'Cyberpunk', defaultMin: 50, defaultSec: 0, overTime: 10, otOn: 'on', icon: './images/tcg_timer/cyberpunk_icon.webp', logo: './images/tcg_timer/cyberpunk.webp' }
+    { id: 'cp', title: 'Cyberpunk', defaultMin: 50, defaultSec: 0, overTime: 10, otOn: 'on', icon: './images/tcg_timer/cyberpunk_icon.webp', logo: './images/tcg_timer/cyberpunk.webp' },
+    { id: 'nr', title: 'Naruto', defaultMin: 30, defaultSec: 0, overTime: 5, otOn: 'on', icon: './images/tcg_timer/naruto_icon.webp', logo: './images/tcg_timer/naruto.webp' }
 ];
 document.addEventListener('touchstart', (evt) => { });
 // SOUND FUNCTIONS - 2A
@@ -76,7 +77,10 @@ const soundLibrary = {
     gundam: new Audio('./music/tcg_timer/mobile-suit-gundam.mp3'),
     finalfantasy: new Audio('./music/tcg_timer/finalfantasy_victory.flac'),
     dragonball: new Audio('./music/tcg_timer/dragonball_gameover.flac'),
-    easterEgg: new Audio('./music/tcg_timer/easterEgg.flac')
+    easterEgg: new Audio('./music/tcg_timer/easterEgg.flac'),
+    sportsBuzzer: new Audio('./music/tcg_timer/Sports_Buzzer.flac'),
+    highBuzzer: new Audio('./music/tcg_timer/High_Buzzer.flac'),
+    amongusBuzzer: new Audio('./music/tcg_timer/among_buzzer.flac')
 };
 const muteState = {};
 // function to mute specific timers - 2C
@@ -134,13 +138,16 @@ function stopAllSounds() {
 }
 // NAVIGATION SETTINGS - 3A
 
-// Accessibility Tooltip Function
+// ============================================================
+// TOOLTIP SYSTEM
+// ============================================================
+
 function tooltipsEnabled() {
     const acsBtn = document.getElementById('acsBtn');
     return acsBtn ? acsBtn.classList.contains('active') : false;
 }
 
-// Generated Buttons (config.id)
+// Per-instance buttons: wired as `${prefix}-${iid}` -> `${tooltipPrefix}-${iid}`
 const TOOLTIP_MAP = [
     ['startBtn', 'StartTooltip'],
     ['stopBtn', 'StopTooltip'],
@@ -153,6 +160,8 @@ const TOOLTIP_MAP = [
     ['tabBtn', 'TabTooltip'],
     ['muteBtn', 'MuteTooltip'],
     ['lockCustom', 'LockTimeTooltip'],
+    ['overtimerActive', 'LockOvertimeTooltip'],
+    ['previewBtn', 'PreviewAlarmTooltip'],
     ['Home', 'HomeTooltip'],
     ['clearName', 'ClearNameTooltip'],
     ['timerOT', 'OTTooltip'],
@@ -161,10 +170,12 @@ const TOOLTIP_MAP = [
     ['Home-controls', 'HomeCTooltip'],
     ['Home-ct', 'HomeCTooltip'],
     ['Home-st', 'HomeCTooltip'],
-    ['TimerName', 'customNameTimeTooltip'],
+    ['TimerName', 'customNameTimeTooltip']
+    // NOTE: nav bar game buttons (id = config.id, no iid suffix) are wired
+    // separately below, since they don't fit this per-instance pattern.
 ];
 
-// Static Buttons
+// Static, page-level buttons: exact id pairs, no per-instance suffix
 const STATIC_TOOLTIP_MAP = [
     ['nt', 'TimerTooltip'],
     ['set', 'SettingsTooltip'],
@@ -215,6 +226,9 @@ function wireStaticTooltips() {
     });
 }
 
+// INSTANCE VISIBILITY HELPERS
+// (top-level, not inside DOMContentLoaded — GameTimer calls these directly)
+
 function updateRow2Visibility(gameId, count) {
     const ROW2_REVEAL_THRESHOLD = 2;
     const showRow2 = count > ROW2_REVEAL_THRESHOLD;
@@ -237,15 +251,15 @@ function updateAddFourthButton(gameId, count) {
 }
 
 
-    function hideAllSettingsPanels() {
-        document.querySelectorAll('.timer-controls-container, .timer-input-container, .sound-select-container')
-            .forEach(panel => {
-                panel.setAttribute('hidden', '')
-            });
+// SETTINGS PANEL EXCLUSIVITY HELPERS
+// Shared by every path that opens/closes a settings sub-panel
 
-    }
+function hideAllSettingsPanels() {
+    document.querySelectorAll('.timer-controls-container, .timer-input-container, .sound-select-container')
+        .forEach(panel => panel.setAttribute('hidden', ''));
+}
 
-    function clearSettingsButtonStates() {
+function clearSettingsButtonStates() {
     document.querySelectorAll('button[id^="numBtn-"], button[id^="timerBtn-"], button[id^="alarmBtn-"], button[id^="Home-"]')
         .forEach(btn => {
             btn.classList.remove('active');
@@ -253,7 +267,8 @@ function updateAddFourthButton(gameId, count) {
         });
 }
 
-    function syncHomeIcon(targetId) {
+// Re-derives Home-${targetId}'s active state from actual panel visibility
+function syncHomeIcon(targetId) {
     const anyOpen = ['timerControls', 'customTimer', 'soundTimer'].some(prefix => {
         const el = document.getElementById(`${prefix}-${targetId}`);
         return el && !el.hasAttribute('hidden');
@@ -307,11 +322,15 @@ function getVisibleCount(gameId) {
     }
     return count || 1;
 }
-    // EXCLUSIVE VIEW MANAGER
+
+// EXCLUSIVE VIEW MANAGER
+// Ensures only one of the 4 top-level views is open at a time
+
 function updateExclusiveViews(viewToOpen) {
     const views = ['timer-settings-container', 'timerScreen-set', 'version-title', 'timerScreen-nt'];
 
     document.getElementById('timer-container')?.removeAttribute('hidden');
+
     const requestedEl = views.includes(viewToOpen) ? document.getElementById(viewToOpen) : null;
     const targetView = requestedEl ? viewToOpen : 'version-title';
 
@@ -337,8 +356,13 @@ function updateExclusiveViews(viewToOpen) {
     });
 }
 
+// ============================================================
+// GAME CLOSE LOGIC
+// ============================================================
+
 function closeGameTimer(gameId) {
     if (gameId === 'nt' || gameId === 'set') return;
+
     const screen = document.getElementById(`timerScreen-${gameId}`);
     const selectElement = document.getElementById('timerSelection');
 
@@ -357,25 +381,20 @@ function closeGameTimer(gameId) {
     }
 }
 
-// DOM LOADED CONTENT
+// ============================================================
+// DOM-DEPENDENT SETUP
+// ============================================================
+
 document.addEventListener("DOMContentLoaded", () => {
     wireStaticTooltips();
 
-    const acsBtn = document.getElementById('acsBtn');
-    if (acsBtn) {
-        acsBtn.addEventListener('click', () => {
-            if (!tooltipsEnabled()) {
-                document.querySelectorAll('[popover]:popover-open').forEach(el => el.hidePopover());
-            }
-        });
-    }
+    document.getElementById('acsBtn')?.addEventListener('click', () => {
+        if (!tooltipsEnabled()) {
+            document.querySelectorAll('[popover]:popover-open').forEach(el => el.hidePopover());
+        }
+    });
 
-
-
-    // Shared by every path that closes settings sub-panels (numBtn/Home/timerBtn/alarmBtn/
-    // and the forced-close path above) so all four stay in sync with each other.
-
-    // Theme Function - 3B
+    // --- Theme ---
     const root = document.documentElement;
     const themeLogo = document.querySelector(".logo-button-theme");
 
@@ -387,20 +406,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-function applyPersistedToggle(elementId, storageKey) {
-    const el = document.getElementById(elementId);
-    if (!el) return;
+    function applyPersistedToggle(elementId, storageKey) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
 
-    let isActive = localStorage.getItem(storageKey) === 'on';
-    if (elementId === 'notiBtn') {
-        isActive = isActive && Notification.permission === 'granted';
-    }
+        let isActive = localStorage.getItem(storageKey) === 'on';
+        if (elementId === 'notiBtn') {
+            isActive = isActive && Notification.permission === 'granted';
+        }
 
-    el.classList.toggle('active', isActive);
-    if (el.hasAttribute('aria-pressed')) {
-        el.setAttribute('aria-pressed', String(isActive));
+        el.classList.toggle('active', isActive);
+        if (el.hasAttribute('aria-pressed')) {
+            el.setAttribute('aria-pressed', String(isActive));
+        }
     }
-}
 
     const storedTheme = localStorage.getItem("theme") || "dark";
     root.classList.remove("light", "dark");
@@ -409,8 +428,7 @@ function applyPersistedToggle(elementId, storageKey) {
     applyPersistedToggle('acsBtn', 'access-enabled');
     applyPersistedToggle('notiBtn', 'notifications-enabled');
 
-    // instance reveal count (per game, timers 1-4) - 3C-prep
-
+    // --- Instance tabs + initial visibility pass ---
     function setupInstanceTabs(config) {
         for (let n = 1; n <= NUM_INSTANCES; n++) {
             const btn = document.getElementById(`tabBtn-${config.id}-${n}`);
@@ -419,23 +437,77 @@ function applyPersistedToggle(elementId, storageKey) {
         }
     }
     gameConfigs.forEach(setupInstanceTabs);
-gameConfigs.forEach(config => {
-    const count = getVisibleCount(config.id);
-    updateRow2Visibility(config.id, count);
-    updateInstanceControlsVisibility(config.id, count);
-    updateAddSecondButton(config.id, count);
-    updateAddFourthButton(config.id, count);
-    updateCloseButtonVisibility(config.id, count);
-});
-gameConfigs.forEach(config => {
-    wireTooltip(`addSecondBtn-${config.id}`, `AddSecondTooltip-${config.id}`);
-    wireTooltip(`addFourthBtn-${config.id}`, `AddFourthTooltip-${config.id}`);
-});
 
-    // toggle button function - 3C
+    gameConfigs.forEach(config => {
+        const count = getVisibleCount(config.id);
+        updateRow2Visibility(config.id, count);
+        updateInstanceControlsVisibility(config.id, count);
+        updateAddSecondButton(config.id, count);
+        updateAddFourthButton(config.id, count);
+        updateCloseButtonVisibility(config.id, count);
+    });
+
+    gameConfigs.forEach(config => {
+        wireTooltip(`addSecondBtn-${config.id}`, `AddSecondTooltip-${config.id}`);
+        wireTooltip(`addFourthBtn-${config.id}`, `AddFourthTooltip-${config.id}`);
+        wireTooltip(config.id, `NavBtnTooltip-${config.id}`);
+    });
+
+    // -- Selection Function --
+    (function setupCustomSelect() {
+        const select = document.getElementById('timerSelection');
+        const trigger = document.getElementById('customSelectTrigger');
+        const label = document.getElementById('customSelectLabel');
+        const list = document.getElementById('customSelectList');
+        if (!select || !trigger || !label || !list) return;
+
+        function buildList() {
+            list.innerHTML = '';
+            Array.from(select.options).forEach(option => {
+                if (option.disabled || option.hidden || !option.value) return;
+                const li = document.createElement('li');
+                li.setAttribute('role', 'option');
+                li.className = 'custom-select-option';
+                li.textContent = option.textContent;
+                li.addEventListener('click', () => {
+                    select.value = option.value;
+                    label.textContent = option.textContent;
+                    closeList();
+                });
+                list.appendChild(li);
+            });
+        }
+
+        function openList() {
+            buildList(); // rebuilt fresh each open, so already-created games (hidden/disabled by choose-timer) never reappear
+            list.hidden = false;
+            trigger.setAttribute('aria-expanded', 'true');
+            document.addEventListener('click', onOutsideClick);
+        }
+
+        function closeList() {
+            list.hidden = true;
+            trigger.setAttribute('aria-expanded', 'false');
+            document.removeEventListener('click', onOutsideClick);
+        }
+
+        function onOutsideClick(event) {
+            if (!event.target.closest('#customSelectWrap')) closeList();
+        }
+
+        trigger.addEventListener('click', () => {
+            list.hidden ? openList() : closeList();
+        });
+
+            window.resetCustomSelectLabel = () => {
+            label.textContent = '-- Select a Game --';
+        };
+    })();
+
+    // --- Central toggle dispatcher ---
     function toggleSection(targetId, buttonId, buttonElement) {
 
-        // NT and SET Exclusivity Block
+        // nt/set are mutually exclusive with each other
         if (buttonId === 'nt' || buttonId === 'set' || buttonId === 'ntm' || buttonId === 'setm') {
             const showNt = buttonId === 'nt' || buttonId === 'ntm';
             const targetViewId = showNt ? 'timerScreen-nt' : 'timerScreen-set';
@@ -452,21 +524,16 @@ gameConfigs.forEach(config => {
             return;
         }
 
-        const PERSISTED_TOGGLES = {
-            acsBtn: 'access-enabled',
-            notiBtn: 'notifications-enabled'
-        };
-
-        if (buttonElement) {
+        // acsBtn/notiBtn: simple persisted toggles, no data-target, handled and done
+        const PERSISTED_TOGGLES = { acsBtn: 'access-enabled', notiBtn: 'notifications-enabled' };
+        if (buttonId in PERSISTED_TOGGLES) {
             buttonElement.classList.toggle('active');
             const isActive = buttonElement.classList.contains('active');
             if (buttonElement.hasAttribute('aria-pressed')) {
-                buttonElement.setAttribute('aria-pressed', isActive);
+                buttonElement.setAttribute('aria-pressed', String(isActive));
             }
-            const storageKey = PERSISTED_TOGGLES[buttonId];
-            if (storageKey) {
-                localStorage.setItem(storageKey, isActive ? 'on' : 'off');
-            }
+            localStorage.setItem(PERSISTED_TOGGLES[buttonId], isActive ? 'on' : 'off');
+            return;
         }
 
         if (!targetId) return;
@@ -481,22 +548,17 @@ gameConfigs.forEach(config => {
             hideAllSettingsPanels();
             clearSettingsButtonStates();
             updateExclusiveViews('version-title');
-            document.getElementById(`Home-${targetId}`)?.classList.remove('active');
-            document.getElementById(`Home-${targetId}`)?.setAttribute('aria-pressed', 'false');
             syncHomeIcon(targetId);
             return;
         }
 
-        // Home — steps back to timerControls specifically, from customTimer or soundTimer
+        // Home — opens/returns to timerControls specifically
         if (isHomeBtn) {
             hideAllSettingsPanels();
             clearSettingsButtonStates();
             document.getElementById(`timerControls-${targetId}`)?.removeAttribute('hidden');
-            updateExclusiveViews('timer-settings-container', syncHomeIcon(targetId));
-            document.getElementById(`Home-${targetId}`)?.classList.add('active');
-            document.getElementById(`Home-${targetId}`)?.setAttribute('aria-pressed', 'true');
+            updateExclusiveViews('timer-settings-container');
             syncHomeIcon(targetId);
-            updateExclusiveViews('timer-settings-container', syncHomeIcon(targetId));
             return;
         }
 
@@ -510,14 +572,12 @@ gameConfigs.forEach(config => {
             clearSettingsButtonStates();
 
             if (!isAlreadyOpen) {
-                updateExclusiveViews('timer-settings-container', syncHomeIcon(targetId));
                 targetSection?.removeAttribute('hidden');
+                updateExclusiveViews('timer-settings-container');
                 if (buttonElement) {
                     buttonElement.classList.add('active');
                     if (buttonElement.hasAttribute('aria-pressed')) buttonElement.setAttribute('aria-pressed', 'true');
                 }
-                document.getElementById(`Home-${targetId}`)?.classList.add('active');
-                document.getElementById(`Home-${targetId}`)?.setAttribute('aria-pressed', 'true');
             } else {
                 updateExclusiveViews('version-title');
             }
@@ -525,6 +585,7 @@ gameConfigs.forEach(config => {
             return;
         }
 
+        // About / Update / Info are mutually exclusive with each other
         let sectionIdToToggle = null;
         switch (buttonId) {
             case 'aboutBtn': sectionIdToToggle = 'about'; break;
@@ -533,7 +594,6 @@ gameConfigs.forEach(config => {
             default: sectionIdToToggle = `timerScreen-${targetId}`; break;
         }
 
-        // About / Update / Info are mutually exclusive with each other
         const ABOUT_GROUP = { aboutBtn: 'about', updateBtn: 'update', infoBtn: 'info' };
         if (buttonId in ABOUT_GROUP) {
             Object.entries(ABOUT_GROUP).forEach(([otherBtnId, otherSectionId]) => {
@@ -557,7 +617,7 @@ gameConfigs.forEach(config => {
         }
     }
 
-    // secondary button function - 3D
+    // --- Delegated click handling ---
     document.addEventListener("click", (event) => {
         const btn = event.target.closest('[data-action], #themeBtn');
         if (!btn) return;
@@ -565,7 +625,6 @@ gameConfigs.forEach(config => {
         const action = btn.dataset.action;
         const buttonId = btn.id;
 
-        // Theme Toggle - 3E
         if (buttonId === "themeBtn") {
             const isDark = root.classList.contains("dark");
             const newTheme = isDark ? "light" : "dark";
@@ -576,7 +635,6 @@ gameConfigs.forEach(config => {
             return;
         }
 
-        // Action Behaviors -3F
         switch (action) {
             case 'toggle': {
                 toggleSection(btn.dataset.target || '', buttonId, btn);
@@ -592,7 +650,7 @@ gameConfigs.forEach(config => {
                 }
                 const selectedValue = selectElement.value;
                 if (!selectedValue) {
-                    alert('Please select a game timer from the dropdown first!');
+                    document.getElementById('createTimerAlert')?.showPopover();
                     return;
                 }
                 const selectedOption = selectElement.querySelector(`option[value="${selectedValue}"]`);
@@ -601,6 +659,7 @@ gameConfigs.forEach(config => {
                     selectedOption.disabled = true;
                 }
                 selectElement.selectedIndex = 0;
+                resetCustomSelectLabel?.();   // <-- keeps the visible label in sync with the real select
                 updateExclusiveViews('version-title');
 
                 const config = gameConfigs.find(c => c.id === selectedValue);
@@ -608,14 +667,13 @@ gameConfigs.forEach(config => {
                     console.error(`choose-timer: no gameConfigs entry for "${selectedValue}"`);
                     return;
                 }
-                createNavButton(config);
+                const navBtn = createNavButton(config);
                 document.getElementById('timer-container')
                     ?.appendChild(document.getElementById(`timerScreen-${config.id}`));
-                toggleSection(selectedValue, buttonId, btn);
+                document.getElementById(`timerScreen-${config.id}`)?.removeAttribute('hidden');
+                navBtn?.classList.add('active');
                 break;
-            }
-
-            case 'close-timer': {
+            }            case 'close-timer': {
                 document.querySelectorAll('[id^="timerScreen-"]:not([hidden])').forEach((screen) => {
                     closeGameTimer(screen.id.replace('timerScreen-', ''));
                 });
@@ -623,12 +681,14 @@ gameConfigs.forEach(config => {
                 document.getElementById('timer-container')?.removeAttribute('hidden');
                 break;
             }
+
             case 'reveal-second': {
                 const gameId = btn.dataset.target;
                 if (!gameId) return;
                 setVisibleCount(gameId, 2);
                 break;
             }
+
             case 'reveal-fourth': {
                 const gameId = btn.dataset.target;
                 if (!gameId) return;
@@ -638,7 +698,6 @@ gameConfigs.forEach(config => {
         }
     });
 });
-
 
 const salt = document.getElementById('saltIcon');
 let saltClickCount = 0;
@@ -897,16 +956,16 @@ function createSettingsHTML(config, n) {
                 <div class="dual-col-row ct-row-8">
                     <input type="range" id="rangeOvertime-${iid}" min="0" max="18000" value="69" step="5"
                            aria-labelledby="overtimeLabel-${iid}" class="incrange">
-                    <button type="button" id="overtimerActive-${iid}" class="toggle-btn" aria-pressed="false">
+                    <button type="button" id="overtimerActive-${iid}" class="toggle-btn" aria-pressed="false" aria-label="Enable Overtime for ${iid}" aria-describedby="LockOvertimeTooltip-${iid}">
                         <span class="switch"></span>
                         <picture class="ui-picture"> <img class="ui-button" src="./images/tcg_timer/ui/decline.webp"
-                                alt="Enable Overtime" aria-label="Enable Overtime for ${iid}"
-                                aria-describedby="LockOvertimeTooltip-${iid}"></picture>
+                                alt="Enable Overtime"></picture>
                     </button>
                     <div id="LockOvertimeTooltip-${iid}" popover="hint" style="text-wrap: pretty;">
                     Enable Overtime for ${config.title}
                     </div>
                 </div>
+                <div>
                 <center class="ct-row-9">
                     <input type="text" id="numberOvertime-${iid}" inputmode="numeric" pattern="\\d*"
                            value="00:01" aria-labelledby="overtimeLabel-${iid}" class="incinput">
@@ -932,12 +991,18 @@ function createSettingsHTML(config, n) {
                     <option value="gundam">Gundam</option>
                     <option value="finalfantasy">Final Fantasy</option>
                     <option value="dragonball">Dragonball</option>
+                    <option value="sportsBuzzer">Sports Buzzer</option>
+                    <option value="highBuzzer">High Pitch Buzzer</option>
+                    <option value="amongusBuzzer">AmongUs Buzzer</option>
                 </select>
                 <div class="button-alarm">
-                    <button id="previewBtn-${iid}" class="btn-52" onclick="playSelectedSound('${iid}')" style="cursor:help;">
+                    <button id="previewBtn-${iid}" class="btn-52" onclick="playSelectedSound('${iid}')" style="cursor:help;" aria-label="Preview Alarm for ${iid}" aria-describedby="PreviewAlarmTooltip-${iid}">
                         <picture class="ui-picture"> <img class="ui-button"
                                 src="./images/tcg_timer/ui/test.webp" alt="preview"></picture>
                     </button>
+                    <div id="PreviewAlarmTooltip-${iid}" popover="hint" style="text-wrap: pretty;">
+                    Preview Alarm for ${config.title}
+                    </div>
                 </div>
             </div>
         </div>`;
@@ -958,11 +1023,15 @@ function createTimerHTML(config) {
 }
 function createNavButtonHTML(config) {
     return `
-    <button class="btn-125 nav-btn active" id="${config.id}" data-action="toggle" data-target="${config.id}">
+    <button class="btn-125 nav-btn active" id="${config.id}" data-action="toggle" data-target="${config.id}"
+            aria-describedby="NavBtnTooltip-${config.id}">
         <picture class="logo-picture">
             <img class="logo-button" src="${config.icon}" alt="${config.id}">
         </picture>
-    </button>`;
+    </button>
+    <div id="NavBtnTooltip-${config.id}" popover="hint" style="text-wrap: pretty;">
+    Show/Hide All ${config.title} Timers
+    </div>`;
 }
 function createTimerSettingsNav(config, n, variant) {
     const iid = `${config.id}-${n}`;
@@ -1013,6 +1082,7 @@ function createNavButton(config) {
     const existing = document.getElementById(config.id);
     if (existing) return existing;
     container.insertAdjacentHTML('beforeend', createNavButtonHTML(config));
+    wireTooltip(config.id, `NavBtnTooltip-${config.id}`);
     return document.getElementById(config.id);
 }
 
@@ -1727,7 +1797,17 @@ gameConfigs.forEach(config => {
         {
             version: "v0.19.5",
             date: "2026-09-17",
-            notes: "* Fixed an issue where timer settings would stay open when closing all timers.\n* Fixed an issue where the settings button would continually spin after being closed.\n* Altered the delete button on the first timer to close the timer block.\n* Added a 'new timer' button on the 4th timer slot when empty.\n* Added more Accessibility button descriptions.\n* Fixed an issue where the toggle buttons were not displaying active colors correctly.\n* "
+            notes: "* Fixed an issue where timer settings would stay open when closing all timers.\n* Fixed an issue where the settings button would continually spin after being closed.\n* Altered the delete button on the first timer to close the timer block.\n* Added a 'new timer' button on the 4th timer slot when empty.\n* Added more Accessibility button descriptions.\n* Fixed an issue where the toggle buttons were not displaying active colors correctly.\n* Various CSS improvements for Timers and Panels."
+        },
+        {
+            version: "v0.19.6",
+            date: "2026-09-19",
+            notes: "* Fixed the issue where the navigation bar icon wasn't changing states.\n* Finished adding an accessibiltiy box to every button!\n* Added some new Buzzer sounds."
+        },
+        {
+            version: "v0.20.0",
+            date: "2026-09-24",
+            notes: "* Mobile and Desktop versions are finally back in sync!\n* Altered the CSS of the Mobile version to align with desktop asthetic.\n* Added a button to switch from mobile version to desktop version.\n* Condensed the Mobile settings menu to work similar to the Desktop settings menu.\n* Mobile version timers can now be renamed!\n* Mobile version Overtime button now emulates the Desktop version!\n* Mobile version now has the same Salt Surprises!"
         }
     ];
     let currentIndex = entries.length - 1;

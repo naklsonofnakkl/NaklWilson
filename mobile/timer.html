@@ -38,8 +38,6 @@
     <link rel="manifest" href="./images/favicon/site.webmanifest" />
     <meta name="author" content="NaklsonofNakkl">
     <meta name="theme-color" content="#6a1480">
-    <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_border.webp" type="image/webp">
-    <link rel="preload" fetchpriority="high" as="image" href="./images/layout/homepage_sub.webp" type="image/webp">
     <meta http-equiv="Cache-control" content="max-age=604800, must-revalidate">
     <meta name="theme-color" content="#fff" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#000" media="(prefers-color-scheme: dark)" />
@@ -188,6 +186,18 @@
                         <img class="logo-button" src=".\images\tcg_timer\palworld_icon.webp" alt="pw">
                     </picture>
                 </button>
+                                <button class="nav-btn active" id="cp" data-action="toggle" data-target="cp" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\cyberpunk.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\cyberpunk_icon.webp" alt="cp">
+                    </picture>
+                </button>
+                                <button class="nav-btn active" id="nr" data-action="toggle" data-target="nr" hidden>
+                    <picture class="logo-picture">
+                        <source srcset=".\images\tcg_timer\naruto.webp" media="(min-width: 780px)">
+                        <img class="logo-button" src=".\images\tcg_timer\naruto_icon.webp" alt="nr">
+                    </picture>
+                </button>
             </nav>
         </div>
         <div class="navbar-mb-wrapper" id="mobile-navbar" hidden>
@@ -235,6 +245,7 @@
                         </label>
                         <select id="timerSelection" name="Games">
                             <option disabled selected value>-- Select a Game --</option>
+                            <option value="cp">Cyberpunk</option>
                             <option value="dm">Digimon</option>
                             <option value="dbs">DragonBall Super Fusion</option>
                             <option value="ff">Final Fantasy</option>
@@ -243,6 +254,7 @@
                             <option value="gm">Gundam</option>
                             <option value="lc">Lorcana</option>
                             <option value="mg">Magic the Gathering</option>
+                            <option value="nr">Naruto</option>
                             <option value="op">One Piece</option>
                             <option value="pw">Palworld</option>
                             <option value="pk">Pokémon</option>
@@ -252,7 +264,7 @@
                             <option value="yo">YuGiOh!</option>
                         </select>
                         <div class="button-timer">
-                            <button id="createBtn" class="button" data-action="choose-timer"
+                            <button id="createBtn" class="button btn-52" data-action="choose-timer"
                                 data-select="timerSelection">
                                 <picture class="ui-picture"> <img class="ui-button"
                                         src=".\images\tcg_timer\ui\confirm.webp" alt="confirm">
@@ -265,6 +277,8 @@
                 </div>
             </section>
             <section id="timerScreen-set" class="settingScreen-card">
+                <img class="label-button-cell">
+                <hr class="clean-line">
                 <label for="Settings">
                     <h2>Settings</h2>
                 </label>
@@ -290,8 +304,7 @@
                             <div class="settings-notification-alarm settings-button-container">
                                 <label id="notiLabel" for="notiBtn" style="color: var(--text-color);"
                                     class="settings-label">Browser Notifications:</label>
-                                <button class="nav-set-btn settings-control" id="notiBtn" data-action="toggle"
-                                    data-target="noti" aria-pressed="false">
+                                <button class="nav-set-btn settings-control" id="notiBtn" type="button" aria-pressed="false">
                                     <picture class="logo-picture-sm">
                                         <img class="logo-button-notify" src=".\images\tcg_timer\ui\notify.webp"
                                             alt="Notifications" width="32px" height="32px">
@@ -301,75 +314,35 @@
                                     Browser Notifications
                                 </div>
                             </div>
-                            <div class="settings-accessibility-tips settings-button-container">
-                                <label for="acsBtn" style="color: var(--text-color);" class="custom-lock">
+                                <div class="settings-accessibility-tips settings-button-container">
                                     <label id="acsLabel" for="acsBtn" style="color: var(--text-color);"
-                                        class=" settings-label">Accessibility Mode:</label>
-                                    <input id="acsBtn" type="checkbox" name="checkbox-set" role="switch"
-                                        class="settings-control">
-                                    <span class="switch"></span>
-                                </label>
-                            </div>
-                        </div>
-                        <div id="button-container">
-                            <button id="aboutBtn" class="button" data-action="toggle" data-target="about">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src="./images/tcg_timer/ui/about.webp" alt="About" aria-label="About Section">
-                            </button>
-                            <div id="AboutTooltip" popover="hint">
-                                About Timer
-                            </div>
-                            <button id="updateBtn" class="button active" data-action="toggle" data-target="update">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src="./images/tcg_timer/ui/notes.webp" alt="Updates"
-                                        aria-label="Updates Section">
-                            </button>
-                            <div id="UpdateTooltip" popover="hint">
-                                Version Notes
-                            </div>
-                            <button id="infoBtn" class="button" data-action="toggle" data-target="info">
-                                <picture class="ui-picture"> <img class="ui-button"
-                                        src="./images/tcg_timer/ui/info.webp" alt="Info"
-                                        aria-label="Infomation Section">
-                            </button>
-                            <div id="InfoTooltip" popover="hint">
-                                Timer Buttons Index
-                            </div>
-                        </div>
-                        <div class="about-container" id="about" hidden>
-                            <center>
-                                <img src="./images/tcg_timer/ui/salt.webp">
-                                <label for="about">
-                                    <p> This is a timer made to support and enhance the local card shop and tcg
-                                        tournament hosting. <br>
-                                        The timer is a <strong style="color: red;">work in progress</strong>; please
-                                        report any issues you experience and always use best practice in regards to
-                                        redundancy timers.</p>
-                                </label>
-                                <p><a href="https://www.naklwilson.net">NaklWilson</a> © <span id="current-year"></span>
-                                    <br>
-                                    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" alt=""
-                                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                                        src="https://mirrors.creativecommons.org/presskit/icons/by.svg" alt=""
-                                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                                        src="https://mirrors.creativecommons.org/presskit/icons/nc.svg" alt=""
-                                        style="max-width: 1em;max-height:1em;margin-left: .2em;"><img
-                                        src="https://mirrors.creativecommons.org/presskit/icons/nd.svg" alt=""
-                                        style="max-width: 1em;max-height:1em;margin-left: .2em;">
-                                </p>
-                                <div class="badge-container"> <a class="outra-link" aria-label="GitHub Repositiory"
-                                        target="_blank" href="https://github.com/naklsonofnakkl/NaklWilson"><img
-                                            alt="GitHub Repo for this Website" src="./images/badges/github-export.webp"
-                                            width="80px" height="15px"></a>
-                                    <a class="outra-link" aria-label="Ko-Fi Donation Page" target="_blank"
-                                        href="https://ko-fi.com/naklwilson"><img class="kofi" alt="Ko-Fi Donation Badge"
-                                            width="80px" height="15px"></a>
-                                    <a class="outra-link" aria-label="Human Made - No AI" target="_blank"
-                                        href="https://madebyhuman.iamjarl.com/"><img alt="No AI Button"
-                                            src="./images/badges/NO-AI-HUMAN.webp" width="80px" height="15px"></a>
+                                        class="settings-label">Accessibility Mode:</label>
+                                    <button type="button" class="nav-set-btn settings-control" id="acsBtn" aria-pressed="false">
+                                        <picture class="logo-picture-sm">
+                                            <img class="logo-button-acs" src=".\images\tcg_timer\ui\info.webp"
+                                                alt="Accessibility Mode" width="32px" height="32px">
+                                        </picture>
+                                    </button>
+                                    <div id="AcsTooltip" popover="hint">
+                                        Accessibility Mode
+                                    </div>
                                 </div>
-                            </center>
+                            <div class="settings-desktop-switcher settings-button-container">
+                                <label id="deskLabel" for="deskBtn" class="settings-label field-label">Desktop
+                                    Version:</label>
+                                <a href="https://timer.naklwilson.net/" id="deskBtn"
+                                    class="nav-set-btn settings-control">
+                                    <picture class="logo-picture-sm">
+                                        <img class="logo-button-desktop" src=".\images\tcg_timer\ui\home.webp"
+                                            alt="Desktop Version" width="32px" height="32px">
+                                    </picture>
+                                </a>
+                                <div id="MobileTooltip" popover="hint" style="text-wrap: pretty;">
+                                    Desktop Version
+                                </div>
+                            </div>
                         </div>
+                        <hr class="clean-line">
                         <div class="update-container" id="update">
 
                             <div class="entry-header">
@@ -387,71 +360,35 @@
                             </div>
 
                         </div>
-                        <div class="info-container" id="info" hidden>
-
-                            <h2>NAVIGATION</h2>
-
-                            <div class="table-nav-container">
-                                <div class="item-nav">
-                                    <img src="./images/tcg_timer/ui/add.webp" alt="New Timer"
-                                        aria-label="New Timer Button">
-                                </div>
-                                <div class="item-nav">
-                                    <img src="./images/tcg_timer/ui/settings.webp" alt="Settings"
-                                        aria-label="Settings button">
-                                </div>
-                                <div class="item-nav">
-                                    <img src="./images/tcg_timer/ui/delete.webp" alt="Delete"
-                                        aria-label="Delete button">
-                                </div>
-                                <div class="item-nav" id="index-newtimer">This is how you select a game timer.</div>
-                                <div class="item-nav" id="index-settings">This opens the settings menu.</div>
-                                <div class="item-nav" id="index-delete">This will delete all visible timers on the
-                                    screen.</div>
+                        <div class="about-container" id="about">
+                            <div class="sm-badge-container">
+                                <a class="intra-link" aria-label="NaklWilson Homepage" target="_blank"
+                                    href="https://www.naklwilson.net"><img alt="NaklWilson Homepage Badge"
+                                        class="naklwilson" width="80px" height="15px"></a>
+                                <a class="outra-link" aria-label="Creative Commons License - by-nc-nd"
+                                    href="https://creativecommons.org/licenses/by-nc-nd/4.0/legalcode.en"
+                                    target="_blank"><img alt="Creative Commons License"
+                                        src="./images/badges/creative_commons_badge.webp" width="80px"
+                                        height="15px"></a>
+                                <a class="outra-link" aria-label="GitHub Repositiory" target="_blank"
+                                    href="https://github.com/naklsonofnakkl/NaklWilson"><img
+                                        alt="GitHub Repo for this Website" src="./images/badges/github-export.webp"
+                                        width="80px" height="15px"></a>
                             </div>
-                            <h2>TIMER</h2>
-                            <div class="table-timer-container">
-                                <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/start.webp" alt="Start" aria-label="Start button">
-                                </div>
-                                <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/stop.webp" alt="Pause" aria-label="Pause button">
-                                </div>
-                                <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/reset.webp" alt="Reset" aria-label="Reset button">
-                                </div>
-                                <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/chromecast.webp" alt="chromecast"
-                                        aria-label="chromecast button">
-                                </div>
-                                <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/add.webp" alt="Add" aria-label="Add button">
-                                </div>
-                                <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/sub.webp" alt="Subtract"
-                                        aria-label="Subtract button">
-                                </div>
-                                <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/custom.webp" alt="Custom"
-                                        aria-label="Custom button">
-                                </div>
-                                <div class="item-timer">
-                                    <img src="./images/tcg_timer/ui/alarm.webp" alt="Alarm" aria-label="Alarm button">
-                                </div>
-
-                                <div class="item-timer" id="index-start">This will start the timer.</div>
-                                <div class="item-timer" id="index-stop">This will pause the timer.</div>
-                                <div class="item-timer" id="index-restart">This will reset the timer.</div>
-                                <div class="item-timer" id="index-chromecast">This will open a timer in a new tab.</div>
-                                <div class="item-timer" id="index-add">This will add an increment of time to the timer.
-                                </div>
-                                <div class="item-timer" id="index-sub">This will subtract an increment of time from the
-                                    timer.</div>
-                                <div class="item-timer" id="index-custom">This will reveal custom timer and increment
-                                    settings.</div>
-                                <div class="item-timer" id="index-alarm">This will reveal custom alarm and Notification
-                                    settings.</div>
-
+                            <span class="salt-wrap">
+                                <img id="saltIcon" width="64px" height="64px" class="salt-icon"
+                                    src="./images/tcg_timer/ui/salt.webp" data-normal="./images/tcg_timer/ui/salt.webp"
+                                    data-hover="./images/tcg_timer/ui/salt_hover.webp"
+                                    data-click="./images/tcg_timer/ui/salt_click.webp">
+                            </span>
+                            <div class="sm-badge-container">
+                                <p class="sm-badge" id="current-year"></p>
+                                <a class="outra-link" aria-label="Human Made - No AI" target="_blank"
+                                    href="https://madebyhuman.iamjarl.com/"><img alt="No AI Button"
+                                        src="./images/badges/NO-AI-HUMAN.webp" width="80px" height="15px"></a>
+                                <a class="outra-link" aria-label="Ko-Fi Donation Page" target="_blank"
+                                    href="https://ko-fi.com/naklwilson"><img class="kofi" alt="Ko-Fi Donation Badge"
+                                        width="80px" height="15px"></a>
                             </div>
                         </div>
                     </div>

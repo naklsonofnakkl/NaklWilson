@@ -83,12 +83,11 @@ html {
 * { box-sizing: border-box; }
 
 body {
-    margin: 0;
     font-family: -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
     background: var(--bg-color);
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1000px);
+    justify-content: center;
 }
 
 h1, h2, h4, p {
@@ -126,22 +125,33 @@ label.field-label {
     flex-flow: column nowrap;
     flex: 1 1 0;
     margin: 5px;
-    min-width: 320px;
-    max-height: 720px;
+    max-width: 1000px;
+    height: clamp(250px, 640px, 720px);
     overflow-x: auto;
     background: var(--indexoffbg-color);
-    border: 5px solid var(--border-color);
+    border: 2px solid transparent;
     border-radius: 30px;
+    box-shadow:
+        inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+        inset 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .column-1 {
     max-width: 260px;
-    max-height: 720px;
+    height: clamp(250px, 640px, 720px);
     margin: 5px;
     min-width: 0;
     background: var(--card-color);
-    border: 5px solid var(--border-color);
+    border: 2px solid transparent;
     border-radius: 30px;
+    box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.settings-area {
+    display: grid;
+    gap: 30px;
 }
 
 .section-block {
@@ -181,6 +191,7 @@ label.field-label {
 
 .full-width-footer {
     display: flex;
+    grid-column: 1 / -1;
     flex: 1 1 100%;
     order: 3;
     text-align: center;
@@ -196,7 +207,10 @@ label.field-label {
     max-height: 150px;
     align-self: flex-end;
     background: var(--card-color);
-    border: 5px solid var(--border-color);
+    border: 2px solid transparent;
+    box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
     overflow: hidden;
     gap: 8px;
     border-radius: 30px;
@@ -223,7 +237,7 @@ label.field-label {
     display: grid;
     grid-template-rows: repeat(3, auto);
     grid-template-columns: 1fr;
-    gap: 16px;
+    gap: 10px;
     z-index: 2;
     background: var(--card-color);
 }
@@ -233,7 +247,7 @@ label.field-label {
     flex-wrap: nowrap;
     overflow-x: auto;
     gap: 12px;
-    height: 78px;
+    height: 74px;
     background: var(--navbar-color);
 }
 
@@ -261,7 +275,6 @@ label.field-label {
     grid-template-rows: 1fr;
     align-items: center;
     gap: 12px;
-    margin-bottom: 10px;
 }
 
 .nav-icon-wrap {
@@ -278,7 +291,10 @@ label.field-label {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, auto) auto;
     gap: 14px;
-    padding: 18px;
+    padding-bottom: 10px;
+    padding-top: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
     width: 100%;
     background: var(--card-color);
     border: 2px solid var(--shadow);
@@ -330,6 +346,7 @@ label.field-label {
     align-items: center;
     justify-content: flex-start;
     gap: 14px;
+    width: clamp(100px, 100%, 450px);
     min-height: 96px;
     padding: 10px 16px 10px 20px;
     background: var(--glossborder);
@@ -411,7 +428,7 @@ label.field-label {
 }
 
 .timer-cell .logo {
-    width: clamp(100px, 200px, 400px);
+    width: clamp(100px, 150px, 200px);
     height: 90px;
     object-fit: contain;
     flex: 0 0 auto;
@@ -474,6 +491,7 @@ label.field-label {
 .timer-close-btn:hover {
     filter: brightness(1.12);
     background: var(--timerstop-color);
+    border-color: var(--timerstopborder-color);
 }
 
 .timerDisplay {
@@ -482,13 +500,13 @@ label.field-label {
     align-items: center;
     justify-content: center;
     flex: 1 1 auto;
-    min-width: 0;
+    width: clamp(100px,133px,150px);
     gap: 2px;
 }
 
 .timer-name {
     font-family: 'ui-monospace;', sans-serif;
-    font-size: clamp(1rem, 0.5778rem + 0.1111vw, 2rem);
+    font-size: clamp(0.8rem, 0.5778rem + 0.1111vw, 2rem);
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
@@ -720,21 +738,55 @@ button {
 }
 
 .btn-125 {
+    position: relative;
+    overflow: hidden;
     width: 80px;
     font-size: 13px;
     color: var(--navbtn-color);
     background: transparent;
-    border: 2px transparent;
+    border: 2px solid transparent;
     border-radius: 15px;
+    transition: transform 0.2s ease;
+}
 
-    &.hover {
-        background: var(--navbtnhover-color);
-    }
+.btn-125::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: var(--glossborder);
+    border-radius: inherit;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.35s ease, opacity 0.35s ease;
+}
 
-    &.active {
-        background: var(--navbtnactive-color);
-        border: 2px solid var(--navborder-color)
-    }
+.btn-125 .logo-picture,
+.btn-125 .logo-button {
+    position: relative;
+    z-index: 1;
+}
+
+.btn-125:hover {
+    border: 1px solid rgba(255,255,255,.06);
+    box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
+    transform: translateY(2px);
+}
+
+.btn-125.active {
+    background-color: var(--card-color);
+    border: 1px solid rgba(255,255,255,.06);
+    box-shadow:
+    outset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    outset 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.btn-125.active::before {
+    transform: translateY(0px);
+    opacity: 1;
+    transition: transform 0.35s ease, opacity 0.35s ease;
 }
 
 .btn-32 {
@@ -869,7 +921,10 @@ button {
     color: var(--text-color);
     background: var(--indexoffbg-color);
     background: var(--indexofflinear);
-    border: 2px solid var(--indexnormalbg-color);
+    border: 2px solid transparent;
+    box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.05),
+    inset 0 2px 4px rgba(0, 0, 0, 0.5);
     border-radius: 12px;
     padding: 0.75rem;
     font-size: 0.9rem;
@@ -960,6 +1015,79 @@ img.label-button-cell {
     display: flex;
     justify-content: center;
 }
+/* ============================================================
+   TIMER SELECT
+   ============================================================ */
+
+   .custom-select-wrap {
+    position: relative;
+    width: 100%;
+}
+
+.custom-select-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px;
+    font-size: 15px;
+    color: var(--text-color);
+    background: var(--plate-dark);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.custom-select-trigger:hover {
+    border-color: var(--navbtnactive-color);
+}
+
+.custom-select-arrow {
+    color: var(--text-color);
+    opacity: 0.7;
+    transition: transform 0.15s ease;
+}
+
+.custom-select-trigger[aria-expanded="true"] .custom-select-arrow {
+    transform: rotate(180deg);
+}
+
+.custom-select-list {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: 5;
+    max-height: 240px;
+    overflow-y: auto;
+    margin: 0;
+    padding: 6px;
+    list-style: none;
+    background: var(--plate-dark);
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px -10px rgba(0, 0, 0, 0.6);
+}
+
+.custom-select-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.custom-select-list::-webkit-scrollbar-thumb {
+    background: var(--border-color);
+    border-radius: 8px;
+}
+
+.custom-select-option {
+    padding: 9px 10px;
+    border-radius: 6px;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+.custom-select-option:hover {
+    background: var(--navbtnactive-color);
+}
 
 /* ============================================================
    SALT ICON & ANIMATIONS
@@ -995,7 +1123,7 @@ img.label-button-cell {
 .salt-icon.pop   { animation: shrink-grow 0.35s ease; cursor: grabbing; }
 
 .sm-badge {
-    margin: 0.25rem 0 0;
+    margin: 0.1rem 0 0;
     font-weight: 400;
     width: 80px;
     height: 15px;
